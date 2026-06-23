@@ -1,0 +1,77 @@
+---
+import { Image } from "astro:assets";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/800.css";
+
+import imagen10 from "@/assets/images/maia_plagas_saas/IMAGENES/IMAGEN 10.png";
+import imagen11 from "@/assets/images/maia_plagas_saas/IMAGENES/IMAGEN 11.png";
+
+import lopez from "@/assets/images/logos/lopez_logo.png";
+import tama from "@/assets/images/logos/tama_logo.png";
+import ecotec from "@/assets/images/logos/ecotec_logo.png";
+import c_logo from "@/assets/images/logos/c_logo.png";
+
+const clientLogos = [lopez, tama, ecotec, c_logo, lopez, tama, ecotec, c_logo];
+---
+
+<section id="por-que-maia" class="w-full bg-white flex flex-col">
+  
+  <!-- Full Width Award Banner -->
+  <div class="w-full">
+    <Image
+      src={imagen10}
+      alt="¡Somos ganadores! Emprendimiento Innovadores 12G"
+      class="w-full h-auto object-cover block"
+    />
+  </div>
+
+
+  <!-- CTA Button Bar -->
+  <div class="w-full bg-[#F4F5F7] py-10 flex justify-center border-t border-b border-gray-100 mb-16 md:mb-24">
+    <a
+      href="#demo"
+      class="bg-[#60e8c1] text-[#311A6B] py-4 px-12 rounded-[12px] font-bold text-[16px] sm:text-[18px] uppercase tracking-[0.12em] transition-transform hover:scale-105 active:scale-95 shadow-sm"
+      style="font-family: Poppins, sans-serif;"
+    >
+      Agendar Demo
+    </a>
+  </div>
+
+  
+
+</section>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<script>
+  const carousel = document.getElementById('whyCarousel');
+  const prevBtn = document.getElementById('whyPrevBtn');
+  const nextBtn = document.getElementById('whyNextBtn');
+
+  if (carousel && prevBtn && nextBtn) {
+    const getScrollAmount = () => {
+      const card = carousel.querySelector('div.flex-shrink-0') as HTMLElement;
+      if (!card) return 250;
+      const style = window.getComputedStyle(carousel);
+      const gap = parseInt(style.gap || '0');
+      return card.offsetWidth + gap;
+    };
+
+    nextBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+
+    prevBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+  }
+</script>

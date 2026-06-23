@@ -1,0 +1,20 @@
+---
+import MaiaBusinessFooter from "@/components/website/MaiaBusinessFooter.astro";
+import BaseLayout from "./BaseLayout.astro";
+import MaiaBusinessHeader from "@/components/website/MaiaBusinessHeader.astro";
+import type { SEO } from "@/types/seo";
+
+interface Props {
+  seo?: Partial<SEO>;
+  title?: string;
+  description?: string;
+}
+---
+
+<BaseLayout seo={Astro.props.seo} title={Astro.props.title} description={Astro.props.description}>
+  <MaiaBusinessHeader />
+  <main class="min-h-screen bg-slate-50/50">
+    <slot />
+  </main>
+  <MaiaBusinessFooter />
+</BaseLayout>

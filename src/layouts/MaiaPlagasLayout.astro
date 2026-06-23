@@ -1,0 +1,20 @@
+---
+import MaiaPlagasSaasFooter from "@/components/website/MaiaPlagasSaasFooter.astro";
+import BaseLayout from "./BaseLayout.astro";
+import MaiaPlagasSaasHeader from "@/components/website/MaiaPlagasSaasHeader.astro";
+import type { SEO } from "@/types/seo";
+
+interface Props {
+  seo?: Partial<SEO>;
+  title?: string;
+  description?: string;
+}
+---
+
+<BaseLayout seo={Astro.props.seo} title={Astro.props.title} description={Astro.props.description}>
+  <MaiaPlagasSaasHeader />
+  <main class="min-h-screen bg-slate-50/50">
+    <slot />
+  </main>
+  <MaiaPlagasSaasFooter />
+</BaseLayout>

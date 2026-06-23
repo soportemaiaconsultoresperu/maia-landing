@@ -1,0 +1,199 @@
+---
+import { Image } from "astro:assets";
+import tableBg from "@/assets/images/calculadora/IMAGENES/HIPOCLORITO DE SODIO.png";
+import normativasImage from "@/assets/images/calculadora/IMAGENES/NORMATIVAS.png";
+const regulations = [
+  {
+    title:
+      "Reglamento Sanitario para las Actividades de Saneamiento Ambiental en Viviendas y Establecimientos Comerciales, Industriales y de Servicios (DS No 022-2001-SA)",
+    // url: "https://www.gob.pe/institucion/minsa/normas-legales/252906-022-2001-sa",
+    url: "https://cdn.www.gob.pe/uploads/document/file/283862/255649_DS022-2001.pdf20190110-18386-1t5gto7.pdf?v=1547177101",
+  },
+  {
+    title:
+      "Reglamento de la Calidad del Agua para Consumo Humano (DS Nº 031-2010-SA)",
+    // url: "https://www.gob.pe/institucion/minsa/normas-legales/249969-031-2010-sa",
+    url: "https://www.digesa.minsa.gob.pe/publicaciones/descargas/Reglamento_Calidad_Agua.pdf",
+  },
+  {
+    title:
+      "Norma Sanitaria para Restaurantes y Servicios Afines (NTS Nº 142-MINSA/2018/DIGESA)",
+    // url: "https://www.gob.pe/institucion/minsa/normas-legales/270487-142-2018-minsa",
+    url: "https://cdn.www.gob.pe/uploads/document/file/197614/Resolucion-Ministerial_N-822-2018-MINSA.PDF?v=1693175766",
+  },
+  {
+    title:
+      "Principios Generales de Higiene de los Alimentos CXC 1-1969. Revisión 2022",
+      // url: "https://www.fao.org/fao-who-codexalimentarius/sh-proxy/es/?lnk=1&url=https%253A%252F%252Fworkspace.fao.org%252Fsites%252Fcodex%252FStandards%252FCXC%252B1-1969%252FCXC_001s.pdf",
+      url: "https://www.fao.org/fao-who-codexalimentarius/sh-proxy/en/?lnk=1&url=https%253A%252F%252Fworkspace.fao.org%252Fsites%252Fcodex%252FStandards%252FCXC%2B1-1969%252FCXC_001s.pdf&__cf_chl_rt_tk=XT7SyBUfV81R2KlCgzTvUbHLqtULtkTTbb..VzpyvLY-1782203326-1.0.1.1-k1fQ1Ne3ZkZLBKXA_IarcwrcxPP1.SsJ.VYJ8rEguC0",
+    },
+];
+---
+
+<section class="bg-white pb-24 overflow-hidden">
+  <!-- 1. TABLE SECTION WITH BG BANNERS -->
+  <div class="relative w-full mb-24">
+    <!-- Header Banner with background image -->
+    <div
+      class="relative h-44 sm:h-[300px] w-full flex items-center justify-center overflow-hidden"
+    >
+      <!-- Background Image -->
+      <Image
+        src={tableBg}
+        alt="¿Cuánto de hipoclorito de sodio tiene?"
+        class="absolute inset-0 w-full h-full object-cover"
+        quality="max"
+      />
+      <!-- Green/Teal Gradient Overlay -->
+      <!-- <div
+        class="absolute inset-0 bg-gradient-to-r from-teal-900/40 via-emerald-950/60 to-teal-900/40 mix-blend-multiply"
+      >
+      </div> -->
+
+      <!-- Banner Content -->
+      <div class="relative z-10 text-center px-4 max-w-4xl">
+        <h2
+          class="text-2xl sm:text-3xl md:text-[38px] font-black text-white tracking-tight leading-tight"
+        >
+          ¿Cuánto de hipoclorito de sodio tiene?
+        </h2>
+      </div>
+    </div>
+    <!-- Table Container (overlapping or stacked) -->
+    <div
+      class="container mx-auto px-6 lg:px-16 -mt-8 sm:-mt-10 relative z-20 max-w-6xl"
+    >
+      <div
+        class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-2xl"
+      >
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#29185a] text-white">
+                <th
+                  class="py-5 px-6 font-bold text-base sm:text-lg uppercase tracking-wider text-center border-r border-[#3d2780]/30 w-[20%]"
+                >
+                  Marca
+                </th>
+                <th
+                  class="py-5 px-6 font-bold text-base sm:text-lg uppercase tracking-wider text-center border-r border-[#3d2780]/30 w-[45%]"
+                >
+                  Descripción
+                </th>
+                <th
+                  class="py-5 px-6 font-bold text-base sm:text-lg uppercase tracking-wider text-center border-r border-[#3d2780]/30 w-[22%]"
+                >
+                  Concentración
+                </th>
+                <th
+                  class="py-5 px-6 font-bold text-base sm:text-lg uppercase tracking-wider text-center w-[13%]"
+                >
+                  Uso
+                </th>
+              </tr>
+            </thead>
+            <tbody class="text-slate-700 divide-y divide-slate-200">
+              <tr class="hover:bg-slate-50/80 transition-colors duration-200">
+                <td
+                  class="py-6 px-6 font-black text-[#1d1b84] text-center text-sm sm:text-lg border-r border-slate-200"
+                >
+                  CLOROX TRADICIONAL
+                </td>
+                <td
+                  class="py-6 px-6 text-xs sm:text-sm md:text-lg text-slate-650 leading-relaxed border-r border-slate-200 text-center font-medium"
+                >
+                  Botella polietileno con tapa rosca de polipropileno por 250,
+                  287.5, 500, 520, 572, 850, 900, 930, 1000, 2000 y 4000 gr.
+                  Botella PEAD por 315 y 625 gr
+                </td>
+                <td
+                  class="py-6 px-6 font-semibold text-slate-800 text-center text-sm sm:text-lg border-r border-slate-200"
+                >
+                  Hipoclorito de sodio 4.9%
+                </td>
+                <td
+                  class="py-6 px-6 text-slate-600 text-center text-sm sm:text-lg font-medium"
+                >
+                  Doméstico
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50/80 transition-colors duration-200">
+                <td
+                  class="py-6 px-6 font-black text-[#1d1b84] text-center text-sm sm:text-base border-r border-slate-200"
+                >
+                  LEJÍA ARO
+                </td>
+                <td
+                  class="py-6 px-6 text-xs sm:text-sm md:text-lg text-slate-650 leading-relaxed border-r border-slate-200 text-center font-medium"
+                >
+                  Cojines de PVC de 120 gr., 130 gr., 140, 190 gr. Y bidones de
+                  PEAD de 18 kg. Y 20 kg.
+                </td>
+                <td
+                  class="py-6 px-6 font-semibold text-slate-800 text-center text-sm sm:text-lg border-r border-slate-200"
+                >
+                  Hipoclorito de sodio 7.5%
+                </td>
+                <td
+                  class="py-6 px-6 text-slate-600 text-center text-sm sm:text-lg font-medium"
+                >
+                  Doméstico
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 2. REGULATION REFERENCES SECTION -->
+  <div class="container mx-auto px-6 lg:px-16 max-w-[1500px]">
+    <!-- Title -->
+    <div class="text-center mb-16 max-w-3xl mx-auto">
+      <h2
+        class="text-2xl sm:text-3xl md:text-[36px] font-extrabold text-[#153f70] tracking-tight leading-tight"
+      >
+        Normativas y Referencias Oficiales sobre Desinfección y Diluciones
+      </h2>
+    </div>
+    <!-- Content Grid -->
+    <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      <!-- Left: Regulation Cards -->
+      <div class="lg:col-span-7 space-y-6">
+        {
+          regulations.map((reg) => (
+            <div class="bg-[#f8f9fa] rounded-[1.5rem] p-6 shadow-sm border border-slate-100/50 flex flex-col sm:flex-row items-center justify-between gap-5 transition-all duration-300 hover:shadow-md hover:translate-x-1">
+              <p class="text-sm sm:text-base md:text-xl text-slate-700 font-semibold leading-relaxed text-left max-w-[80%]">
+                {reg.title}
+              </p>
+              <a
+                href={reg.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full sm:w-auto inline-flex items-center justify-center px-10 py-3 bg-[#4f46e5] hover:bg-[#3f37c9] text-white font-bold text-base tracking-wide rounded-xl transition-all duration-300 shadow-md shadow-indigo-500/10 hover:scale-[1.03] active:scale-97 text-center whitespace-nowrap shrink-0"
+              >
+                Ver
+              </a>
+            </div>
+          ))
+        }
+      </div>
+      <!-- Right: Image with Rounded Corners -->
+      <div
+        class="lg:col-span-5 relative w-full rounded-[2.5rem] overflow-hidden shadow-2xl group"
+      >
+        <Image
+          src={normativasImage}
+          alt="Normativas y Referencias Oficiales"
+          class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+          quality="max"
+        />
+        <!-- Subtle interactive overlay -->
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

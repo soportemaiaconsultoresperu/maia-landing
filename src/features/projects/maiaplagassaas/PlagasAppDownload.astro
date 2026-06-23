@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import appImage from "@/assets/images/maia_plagas_saas/IMAGENES/app.png";
+---
+
+<section id="descarga-app" class="py-12 sm:py-16 bg-[#F8F9FA]">
+  <div class="container mx-auto max-w-[1200px] px-[20px] sm:px-[45px]">
+    <a 
+      href="https://play.google.com/store" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="block w-full transition-transform hover:scale-[1.01] active:scale-100"
+      aria-label="Descargar en Google Play"
+    >
+      <Image
+        src={appImage}
+        alt="App Maia Plagas - Registra servicios desde el celular incluso sin internet"
+        class="w-full h-auto object-contain shadow-sm rounded-[16px]"
+      />
+    </a>
+  </div>
+</section>

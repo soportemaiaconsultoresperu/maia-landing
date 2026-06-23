@@ -1,0 +1,119 @@
+---
+import { Image } from "astro:assets";
+---
+
+<section class="py-16 md:py-24 bg-[#f2f4f7]">
+  <div class="container mx-auto px-6 lg:px-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Content Column -->
+      <div class="flex flex-col">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-[#153f70] leading-tight mb-6"
+        >
+          Diseño e Implementación de Sistemas de Gestión de la Inocuidad y
+          Calidad
+        </h2>
+
+        <p class="text-gray-700 text-base md:text-2xl mb-8 leading-relaxed">
+          Optimizamos y diseñamos sistemas de gestión de calidad e inocuidad
+          para que tu empresa cumpla con normativas internacionales y obtenga
+          certificaciones que respalden la calidad de tu empresa.
+        </p>
+
+        <div class="mb-10">
+          <h3 class="font-bold text-gray-800 text-2xl mb-4">Implementamos:</h3>
+          <ul class="space-y-3.5 text-gray-700 text-2xl">
+            <li class="flex items-start gap-3">
+              <span class="text-gray-900 text-2xl font-bold">•</span>
+              <span>
+                <strong class="text-gray-900"
+                  >Sistemas de Gestión de la Inocuidad:</strong
+                > BPM, POES, HACCP, PHS.
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-gray-900 text-2xl font-bold">•</span>
+              <span>
+                <strong class="text-gray-900"
+                  >Sistemas de Gestión de la Calidad:</strong
+                > ISO 9001, ISO 22000, BRC, IFS y más.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="w-full">
+          <a
+            href="#contacto"
+            class="inline-flex w-full items-center justify-center px-10 py-4 bg-[#4c84f4] hover:bg-[#3572e8] text-white font-bold text-base rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.03] uppercase tracking-wider"
+          >
+            AGENDAR ASESORÍA
+          </a>
+        </div>
+      </div>
+
+      <!-- Video Column -->
+      <div
+        class="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl group"
+      >
+        <!-- Video Cover (Plays on click) -->
+        <div
+          id="video-cover"
+          class="absolute inset-0 z-10 cursor-pointer flex items-center justify-center transition-all duration-300"
+        >
+          <!-- Youtube Maxresdefault Thumbnail -->
+          <img
+            src="https://img.youtube.com/vi/3hJOSnkJgMs/maxresdefault.jpg"
+            alt="Presentación de Maia Plagas"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+          <!-- Dark Overlay -->
+          <div
+            class="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300"
+          >
+          </div>
+
+          <!-- Modern Youtube Play Button -->
+          <div
+            class="relative z-20 w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-red-600 group-hover:bg-red-700 transition-all duration-300 transform group-hover:scale-110 shadow-lg shadow-black/30"
+          >
+            <svg
+              class="w-10 h-10 text-white fill-current translate-x-0.5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Lazy loaded Iframe Container -->
+        <div id="video-player-container" class="w-full h-full bg-black"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const videoCover = document.getElementById("video-cover");
+  const videoContainer = document.getElementById("video-player-container");
+
+  if (videoCover && videoContainer) {
+    videoCover.addEventListener("click", () => {
+      // Hide the cover
+      videoCover.classList.add("hidden");
+
+      // Inject YouTube iframe with autoplay enabled
+      videoContainer.innerHTML = `
+        <iframe 
+          class="w-full h-full" 
+          src="https://www.youtube.com/embed/3hJOSnkJgMs?autoplay=1" 
+          title="Video de presentación" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen
+        ></iframe>
+      `;
+    });
+  }
+</script>

@@ -1,0 +1,169 @@
+---
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/900.css";
+
+// YouTube Video URL: https://www.youtube.com/watch?v=3hJOSnkJgMs
+// Video ID: 3hJOSnkJgMs
+const videoId = "3hJOSnkJgMs";
+const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+---
+
+<section
+  id="que-es-maia-plagas"
+  class="py-16 sm:py-24 bg-[#ecf0fe] relative overflow-hidden"
+>
+  <!-- Glowing subtle highlights for premium feel -->
+  <div class="absolute inset-0 opacity-40 pointer-events-none">
+    <div
+      class="absolute -top-[10%] -left-[10%] h-[400px] w-[400px] rounded-full bg-blue-400/10 blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute -bottom-[10%] -right-[10%] h-[400px] w-[400px] rounded-full bg-teal-400/10 blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-16 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Left Content Column -->
+      <div class="flex flex-col animate-on-scroll">
+        <h2
+          class="text-3xl sm:text-4xl md:text-[40px] font-bold text-[#15459c] tracking-tight leading-tight uppercase mb-6"
+          style="font-family: Poppins, sans-serif;"
+        >
+          ¿QUÉ ES MAIA RESIDUOS?
+        </h2>
+
+        <div
+          class="space-y-6 text-[#000] text-sm sm:text-base md:text-2xl leading-relaxed font-normal mb-8"
+        >
+          <p>
+            Un software diseñado específicamente para empresas de saneamiento
+            ambiental que permite controlar y automatizar procesos
+            administrativos, documentarios, logísticos y operativos en una sola
+            plataforma.
+          </p>
+          <p>
+            Gestiona cada etapa de tu operación, desde el registro de clientes
+            hasta la emisión automática de certificados, fichas técnicas e
+            informes.
+          </p>
+        </div>
+
+        <div class="pt-6">
+          <a
+            href="#contacto"
+            class="block items-center justify-center text-center bg-[#3dd87c] text-white font-bold text-lg px-10 py-4 rounded-[16px] hover:brightness-110 hover:shadow-xl hover:shadow-[#60e8c1]/20 transition-all duration-300 uppercase tracking-wider hover:scale-[1.02] active:scale-95 shadow-lg shadow-[#60e8c1]/10"
+            style="font-family: Poppins, sans-serif;"
+          >
+            AGENDAR DEMO
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Video Column -->
+      <div
+        class="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl group animate-on-scroll"
+      >
+        <!-- Video Cover (Plays on click) -->
+        <div
+          id="video-cover"
+          class="absolute inset-0 z-10 cursor-pointer flex items-center justify-center transition-all duration-300"
+        >
+          <!-- Youtube Maxresdefault Thumbnail -->
+          <img
+            src={thumbnailUrl}
+            alt="Maia Plagas Presentación de Video"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+          />
+          <!-- Dark Overlay -->
+          <div
+            class="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300"
+          >
+          </div>
+
+          <!-- Modern Youtube Play Button -->
+          <div
+            class="relative z-20 w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-red-600 group-hover:bg-red-700 transition-all duration-300 transform group-hover:scale-110 shadow-lg shadow-black/30"
+          >
+            <svg
+              class="w-10 h-10 text-white fill-current translate-x-0.5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Lazy loaded Iframe Container -->
+        <div id="video-player-container" class="w-full h-full bg-black"></div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Smooth entry animation */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .animate-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+
+  <script define:vars={{ videoUrl }}>
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", () => {
+      const videoCover = document.getElementById("video-cover");
+      const videoContainer = document.getElementById("video-player-container");
+
+      if (videoCover && videoContainer) {
+        videoCover.addEventListener("click", (e) => {
+          // Prevent any parent event side-effects
+          e.stopPropagation();
+
+          // Hide the cover
+          videoCover.classList.add("hidden");
+
+          // Inject YouTube iframe with autoplay enabled
+          videoContainer.innerHTML = `
+            <iframe 
+              src="${videoUrl}" 
+              title="¿Qué es Maia Plagas? - Software de Saneamiento Ambiental" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen 
+              class="w-full h-full absolute inset-0"
+            ></iframe>
+          `;
+        });
+      }
+
+      // Scroll animation observer
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</section>

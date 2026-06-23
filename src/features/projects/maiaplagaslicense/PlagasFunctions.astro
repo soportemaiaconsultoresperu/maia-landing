@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/800.css";
+
+import imagen2 from "@/assets/images/maia_plagas_license/IMAGENES/IMAGEN 2.png";
+import imagen3 from "@/assets/images/maia_plagas_license/IMAGENES/IMAGEN 3.png";
+import imagen4 from "@/assets/images/maia_plagas_license/IMAGENES/IMAGEN 4.png";
+import imagen5 from "@/assets/images/maia_plagas_license/IMAGENES/IMAGEN 5.png";
+
+const functions = [
+  {
+    image: imagen2,
+    alt: "Pantalla de Programación de Actividades en Maia Plagas",
+    title: "Programación de Actividades",
+    description: "Designa la fecha, hora, ubicación y operario para cada servicio.",
+  },
+  {
+    image: imagen3,
+    alt: "Certificados, fichas técnicas e informes generados automáticamente",
+    title: "Certificados, Fichas Técnicas e Informes",
+    description: "Emite documentación técnica de forma automática.",
+  },
+  {
+    image: imagen4,
+    alt: "Gráficas de tendencia y KPIs en Maia Plagas",
+    title: "Gráficas de Tendencia y KPI's",
+    description:
+      "Monitorea cebaderos y trampas de luz mediante gráficas y evalúa el desempeño de tus servicios a través de KPI's.",
+  },
+  {
+    image: imagen5,
+    alt: "Control de stock e inventario en Maia Plagas",
+    title: "Control de Stock",
+    description:
+      "Controla el ingreso, salida y stock de tus insumos en tiempo real",
+  },
+];
+---
+
+<section id="funciones" class="py-16 sm:py-24 lg:py-32 bg-white">
+  <div class="w-full mx-auto px-[20px] sm:px-[45px] lg:px-[80px] max-w-[1800px]">
+
+    <!-- Section Header -->
+    <div class="mb-16 lg:mb-24">
+      <h2
+        class="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-[#311A6B] uppercase tracking-wide"
+        style="font-family: Poppins, sans-serif;"
+      >
+        FUNCIONES DE MAIA PLAGAS LICENCIA
+      </h2>
+    </div>
+
+    <!-- 2×2 Grid -->
+    <div class="grid gap-16 lg:gap-24 sm:grid-cols-2">
+      {
+        functions.map((fn) => (
+          <div class="flex flex-col items-center">
+            <!-- Screenshot -->
+            <div class="flex items-center justify-center w-full mb-8">
+              <Image
+                src={fn.image}
+                alt={fn.alt}
+                class="w-full h-auto object-contain"
+              />
+            </div>
+
+            <!-- Text -->
+            <div class="flex flex-col items-center text-center max-w-[550px]">
+              <h3
+                class="text-[22px] sm:text-[28px] lg:text-[32px] font-bold text-[#1A1A2E] leading-snug mb-4"
+                style="font-family: Poppins, sans-serif;"
+              >
+                {fn.title}
+              </h3>
+              <p class="text-[#4B5563] text-sm sm:text-base md:text-2xl leading-relaxed">
+                {fn.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+  </div>
+</section>

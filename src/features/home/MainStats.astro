@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import flechaIcon from '@/assets/images/anios_en_el_mercado.png';
+import bookIcon from '@/assets/images/cursos_dictados.png';
+import obreroIcon from '@/assets/images/profesionales_especializados.png';
+
+const stats = [
+  {
+    number: "+7",
+    label1: "años en el",
+    label2: "mercado",
+    icon: flechaIcon,
+  },
+  {
+    number: "+60",
+    label1: "cursos",
+    label2: "dictados",
+    icon: bookIcon,
+  },
+  {
+    number: "+1700",
+    label1: "profesionales",
+    label2: "capacitados",
+    icon: obreroIcon,
+  }
+];
+---
+
+<section class="relative z-20 px-6 lg:px-20 -mt-16 md:-mt-24 pb-12">
+  <div class="container mx-auto max-w-[1300px]">
+    <div class="bg-[#f6f6f9] rounded-[2rem] shadow-2xl py-8 md:py-10 px-8 lg:px-16 flex flex-col md:flex-row justify-around md:justify-between items-center gap-10">
+      {stats.map((stat) => (
+        <div class="flex items-center gap-4 md:gap-5 group">
+          <!-- Icon -->
+          <div class="w-14 h-14 md:w-20 md:h-20 flex-shrink-0 transition-transform duration-500 group-hover:scale-105">
+            <Image src={stat.icon} alt={stat.label1} class="w-full h-full object-contain" />
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <span class="text-5xl md:text-6xl lg:text-7xl font-medium text-[#18124b] tracking-tight">
+              {stat.number}
+            </span>
+            <div class="flex flex-col text-[#18124b] text-sm md:text-base font-bold leading-tight mt-1 text-left">
+              <span>{stat.label1}</span>
+              <span>{stat.label2}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

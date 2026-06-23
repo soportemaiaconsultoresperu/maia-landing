@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "@/assets/images/PORTADA.png";
+---
+
+<section
+  class="relative h-[calc(100vh-120px)] flex items-center overflow-hidden"
+>
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={heroImage}
+      alt="Maia Consultores Team"
+      class="w-full h-full object-cover"
+      quality="max"
+      loading="eager"
+    />
+    <!-- Overlay Gradient - Stronger on the left to ensure text readability -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-brand-blue via-brand-blue/80 to-transparent lg:from-brand-blue/90 lg:via-brand-blue/40 lg:to-transparent"
+    >
+    </div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10">
+    <div class="max-w-3xl">
+      <h1
+        class="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] mb-6 animate-fade-in-up tracking-tight"
+      >
+        Maia<br />Consultores
+      </h1>
+
+      <p
+        class="text-lg md:text-2xl text-white mb-8 leading-snug max-w-2xl animate-fade-in-up delay-100"
+      >
+        <span class="text-[#60e8c1] font-bold"
+          >Especialistas en asesoría, capacitación y desarrollo de software</span
+        > para empresas que buscan optimizar procesos, garantizar el cumplimiento
+        normativo y potenciar su gestión empresarial.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-200">
+        <a
+          href="#quienes-somos"
+          class="inline-flex items-center justify-center px-12 py-4 border-[3px] border-white bg-[#153f70] text-white font-bold text-2xl rounded-[16px] hover:bg-white hover:text-[#153f70] transition-all duration-300"
+        >
+          CONÓCENOS
+        </a>
+        <a
+          href="#contacto"
+          class="inline-flex items-center justify-center px-12 py-4 bg-[#60e8c1] text-[#153f70] font-bold text-2xl rounded-[16px] hover:brightness-110 hover:scale-105 transition-all duration-300 shadow-xl shadow-[#60e8c1]/20"
+        >
+          CONTÁCTANOS
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+</style>

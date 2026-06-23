@@ -1,0 +1,226 @@
+---
+import { Image } from "astro:assets";
+
+import logoAmbipar from "@/assets/images/saneamiento_ambiental/LOGO DE CLIENTES/AMBIPAR ENVIRONMENT.png";
+import logoCyper from "@/assets/images/saneamiento_ambiental/LOGO DE CLIENTES/CYPER CLEAN.png";
+import logoEcotec from "@/assets/images/saneamiento_ambiental/LOGO DE CLIENTES/ECOTEC.png";
+import logoHuracorp from "@/assets/images/saneamiento_ambiental/LOGO DE CLIENTES/HURACORP.png";
+import logoJosaal from "@/assets/images/saneamiento_ambiental/LOGO DE CLIENTES/JOSAAL.png";
+import logoLopez from "@/assets/images/saneamiento_ambiental/LOGO DE CLIENTES/LOPEZ.png";
+import logoSuat from "@/assets/images/saneamiento_ambiental/LOGO DE CLIENTES/SUAT.png";
+import logoUrano from "@/assets/images/saneamiento_ambiental/LOGO DE CLIENTES/URANO GROUP.png";
+
+const logos = [
+  logoAmbipar,
+  logoLopez,
+  logoHuracorp,
+  logoSuat,
+  logoCyper,
+  logoEcotec,
+  logoJosaal,
+  logoUrano,
+];
+
+// Triplicate logos for seamless infinite looping
+const tripleLogos = [...logos, ...logos, ...logos];
+---
+
+<section
+  id="clientes"
+  class="py-16 bg-[#f8fafc] border-t border-slate-100 overflow-hidden"
+>
+  <div class="container mx-auto max-w-[1344px] px-[20px] sm:px-[45px]">
+    <div class="text-center mx-auto mb-12">
+      <h2
+        class="text-2xl sm:text-2xl md:text-3xl font-extrabold text-[#153f70] tracking-wider uppercase"
+      >
+        EMPRESAS QUE CONFÍAN EN NOSOTROS
+      </h2>
+    </div>
+
+    <div class="relative w-full flex items-center justify-between gap-4">
+      <!-- Left Navigation Button -->
+      <button
+        id="saneamientoClientPrevBtn"
+        class="w-10 h-10 shrink-0 bg-neutral-400/90 hover:bg-neutral-500 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-md hover:scale-105 active:scale-95"
+        aria-label="Previous"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg
+        >
+      </button>
+
+      <!-- Carousel Container Wrapper -->
+      <div class="relative flex-1 overflow-hidden">
+        <!-- Gradient Overlays for smooth blend on edges -->
+        <div
+          class="hidden md:block absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#f8fafc] to-transparent z-10 pointer-events-none"
+        >
+        </div>
+        <div
+          class="hidden md:block absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#f8fafc] to-transparent z-10 pointer-events-none"
+        >
+        </div>
+
+        <!-- Carousel Container -->
+        <div
+          id="saneamientoClientCarousel"
+          class="flex gap-6 overflow-x-hidden no-scrollbar cursor-grab active:cursor-grabbing py-4"
+        >
+          {
+            tripleLogos.map((logo, index) => (
+              <div
+                class="saneamiento-client-slide shrink-0"
+                data-index={index % logos.length}
+              >
+                <div class="bg-white rounded-[16px] border border-slate-200/70 p-6 h-28 sm:h-36 flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 group/card overflow-hidden">
+                  <div class="w-full h-full flex items-center justify-center">
+                    <Image
+                      src={logo}
+                      alt="Cliente Colaborador"
+                      class="max-h-full max-w-full w-auto h-auto object-contain transition-all duration-500 group-hover/card:scale-105"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Right Navigation Button -->
+      <button
+        id="saneamientoClientNextBtn"
+        class="w-10 h-10 shrink-0 bg-neutral-400/90 hover:bg-neutral-500 rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-md hover:scale-105 active:scale-95"
+        aria-label="Next"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg
+        >
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .saneamiento-client-slide {
+    width: calc(100vw - 8rem); /* Mobile: Near full width minus buttons */
+  }
+
+  @media (min-width: 640px) {
+    .saneamiento-client-slide {
+      width: calc((100% - 1.5rem) / 2); /* Tablet: 2 columns */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .saneamiento-client-slide {
+      width: calc((100% - 3rem) / 3); /* Small Desktop: 3 columns */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .saneamiento-client-slide {
+      width: calc(
+        (100% - 4.5rem) / 4
+      ); /* Large Desktop: 4 columns like mockup */
+    }
+  }
+</style>
+
+<script>
+  const carousel = document.getElementById("saneamientoClientCarousel");
+  const prevBtn = document.getElementById("saneamientoClientPrevBtn");
+  const nextBtn = document.getElementById("saneamientoClientNextBtn");
+
+  if (carousel && prevBtn && nextBtn) {
+    let isPaused = false;
+    let scrollSpeed = 0.8; // px per frame
+    let resumeTimeout: number;
+
+    const slideWidth = () => {
+      const firstSlide = carousel.querySelector(
+        ".saneamiento-client-slide",
+      ) as HTMLElement;
+      if (!firstSlide) return 200;
+      const style = window.getComputedStyle(carousel);
+      const gap = parseInt(style.columnGap || style.gap || "0");
+      return firstSlide.offsetWidth + gap;
+    };
+
+    // Center content initially
+    const totalContentWidth = carousel.scrollWidth / 3;
+    carousel.scrollLeft = totalContentWidth;
+
+    const step = () => {
+      if (!isPaused) {
+        carousel.scrollLeft += scrollSpeed;
+
+        // Reset positions
+        if (carousel.scrollLeft >= totalContentWidth * 2) {
+          carousel.scrollLeft -= totalContentWidth;
+        } else if (carousel.scrollLeft <= totalContentWidth - 10) {
+          carousel.scrollLeft += totalContentWidth;
+        }
+      }
+      requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+
+    const pauseAutoScroll = (duration = 4000) => {
+      isPaused = true;
+      clearTimeout(resumeTimeout);
+      resumeTimeout = window.setTimeout(() => {
+        isPaused = false;
+      }, duration);
+    };
+
+    // Pause on interactions
+    carousel.addEventListener("mouseenter", () => {
+      isPaused = true;
+      clearTimeout(resumeTimeout);
+    });
+    carousel.addEventListener("mouseleave", () => {
+      isPaused = false;
+    });
+
+    nextBtn.addEventListener("click", () => {
+      pauseAutoScroll();
+      carousel.scrollTo({
+        left: carousel.scrollLeft + slideWidth(),
+        behavior: "smooth",
+      });
+    });
+
+    prevBtn.addEventListener("click", () => {
+      pauseAutoScroll();
+      carousel.scrollTo({
+        left: carousel.scrollLeft - slideWidth(),
+        behavior: "smooth",
+      });
+    });
+  }
+</script>

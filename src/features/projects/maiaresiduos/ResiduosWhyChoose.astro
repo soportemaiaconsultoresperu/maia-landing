@@ -1,0 +1,157 @@
+---
+import { Image } from "astro:assets";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/800.css";
+
+import imagen6 from "@/assets/images/maia_residuos/IMAGENES/IMAGEN 6.png";
+import imagen7 from "@/assets/images/maia_residuos/IMAGENES/IMAGEN 7.png";
+import imagen8 from "@/assets/images/maia_residuos/IMAGENES/IMAGEN 8.png";
+import imagen10 from "@/assets/images/maia_residuos/IMAGENES/IMAGEN 10.png";
+
+import icon1 from "@/assets/images/maia_residuos/ICONOS/icon1.png";
+import icon2 from "@/assets/images/maia_residuos/ICONOS/icon2.png";
+import icon3 from "@/assets/images/maia_residuos/ICONOS/icon3.png";
+---
+
+<section id="por-que-elegirnos" class="pb-16 sm:pb-24 bg-white">
+  <div class="w-full">
+    <!-- Award Banner -->
+    <div class="overflow-hidden">
+      <Image
+        src={imagen6}
+        alt="¡Somos ganadores! Emprendimiento Innovadores 12G por ProInnóvate 2025"
+        class="w-full h-auto"
+      />
+    </div>
+
+    <!-- Banner -->
+    <div class="mb-16">
+      <div
+        class="w-full text-center py-4 px-6 sm:px-10 font-bold text-[#1d1b84] text-[20px] sm:text-[25px]"
+        style="background-color: #ecf0fe; font-family: Poppins, sans-serif;"
+      >
+        ¡Con Maia Plagas Licencia, la llave del software es tuya!
+      </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto max-w-[1500px] px-[20px] sm:px-[45px]">
+    <h2
+      class="text-[#2B1B85] text-[28px] sm:text-[32px] md:text-[36px] font-bold mb-10 uppercase tracking-tight"
+      style="font-family: Poppins, sans-serif;"
+    >
+      ¿POR QUÉ ELEGIR MAIA PLAGAS RESIDUOS?
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <!-- Card 1 -->
+      <div
+        class="flex flex-col rounded-[32px] overflow-hidden shadow-lg h-full"
+      >
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          <Image
+            src={imagen7}
+            alt="Personal en campo"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div
+          class="relative bg-[#2B1B85] pt-12 pb-8 px-6 sm:px-8 text-center flex-grow flex items-center justify-center"
+        >
+          <div
+            class="absolute -top-8 left-8 w-16 h-16 bg-white rounded-[16px] flex items-center justify-center shadow-md p-3"
+          >
+            <Image
+              src={icon1}
+              alt="Icono 2"
+              class="w-full h-full object-contain"
+            />
+          </div>
+          <p
+            class="text-white font-medium text-sm sm:text-base md:text-2xl leading-normal"
+            style="font-family: Poppins, sans-serif;"
+          >
+            Software diseñado exclusivamente para empresas gestoras de residuos
+            sólidos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div
+        class="flex flex-col rounded-[32px] overflow-hidden shadow-lg h-full"
+      >
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          <Image
+            src={imagen10}
+            alt="Personal en oficina"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div
+          class="relative bg-[#3b76f6] pt-12 pb-8 px-6 sm:px-8 text-center flex-grow flex items-center justify-center"
+        >
+          <div
+            class="absolute -top-8 left-8 w-16 h-16 bg-white rounded-[16px] flex items-center justify-center shadow-md p-3"
+          >
+            <Image
+              src={icon2}
+              alt="Icono 3"
+              class="w-full h-full object-contain"
+            />
+          </div>
+          <p
+            class="text-white font-medium text-sm sm:text-base md:text-2xl leading-normal"
+            style="font-family: Poppins, sans-serif;"
+          >
+            Software propio que garantiza la seguridad de tu información.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div
+        class="flex flex-col rounded-[32px] overflow-hidden shadow-lg h-full"
+      >
+        <div class="relative w-full aspect-[4/3] overflow-hidden">
+          <Image
+            src={imagen8}
+            alt="Reunión de gerencia"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div
+          class="relative bg-[#0bb598] pt-12 pb-8 px-6 sm:px-8 text-center flex-grow flex items-center justify-center"
+        >
+          <div
+            class="absolute -top-8 left-8 w-16 h-16 bg-white rounded-[16px] flex items-center justify-center shadow-md p-3"
+          >
+            <Image
+              src={icon3}
+              alt="Icono 4"
+              class="w-full h-full object-contain"
+            />
+          </div>
+          <p
+            class="text-white font-medium text-sm sm:text-base md:text-2xl leading-normal"
+            style="font-family: Poppins, sans-serif;"
+          >
+            Plantillas que cumplen con la normativa nacional vigente.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="flex justify-center w-full">
+      <a
+        href="#contacto"
+        class="bg-[#6EF0CD] hover:bg-[#5CE1B5] transition-colors text-[#2B1B85] font-bold text-[20px] py-4 px-12 rounded-[12px] w-full text-center tracking-wide"
+        style="font-family: Poppins, sans-serif;"
+      >
+        AGENDAR DEMO
+      </a>
+    </div>
+  </div>
+</section>

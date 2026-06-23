@@ -1,0 +1,180 @@
+---
+import { Image } from "astro:assets";
+import formularioImg from "@/assets/images/FORMULARIO.png";
+---
+
+<section id="contacto" class="py-20 bg-slate-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <div
+      class="flex flex-col lg:flex-row bg-[#eef2f9] rounded-3xl overflow-hidden shadow-lg border border-slate-100"
+    >
+      <!-- Image Section -->
+      <div
+        class="w-full lg:w-1/2 relative h-64 lg:h-auto min-h-[320px] lg:min-h-full"
+      >
+        <Image
+          src={formularioImg}
+          alt="Contacto Saneamiento Ambiental"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-emerald-950/20 mix-blend-multiply">
+        </div>
+      </div>
+
+      <!-- Form Section -->
+      <div class="w-full lg:w-1/2 p-8 md:p-12">
+        <h2 class="text-3xl font-extrabold text-slate-800 mb-2">
+          ¡CONTÁCTANOS!
+        </h2>
+        <p class="text-slate-800 text-base md:text-2xl leading-relaxed mb-8">
+          Cuéntanos qué necesita tu empresa y recibe una propuesta
+          personalizada.
+        </p>
+
+        <form id="saneamientoContactForm" class="space-y-4">
+          <div>
+            <input
+              type="text"
+              id="saneamientoName"
+              placeholder="Nombre y Apellido"
+              required
+              class="w-full px-4 py-3.5 rounded-xl border border-slate-205 border-slate-200 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-800 placeholder-gray-400 focus:outline-none transition-all"
+            />
+          </div>
+
+          <div class="flex flex-col md:flex-row gap-4">
+            <div class="w-full md:w-1/2">
+              <input
+                type="email"
+                id="saneamientoEmail"
+                placeholder="Correo corporativo"
+                required
+                class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-800 placeholder-gray-400 focus:outline-none transition-all"
+              />
+            </div>
+            <div class="w-full md:w-1/2">
+              <input
+                type="tel"
+                id="saneamientoPhone"
+                placeholder="Teléfono / Celular"
+                required
+                class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-800 placeholder-gray-400 focus:outline-none transition-all"
+              />
+            </div>
+          </div>
+
+          <div>
+            <input
+              type="text"
+              id="saneamientoCompany"
+              placeholder="Nombre de tu empresa"
+              required
+              class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-800 placeholder-gray-400 focus:outline-none transition-all"
+            />
+          </div>
+
+          <div>
+            <textarea
+              id="saneamientoMessage"
+              placeholder="Detalla tu requerimiento (e.g. gestión de residuos, análisis de agua, auditoría ambiental)"
+              rows="4"
+              required
+              class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white text-gray-800 placeholder-gray-400 focus:outline-none transition-all resize-none"
+            ></textarea>
+          </div>
+
+          <div class="flex justify-end w-full pt-2">
+            <button
+              type="submit"
+              class="w-full bg-[#00af9b] hover:bg-[#009685] text-white font-bold py-3.5 px-10 rounded-full transition-colors duration-300 shadow-md hover:shadow-emerald-500/10"
+            >
+              ENVIAR SOLICITUD
+            </button>
+          </div>
+
+          <div
+            id="saneamientoFormSuccess"
+            class="hidden mt-4 p-4 bg-emerald-100 text-emerald-800 rounded-xl text-center font-medium border border-emerald-200"
+          >
+            ¡Gracias por contactarnos! Un consultor ambiental se comunicará
+            contigo pronto.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { SCRIPT_URL } from "@/utils/demoFormSubmit";
+
+  const form = document.getElementById(
+    "saneamientoContactForm",
+  ) as HTMLFormElement;
+  const successMessage = document.getElementById("saneamientoFormSuccess");
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector(
+        'button[type="submit"]',
+      ) as HTMLButtonElement;
+      if (!submitBtn) return;
+
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = "Enviando...";
+      submitBtn.disabled = true;
+
+      try {
+        const data = {
+          name:
+            (document.getElementById("saneamientoName") as HTMLInputElement)
+              ?.value || "",
+          email:
+            (document.getElementById("saneamientoEmail") as HTMLInputElement)
+              ?.value || "",
+          phone:
+            (document.getElementById("saneamientoPhone") as HTMLInputElement)
+              ?.value || "",
+          company:
+            (document.getElementById("saneamientoCompany") as HTMLInputElement)
+              ?.value || "",
+          message:
+            (
+              document.getElementById(
+                "saneamientoMessage",
+              ) as HTMLTextAreaElement
+            )?.value || "",
+          project: "Saneamiento Ambiental",
+        };
+
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+        });
+
+        form.reset();
+
+        // Hide form elements, show success message
+        form.querySelectorAll("input, textarea, button").forEach((el) => {
+          if (el.id !== "saneamientoFormSuccess") {
+            (el as HTMLElement).classList.add("hidden");
+          }
+        });
+
+        if (successMessage) successMessage.classList.remove("hidden");
+      } catch (error) {
+        console.error("Error enviando formulario:", error);
+        alert(
+          "Hubo un error enviando la solicitud. Por favor intenta de nuevo.",
+        );
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+</script>

@@ -1,0 +1,136 @@
+---
+import { Image } from "astro:assets";
+import heroBackground from "@/assets/images/maia_business/PORTADA.png";
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/800.css";
+---
+
+<section
+  id="inicio"
+  class="relative min-h-[650px] lg:h-[calc(100vh-100px)] flex items-center overflow-hidden bg-[#0f113a]"
+>
+  <!-- Background Image for the entire section -->
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={heroBackground}
+      alt="Transformamos tu negocio con software a medida"
+      class="w-full h-full object-cover object-right"
+      quality="max"
+      loading="eager"
+    />
+  </div>
+
+  <!-- Left Side Diagonal Dark Blue/Violet Overlay (Desktop Only) -->
+  <div
+    class="absolute inset-y-0 left-0 z-10 hidden lg:block w-[62%] [clip-path:polygon(0_0,100%_0,73%_100%,0_100%)] select-none pointer-events-none"
+  >
+    <!-- Background color and overlay structure to let the background image show through with a dark blue tint -->
+    <div class="absolute inset-0 bg-[#151249]/95 mix-blend-multiply"></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-[#161245] via-[#1a1752] to-[#120f3d] opacity-95"
+    >
+    </div>
+
+    <!-- Faint overlay of the same image to create depth on the left side, matching the capture -->
+    <div class="absolute inset-0 opacity-[0.15] mix-blend-overlay">
+      <Image
+        src={heroBackground}
+        alt="Fondo"
+        class="w-full h-full object-cover object-right"
+        quality="low"
+      />
+    </div>
+  </div>
+
+  <!-- Mobile Overlay (Stacked/All-Screen) -->
+  <div
+    class="absolute inset-0 z-10 lg:hidden bg-gradient-to-b from-[#161245]/95 via-[#120f3d]/98 to-[#0b0927]"
+  >
+  </div>
+
+  <!-- Content Container -->
+  <div
+    class="container mx-auto max-w-[1344px] px-[20px] sm:px-[45px] relative z-20 w-full"
+  >
+    <div class="grid lg:grid-cols-12 w-full">
+      <!-- Left Content Column -->
+      <div
+        class="lg:col-span-7 xl:col-span-6 flex flex-col justify-center text-left py-16 lg:py-0"
+      >
+        <!-- Title -->
+        <h1
+          class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-[1.15] tracking-tight mb-6"
+          style="font-family: 'Poppins', sans-serif;"
+        >
+          Transformamos tu negocio con <span
+            class="text-[#00c0a9] block sm:inline">software a medida</span
+          >
+        </h1>
+
+        <!-- Subtitle -->
+        <p
+          class="text-sm sm:text-base md:text-2xl text-white/80 leading-relaxed mb-10 max-w-[540px]"
+          style="font-family: 'Poppins', sans-serif;"
+        >
+          Digitaliza operaciones, elimina procesos manuales y aumenta la
+          eficiencia con soluciones tecnológicas diseñadas exclusivamente para
+          tu negocio.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:max-w-[480px]">
+          <!-- Button 1: Ver Servicios -->
+          <a
+            href="#funciones"
+            class="flex-1 inline-flex items-center justify-center border-2 border-white bg-[#151249]/40 text-white font-bold text-sm sm:text-base px-6 py-4 rounded-[12px] hover:bg-white hover:text-[#151249] transition-all duration-300 uppercase tracking-wider hover:scale-[1.02] active:scale-95 text-center"
+            style="font-family: 'Poppins', sans-serif;"
+          >
+            Ver Servicios
+          </a>
+
+          <!-- Button 2: Agendar Demo -->
+          <a
+            href="#contacto"
+            class="flex-1 inline-flex items-center justify-center bg-[#00c0a9] text-white font-bold text-sm sm:text-base px-6 py-4 rounded-[12px] hover:bg-[#00a894] transition-all duration-300 uppercase tracking-wider hover:scale-[1.02] active:scale-95 shadow-lg shadow-[#00c0a9]/20 text-center"
+            style="font-family: 'Poppins', sans-serif;"
+          >
+            Agendar Demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Premium animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  h1,
+  p,
+  div.flex {
+    opacity: 0;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  h1 {
+    animation-delay: 0.15s;
+  }
+  p {
+    animation-delay: 0.35s;
+  }
+  div.flex {
+    animation-delay: 0.55s;
+  }
+</style>

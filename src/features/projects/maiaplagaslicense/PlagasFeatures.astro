@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+
+import icon1 from "@/assets/images/maia_plagas_license/ICONOS/ICONO 1.png";
+import icon2 from "@/assets/images/maia_plagas_license/ICONOS/ICONO 2.png";
+import icon3 from "@/assets/images/maia_plagas_license/ICONOS/ICONO 3.png";
+import icon4 from "@/assets/images/maia_plagas_license/ICONOS/ICONO 4.png";
+import icon5 from "@/assets/images/maia_plagas_license/ICONOS/ICONO 5.png";
+import icon6 from "@/assets/images/maia_plagas_license/ICONOS/ICONO 6.png";
+
+const features = [
+  {
+    icon: icon1,
+    title: "Cuenta con un software propio para tu empresa",
+    description: "Realiza un único pago y obtén un sistema con acceso exclusivo.",
+    bgColor: "bg-[#5659d8]",
+  },
+  {
+    icon: icon2,
+    title: "Software adaptado a los procesos de tu empresa",
+    description: "Personaliza el sistema con tu logo, documentos y nuevas funciones.",
+    bgColor: "bg-[#5659d8]",
+  },
+  {
+    icon: icon3,
+    title: "Genera automáticamente certificados e informes",
+    description: "Emite documentos de cada ervicio en minutos."
+  },
+  {
+    icon: icon4,
+    title: "Visualiza gráficas de tendencias",
+    description: "Genera gráficos para monitorear cebaderos y trampas de luz."
+  },
+  {
+    icon: icon5,
+    title: "Aumenta tus oportunidades de ganar licitaciones",
+    description: "Cumple la normativa en documentos exigidos por tus clientes."
+  },
+  {
+    icon: icon6,
+    title: "Brinda a tus clientes un portal de servicios",
+    description: "Permite que tus clientes accedan a certificados e informes cuando lo necesiten."
+  }
+];
+---
+
+<section id="beneficios" class="py-16 sm:py-24 bg-white relative">
+  <div class="container mx-auto max-w-[1200px] px-[20px] sm:px-[45px]">
+    
+    <!-- Section Header -->
+    <div class="mb-12 sm:mb-16">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#311A6B] tracking-tight uppercase" style="font-family: Poppins, sans-serif;">
+        Beneficios de usar Maia Plagas
+      </h2>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        features.map((feature) => (
+          <div class="flex flex-col items-center text-center">
+            <!-- Icon Container -->
+            <div class={`h-[96px] w-[96px] ${feature.bgColor ? feature.bgColor : "bg-[#EEF2FF]"} rounded-full flex items-center justify-center p-5 mb-6`}>
+              <Image 
+                src={feature.icon} 
+                alt={feature.title} 
+                class="h-full w-auto object-contain"
+              />
+            </div>
+            
+            <!-- Content -->
+            <h3 class="text-lg sm:text-[20px] font-bold text-[#1A1A2E] leading-tight mb-3 max-w-[320px]" style="font-family: Poppins, sans-serif;">
+              {feature.title}
+            </h3>
+            
+            <p class="text-black text-[15px] sm:text-base leading-relaxed max-w-[300px]">
+              {feature.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,16 @@
+---
+import type { GetStaticPaths } from "astro";
+import WebsiteLayout from "@/layouts/WebsiteLayout.astro";
+
+export const getStaticPaths = (() => {
+  return [];
+}) satisfies GetStaticPaths;
+
+const { slug } = Astro.params as { slug?: string };
+---
+
+<WebsiteLayout title={slug ?? "Pagina"} description="Pagina editorial de MAIA.">
+  <section class="mx-auto max-w-4xl px-6 py-20">
+    <h1 class="text-4xl font-semibold">{slug}</h1>
+  </section>
+</WebsiteLayout>

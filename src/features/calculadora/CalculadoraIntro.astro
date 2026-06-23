@@ -1,0 +1,109 @@
+---
+import { Image } from "astro:assets";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/900.css";
+
+import introImage from "@/assets/images/calculadora/IMAGENES/PARA QUE SIRVE.png";
+---
+
+<section
+  id="calculadora-intro"
+  class="py-16 sm:py-24 bg-[#f4f6fa] relative overflow-hidden"
+>
+  <!-- Glowing subtle highlights for premium feel -->
+  <div class="absolute inset-0 opacity-40 pointer-events-none">
+    <div
+      class="absolute -top-[10%] -left-[10%] h-[400px] w-[400px] rounded-full bg-blue-400/10 blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute -bottom-[10%] -right-[10%] h-[400px] w-[400px] rounded-full bg-teal-400/10 blur-3xl"
+    >
+    </div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-16 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Left Content Column -->
+      <div class="flex flex-col animate-on-scroll">
+        <h2
+          class="text-3xl sm:text-4xl md:text-[40px] font-bold text-[#1d1b84] tracking-tight leading-tight mb-6"
+          style="font-family: Poppins, sans-serif;"
+        >
+          ¿Para que sirve la calculadora de diluciones?
+        </h2>
+
+        <div
+          class="space-y-6 text-[#000]/90 text-sm sm:text-base md:text-xl leading-relaxed font-normal mb-8"
+        >
+          <p>
+            Realiza cálculos precisos para la preparación de desinfectantes,
+            asegurando la eficacia y cumplimiento con normativas sanitarias.
+            Ideal para empresas de saneamiento ambiental, industria
+            alimentaria y uso doméstico.
+          </p>
+        </div>
+
+        <div class="pt-6">
+          <a
+            href="#calculadora-tool"
+            class="inline-block text-center bg-[#427ef4] hover:bg-[#2563eb] text-white font-black text-lg px-10 py-4 rounded-[20px] hover:brightness-110 hover:shadow-xl hover:shadow-[#427ef4]/20 transition-all duration-300 uppercase tracking-wider hover:scale-[1.02] active:scale-95 shadow-lg shadow-[#427ef4]/10"
+            style="font-family: Poppins, sans-serif;"
+          >
+            USAR CALCULADORA
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Image Column -->
+      <div
+        class="relative w-full rounded-[2.5rem] overflow-hidden shadow-2xl group animate-on-scroll"
+      >
+        <Image
+          src={introImage}
+          alt="Preparación de desinfectantes"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Smooth entry animation */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .animate-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+
+  <script>
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", () => {
+      // Scroll animation observer
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</section>

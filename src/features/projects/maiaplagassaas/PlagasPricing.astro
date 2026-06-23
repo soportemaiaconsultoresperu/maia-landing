@@ -1,0 +1,386 @@
+---
+import { Image } from "astro:assets";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/800.css";
+
+import imagen11 from "@/assets/images/maia_plagas_saas/IMAGENES/IMAGEN 11.png";
+
+const plans = [
+  {
+    name: "Plan Smart",
+    priceMonthly: 60,
+    priceActivation: 130,
+    highlight: false,
+    tag: null,
+    users: [
+      "1 Administrador",
+      "1 Supervisor",
+      "5 Técnicos",
+      "Clientes",
+      "Curso Gratuito *",
+    ],
+    features: [
+      "Programación Actividades",
+      "Cotizaciones",
+      "Certificados",
+      "Ficha Técnica",
+      "Informes",
+      "Estadísticas (Monitoreo)",
+      "Proveedores",
+      "Pedidos",
+      "Soporte",
+      "Portal de Clientes",
+      "Inventarios",
+      "Proyección de Servicios",
+      "Plantillas de Servicios***",
+      "Gráfico de Tendencias",
+      "APP Web Android/iPhone",
+    ],
+  },
+  {
+    name: "Plan Plus",
+    priceMonthly: 110,
+    priceActivation: 190,
+    highlight: true,
+    tag: "Más popular",
+    users: [
+      "1 Administrador",
+      "2 Supervisores",
+      "10 Técnicos",
+      "Clientes",
+      "Curso Gratuito **",
+      "Dscto. Asesorías",
+    ],
+    features: [
+      "Programación Actividades",
+      "Cotizaciones",
+      "Certificados",
+      "Ficha Técnica",
+      "Informes",
+      "Estadísticas (Monitoreo)",
+      "Proveedores",
+      "Pedidos",
+      "Soporte",
+      "Portal de Clientes",
+      "Inventarios",
+      "Proyección de Servicios",
+      "Plantillas de Servicios***",
+      "Gráfico de Tendencias",
+      "APP Web Android/iPhone",
+    ],
+  },
+  {
+    name: "Plan Max",
+    priceMonthly: 160,
+    priceActivation: 190,
+    highlight: false,
+    tag: null,
+    users: [
+      "2 Administradores",
+      "3 Supervisores",
+      "15 Técnicos",
+      "Clientes",
+      "Curso Gratuito **",
+      "Dscto. Asesorías",
+    ],
+    features: [
+      "Programación Actividades",
+      "Cotizaciones",
+      "Certificados",
+      "Ficha Técnica",
+      "Informes",
+      "Estadísticas (Monitoreo)",
+      "Proveedores",
+      "Pedidos",
+      "Soporte",
+      "Portal de Clientes",
+      "Inventarios",
+      "Proyección de Servicios",
+      "Plantillas de Servicios***",
+      "Gráfico de Tendencias",
+      "APP Web Android/iPhone",
+    ],
+  },
+];
+---
+
+<section id="precios" class="pt-12 pb-16 sm:pt-16 sm:pb-24 lg:pt-20 lg:pb-32 relative bg-[#f8f9fc]">
+  <!-- Background Image restricted to top portion -->
+  <div class="absolute inset-x-0 top-0 h-[550px] sm:h-[600px] z-0">
+    <Image
+      src={imagen11}
+      alt="Fondo planes de suscripción"
+      class="w-full h-full object-cover"
+      style="object-position: center 50%;"
+    />
+    <!-- Dark overlay -->
+    <div
+      class="absolute inset-0"
+      style="background: rgba(42, 28, 100, 0.8);"
+    ></div>
+  </div>
+
+  <div class="relative z-10 container mx-auto max-w-[1350px] px-5 sm:px-10">
+    <!-- Header -->
+    <div class="text-center mb-3">
+      <h2
+        class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-white uppercase tracking-wide"
+        style="font-family: Poppins, sans-serif;"
+      >
+        Planes de Suscripción
+      </h2>
+    </div>
+    <div
+      class="text-center text-white text-[15px] sm:text-[16px] mb-8"
+      style="font-family: Poppins, sans-serif;"
+    >
+      <p class="mb-1">Elige el mejor plan que se adapte a tu empresa.</p>
+      <p>Suscríbete de manera mensual, semestral o anual.</p>
+    </div>
+
+    <!-- Switches -->
+    <div class="flex flex-col items-center justify-center mb-12">
+      <div class="flex flex-col gap-4 sm:gap-3">
+        <!-- Annual -->
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 justify-center sm:justify-start">
+          <div class="bg-white rounded-full w-[22px] h-[22px] flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-[14px] w-[14px] text-[#1E1060] ml-[2px]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <span class="text-white text-[15px] sm:text-[16px] text-center sm:text-left font-medium" style="font-family: Poppins, sans-serif;">
+            Ahorra más con un <strong class="font-bold">20% de descuento</strong> en el Plan Anual.
+          </span>
+          <button id="toggle-annual" class="w-12 h-6 bg-[#c4c4c4]/80 rounded-full flex items-center px-1 transition-colors relative ml-1 sm:ml-2 cursor-pointer focus:outline-none" aria-label="Toggle anual">
+            <div class="toggle-dot w-[16px] h-[16px] bg-white rounded-full shadow-sm transform transition-transform duration-200 translate-x-0"></div>
+          </button>
+        </div>
+
+        <!-- Semiannual -->
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 justify-center sm:justify-start">
+          <div class="bg-white rounded-full w-[22px] h-[22px] flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-[14px] w-[14px] text-[#1E1060] ml-[2px]" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <span class="text-white text-[15px] sm:text-[16px] text-center sm:text-left font-medium" style="font-family: Poppins, sans-serif;">
+            Flexibilidad y ahorro con un <strong class="font-bold">10% de descuento</strong> en el Plan Semestral.
+          </span>
+          <button id="toggle-semestral" class="w-12 h-6 bg-[#c4c4c4]/80 rounded-full flex items-center px-1 transition-colors relative ml-1 sm:ml-2 cursor-pointer focus:outline-none" aria-label="Toggle semestral">
+            <div class="toggle-dot w-[16px] h-[16px] bg-white rounded-full shadow-sm transform transition-transform duration-200 translate-x-0"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plans Grid -->
+    <div class="grid gap-8 sm:grid-cols-3 items-stretch">
+      {
+        plans.map((plan) => (
+          <div
+            class={`relative flex flex-col h-full rounded-[16px] overflow-hidden border-[6px] ${
+              plan.highlight
+                ? "border-[#3EC8A0] shadow-[0_8px_40px_rgba(62,200,160,0.35)] z-10"
+                : "border-[#e0e4f5] shadow-lg"
+            }`}
+            style="background: #ffffff;"
+          >
+            <!-- Popular tag (or invisible spacer) -->
+            <div
+              class={`text-center py-[7px] font-semibold tracking-wide ${
+                plan.tag ? "text-white" : "text-transparent select-none"
+              }`}
+              style={
+                plan.tag
+                  ? "background-color: #3EC8A0; font-family: Poppins, sans-serif;"
+                  : "font-family: Poppins, sans-serif;"
+              }
+            >
+              {plan.tag || "Spacer"}
+            </div>
+
+            <div class="flex flex-col flex-1 px-6 pb-6 pt-5">
+              <!-- Plan name -->
+              <h3
+                class="text-[20px] font-extrabold text-center uppercase mb-3"
+                style="font-family: Poppins, sans-serif; color: #1E1060;"
+              >
+                {plan.name}
+              </h3>
+
+              <!-- Stacked prices adjusted to capture style -->
+              <div class="space-y-2 mb-2">
+                <!-- Monthly Price -->
+                <div class="flex items-baseline justify-between gap-1">
+                  <span
+                    class="text-[32px] sm:text-[36px] font-bold leading-none plan-monthly-price"
+                    style="color: #1E1060; font-family: Poppins, sans-serif;"
+                    data-base-price={plan.priceMonthly}
+                  >
+                    ${plan.priceMonthly}
+                  </span>
+                  <span
+                    class="text-[12px] font-semibold text-[#1E1060] opacity-80 text-right leading-none"
+                    style="font-family: Poppins, sans-serif;"
+                  >
+                    USD/Mes + IGV
+                  </span>
+                </div>
+                <!-- Activation Price -->
+                <div class="flex items-baseline justify-between gap-1">
+                  <span
+                    class="text-[32px] sm:text-[36px] font-bold leading-none"
+                    style="color: #1E1060; font-family: Poppins, sans-serif;"
+                  >
+                    ${plan.priceActivation}
+                  </span>
+                  <span
+                    class="text-[12px] font-semibold text-[#1E1060] opacity-80 text-right leading-none"
+                    style="font-family: Poppins, sans-serif;"
+                  >
+                    Activación Inicial + IGV
+                  </span>
+                </div>
+              </div>
+
+              <!-- Divider -->
+              <div class="border-t-2 border-[#1E1060] my-4" />
+
+              <!-- Users included — plain list, no bullets -->
+              <ul class="mb-4 space-y-[3px]">
+                {plan.users.map((u) => (
+                  <li
+                    class=" text-[#374151] leading-snug"
+                    style="font-family: Poppins, sans-serif;"
+                  >
+                    {u}
+                  </li>
+                ))}
+              </ul>
+
+              <!-- CTA button -->
+              <a
+                href="#contacto"
+                class="block text-center py-[11px] px-6 rounded-[10px] font-bold text-white text-[15px] mb-5 transition-all hover:brightness-110 active:scale-95 animate-pulse-subtle"
+                style={`font-family: Poppins, sans-serif; background-color: ${plan.highlight ? "#3EC8A0" : "#5059E5"};`}
+              >
+                ¡Lo quiero!
+              </a>
+
+              <!-- Second divider -->
+              <div class="border-t-2 border-[#1E1060] mb-4" />
+
+              <!-- Includes label -->
+              <p
+                class="text-[13px] font-bold text-[#1E1060] mb-2"
+                style="font-family: Poppins, sans-serif;"
+              >
+                Incluye:
+              </p>
+
+              <!-- Features list — plain, no bullets -->
+              <ul class="space-y-[3px] flex-1">
+                {plan.features.map((f) => (
+                  <li
+                    class=" text-[#374151] leading-snug"
+                    style="font-family: Poppins, sans-serif;"
+                  >
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="w-full bg-[#f4f5f8] py-8 sm:py-10">
+  <div class="container mx-auto max-w-[1350px] px-5 sm:px-10">
+    <div class="text-[#1E1060] font-semibold text-[14px] sm:text-[15px] leading-relaxed ml-2 sm:ml-4" style="font-family: Poppins, sans-serif;">
+      <p>* 01 curso virtual gratuito de Saneamiento Ambiental al año.</p>
+      <p>** 02 cursos virtuales gratuito de Saneamiento Ambiental al año.</p>
+      <p>*** Monitoreo de Desratización y Trampas de Luz.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+<script>
+  function setupToggles() {
+    const toggleAnnual = document.getElementById('toggle-annual');
+    const toggleSemestral = document.getElementById('toggle-semestral');
+    const priceElements = document.querySelectorAll('.plan-monthly-price');
+
+    let activeDiscount = 'none'; // 'none' | 'semiannual' | 'annual'
+
+    function updatePrices() {
+      priceElements.forEach((el) => {
+        if (!(el instanceof HTMLElement)) return;
+        const basePrice = parseInt(el.dataset.basePrice || '0', 10);
+        let finalPrice = basePrice;
+
+        if (activeDiscount === 'annual') {
+          finalPrice = (Math.round(basePrice * 0.8) * 12);
+        } else if (activeDiscount === 'semiannual') {
+          finalPrice = (Math.round(basePrice * 0.9) * 6);
+        }
+
+        el.textContent = `$${finalPrice}`;
+      });
+
+      // Styling updates
+      const annualDot = toggleAnnual?.querySelector('.toggle-dot');
+      const semestralDot = toggleSemestral?.querySelector('.toggle-dot');
+
+      if (activeDiscount === 'annual') {
+        toggleAnnual?.classList.remove('bg-[#c4c4c4]/80');
+        toggleAnnual?.classList.add('bg-[#3EC8A0]');
+        annualDot?.classList.remove('translate-x-0');
+        annualDot?.classList.add('translate-x-[24px]');
+
+        toggleSemestral?.classList.add('bg-[#c4c4c4]/80');
+        toggleSemestral?.classList.remove('bg-[#3EC8A0]');
+        semestralDot?.classList.add('translate-x-0');
+        semestralDot?.classList.remove('translate-x-[24px]');
+      } else if (activeDiscount === 'semiannual') {
+        toggleSemestral?.classList.remove('bg-[#c4c4c4]/80');
+        toggleSemestral?.classList.add('bg-[#3EC8A0]');
+        semestralDot?.classList.remove('translate-x-0');
+        semestralDot?.classList.add('translate-x-[24px]');
+
+        toggleAnnual?.classList.add('bg-[#c4c4c4]/80');
+        toggleAnnual?.classList.remove('bg-[#3EC8A0]');
+        annualDot?.classList.add('translate-x-0');
+        annualDot?.classList.remove('translate-x-[24px]');
+      } else {
+        toggleAnnual?.classList.add('bg-[#c4c4c4]/80');
+        toggleAnnual?.classList.remove('bg-[#3EC8A0]');
+        annualDot?.classList.add('translate-x-0');
+        annualDot?.classList.remove('translate-x-[24px]');
+
+        toggleSemestral?.classList.add('bg-[#c4c4c4]/80');
+        toggleSemestral?.classList.remove('bg-[#3EC8A0]');
+        semestralDot?.classList.add('translate-x-0');
+        semestralDot?.classList.remove('translate-x-[24px]');
+      }
+    }
+
+    toggleAnnual?.addEventListener('click', () => {
+      activeDiscount = activeDiscount === 'annual' ? 'none' : 'annual';
+      updatePrices();
+    });
+
+    toggleSemestral?.addEventListener('click', () => {
+      activeDiscount = activeDiscount === 'semiannual' ? 'none' : 'semiannual';
+      updatePrices();
+    });
+  }
+
+  // Support Astro transitions
+  setupToggles();
+  document.addEventListener('astro:after-swap', setupToggles);
+</script>

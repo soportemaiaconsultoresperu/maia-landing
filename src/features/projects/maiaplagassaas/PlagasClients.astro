@@ -1,0 +1,215 @@
+---
+import { Image } from "astro:assets";
+import "@fontsource/poppins/600.css";
+
+import client1 from "@/assets/images/maia_plagas_saas/LOGOS DE CLIENTES/CLIENTE 1.png";
+import client2 from "@/assets/images/maia_plagas_saas/LOGOS DE CLIENTES/CLIENTE 2.png";
+import client3 from "@/assets/images/maia_plagas_saas/LOGOS DE CLIENTES/CLIENTE 3.png";
+import client4 from "@/assets/images/maia_plagas_saas/LOGOS DE CLIENTES/CLIENTE 4.png";
+import client5 from "@/assets/images/maia_plagas_saas/LOGOS DE CLIENTES/CLIENTE 5.png";
+import client6 from "@/assets/images/maia_plagas_saas/LOGOS DE CLIENTES/CLIENTE 6.png";
+import client7 from "@/assets/images/maia_plagas_saas/LOGOS DE CLIENTES/CLIENTE 7.png";
+
+const logos = [client1, client2, client3, client4, client5, client6, client7];
+
+// Triplicate logos for seamless infinite looping
+const tripleLogos = [...logos, ...logos, ...logos];
+---
+
+<section
+  id="clientes"
+  class="py-16 bg-white border-y border-slate-100 overflow-hidden"
+>
+  <div class="container mx-auto max-w-[1344px] px-[20px] sm:px-[45px]">
+    <div class="text-center max-w-xl mx-auto mb-10">
+      <h2
+        class="text-2xl sm:text-3xl font-bold text-[#311A6B] tracking-tight mb-2"
+        style="font-family: Poppins, sans-serif;"
+      >
+        Empresas que ya optimizan su gestión
+      </h2>
+      <!-- <p class="text-slate-500 text-sm sm:text-base">
+        Líderes de control de plagas y saneamiento ambiental confían en nuestra tecnología
+      </p> -->
+    </div>
+
+    <div class="relative w-full group">
+      <!-- Gradient Overlays -->
+      <div
+        class="hidden md:block absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none"
+      >
+      </div>
+      <div
+        class="hidden md:block absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none"
+      >
+      </div>
+
+      <!-- Navigation Buttons -->
+      <button
+        id="plagasClientPrevBtn"
+        class="absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white border border-slate-100 rounded-full flex items-center justify-center shadow-lg text-[#153f70] hover:bg-[#153f70] hover:text-white transition-all duration-300 md:opacity-0 md:group-hover:opacity-100 hover:scale-105"
+        aria-label="Previous"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg
+        >
+      </button>
+
+      <button
+        id="plagasClientNextBtn"
+        class="absolute -right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white border border-slate-100 rounded-full flex items-center justify-center shadow-lg text-[#153f70] hover:bg-[#153f70] hover:text-white transition-all duration-300 md:opacity-0 md:group-hover:opacity-100 hover:scale-105"
+        aria-label="Next"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg
+        >
+      </button>
+
+      <!-- Carousel Container -->
+      <div
+        id="plagasClientCarousel"
+        class="flex gap-6 overflow-x-hidden no-scrollbar cursor-grab active:cursor-grabbing py-4"
+      >
+        {
+          tripleLogos.map((logo, index) => (
+            <div
+              class="plagas-client-slide shrink-0"
+              data-index={index % logos.length}
+            >
+              <div class="bg-white rounded-[16px] p-4 h-36 sm:h-48 flex items-center justify-center shadow-sm hover:shadow-lg transition-all duration-500 border border-slate-100/80 group/card overflow-hidden">
+                <div class="w-full h-full flex items-center justify-center">
+                  <Image
+                    src={logo}
+                    alt="Cliente Colaborador"
+                    class="max-h-full max-w-full w-auto h-auto object-contain transition-all duration-500 group-hover/card:scale-110"
+                  />
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .plagas-client-slide {
+    width: calc(100vw - 3rem); /* Mobile: Near full width */
+  }
+
+  @media (min-width: 640px) {
+    .plagas-client-slide {
+      width: calc((100% - 1.5rem) / 2); /* Tablet: 2 columns */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .plagas-client-slide {
+      width: calc((100% - 3rem) / 3); /* Small Desktop: 3 columns */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .plagas-client-slide {
+      width: calc((100% - 6rem) / 5); /* Large Desktop: 5 columns */
+    }
+  }
+</style>
+
+<script>
+  const carousel = document.getElementById("plagasClientCarousel");
+  const prevBtn = document.getElementById("plagasClientPrevBtn");
+  const nextBtn = document.getElementById("plagasClientNextBtn");
+
+  if (carousel && prevBtn && nextBtn) {
+    let isPaused = false;
+    let scrollSpeed = 0.8; // px per frame
+    let resumeTimeout: number;
+
+    const slideWidth = () => {
+      const firstSlide = carousel.querySelector(
+        ".plagas-client-slide",
+      ) as HTMLElement;
+      if (!firstSlide) return 200;
+      const style = window.getComputedStyle(carousel);
+      const gap = parseInt(style.columnGap || style.gap || "0");
+      return firstSlide.offsetWidth + gap;
+    };
+
+    // Center content initially
+    const totalContentWidth = carousel.scrollWidth / 3;
+    carousel.scrollLeft = totalContentWidth;
+
+    const step = () => {
+      if (!isPaused) {
+        carousel.scrollLeft += scrollSpeed;
+
+        // Reset positions
+        if (carousel.scrollLeft >= totalContentWidth * 2) {
+          carousel.scrollLeft -= totalContentWidth;
+        } else if (carousel.scrollLeft <= totalContentWidth - 10) {
+          carousel.scrollLeft += totalContentWidth;
+        }
+      }
+      requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+
+    const pauseAutoScroll = (duration = 4000) => {
+      isPaused = true;
+      clearTimeout(resumeTimeout);
+      resumeTimeout = window.setTimeout(() => {
+        isPaused = false;
+      }, duration);
+    };
+
+    // Pause on interactions
+    carousel.addEventListener("mouseenter", () => {
+      isPaused = true;
+      clearTimeout(resumeTimeout);
+    });
+    carousel.addEventListener("mouseleave", () => {
+      isPaused = false;
+    });
+
+    nextBtn.addEventListener("click", () => {
+      pauseAutoScroll();
+      carousel.scrollTo({
+        left: carousel.scrollLeft + slideWidth(),
+        behavior: "smooth",
+      });
+    });
+
+    prevBtn.addEventListener("click", () => {
+      pauseAutoScroll();
+      carousel.scrollTo({
+        left: carousel.scrollLeft - slideWidth(),
+        behavior: "smooth",
+      });
+    });
+  }
+</script>

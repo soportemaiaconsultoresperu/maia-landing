@@ -1,0 +1,15 @@
+---
+import ArticleLayout from "@/layouts/ArticleLayout.astro";
+
+export function getStaticPaths() {
+  return [];
+}
+
+const { slug } = Astro.params;
+---
+
+<ArticleLayout title={slug ?? "Articulo"} description="Articulo del blog.">
+  <section class="mx-auto max-w-3xl px-6 py-20">
+    <h1 class="text-4xl font-semibold">{slug}</h1>
+  </section>
+</ArticleLayout>

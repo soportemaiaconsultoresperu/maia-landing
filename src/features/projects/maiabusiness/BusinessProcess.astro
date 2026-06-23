@@ -1,0 +1,142 @@
+---
+import { Image } from "astro:assets";
+import imgProceso from "@/assets/images/maia_business/PROCESO.png";
+
+// Import step icons from the ICONOS folder
+import icon1 from "@/assets/images/maia_business/ICONOS/1.png";
+import icon2 from "@/assets/images/maia_business/ICONOS/2.png";
+import icon3 from "@/assets/images/maia_business/ICONOS/3.png";
+import icon4 from "@/assets/images/maia_business/ICONOS/4.png";
+
+const steps = [
+  {
+    number: "1",
+    title: "Diagnóstico Inicial",
+    description: "Analizamos tus dolores operativos y requerimientos para diseñar una estrategia digital personalizada.",
+    bgColor: "#e6f6f4", // Light teal
+    badgeColor: "bg-[#00a896]",
+    icon: icon1
+  },
+  {
+    number: "2",
+    title: "Diseño y Desarrollo",
+    description: "Construimos tu software con tecnologías modernas, asegurando escalabilidad y seguridad.",
+    bgColor: "#fffbeb", // Light yellow/orange
+    badgeColor: "bg-[#f59e0b]",
+    icon: icon2
+  },
+  {
+    number: "3",
+    title: "Implementación",
+    description: "Desplegamos la solución y capacitamos a tu personal para garantizar una adopción fluida.",
+    bgColor: "#eef2ff", // Light Indigo
+    badgeColor: "bg-[#6366f1]",
+    icon: icon3
+  },
+  {
+    number: "4",
+    title: "Soporte Continuo",
+    description: "Monitoreamos el desempeño y brindamos mantenimiento constante para que tu sistema evolucione contigo.",
+    bgColor: "#f0fdf4", // Light Green
+    badgeColor: "bg-[#84cc16]",
+    icon: icon4
+  }
+];
+---
+
+<section id="metodologia" class="py-20 bg-white relative overflow-hidden">
+  <div class="container mx-auto max-w-[1344px] px-[20px] sm:px-[45px]">
+    
+    <!-- Title -->
+    <div class="text-center mb-16 sm:mb-20">
+      <h2 
+        class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#153f70] tracking-wider uppercase"
+        style="font-family: 'Poppins', sans-serif;"
+      >
+        Nuestro Proceso
+      </h2>
+    </div>
+
+    <!-- Content Grid (increased image width column spans to 7 cols and timeline to 5 cols) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      <!-- Left Column: Image with stylized borders (Wider layout) -->
+      <div class="lg:col-span-7 flex justify-center w-full">
+        <div class="relative w-full max-w-[680px] group">
+          <!-- Soft glow effect behind the image -->
+          <div class="absolute inset-0 bg-[#153f70]/5 rounded-[40px] rounded-tr-[120px] blur-xl -z-10 group-hover:scale-105 transition-transform duration-500"></div>
+          
+          <div class="overflow-hidden rounded-[40px] rounded-tr-[120px] shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-500">
+            <Image 
+              src={imgProceso} 
+              alt="Equipo de trabajo Maia Business colaborando y analizando datos" 
+              class="w-full h-auto object-cover transform hover:scale-[1.03] transition-transform duration-700 ease-out"
+              quality="high"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Vertical Timeline Steps -->
+      <div class="lg:col-span-5 relative">
+        <!-- Vertical connecting line (Dashed) -->
+        <div 
+          class="absolute left-[38px] sm:left-[48px] top-10 bottom-10 w-[2px] border-l-2 border-dashed border-slate-300 -z-10"
+          aria-hidden="true"
+        ></div>
+
+        <div class="flex flex-col gap-10 sm:gap-12">
+          {
+            steps.map((step) => (
+              <div class="flex gap-6 sm:gap-8 items-start relative group">
+                
+                <!-- Circle Visual Container -->
+                <div class="relative shrink-0">
+                  <!-- Main Outer Circle -->
+                  <div 
+                    class="w-[76px] h-[76px] sm:w-[96px] sm:h-[96px] rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105"
+                    style={`background-color: ${step.bgColor};`}
+                  >
+                    <!-- Inner Icon from Folder -->
+                    <Image 
+                      src={step.icon}
+                      alt={step.title}
+                      class="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                      quality="high"
+                    />
+                  </div>
+
+                  <!-- Small Floating Number Badge -->
+                  <div 
+                    class={`absolute -top-1 -left-1 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-white text-sm sm:text-base font-bold shadow-md ${step.badgeColor}`}
+                  >
+                    {step.number}
+                  </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="flex-grow pt-2 sm:pt-4">
+                  <h3 
+                    class="text-sm sm:text-base md:text-2xl font-bold text-[#1e293b] mb-2 group-hover:text-[#153f70] transition-colors duration-300"
+                    style="font-family: 'Poppins', sans-serif;"
+                  >
+                    {step.title}
+                  </h3>
+                  <p 
+                    class="text-sm sm:text-base md:text-2xl text-slate-600 leading-relaxed max-w-[480px]"
+                    style="font-family: 'Poppins', sans-serif;"
+                  >
+                    {step.description}
+                  </p>
+                </div>
+
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

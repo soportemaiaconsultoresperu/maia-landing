@@ -1,0 +1,105 @@
+---
+import { Image } from "astro:assets";
+
+// Import images
+import imgAdaptabilidad from "@/assets/images/maia_business/ADAPTABILIDAD TOTAL.png";
+import imgEficiencia from "@/assets/images/maia_business/EFICIENCIA OPERATIVA.png";
+import imgSoporte from "@/assets/images/maia_business/SOPORTE LOCAL.png";
+
+// Import icons
+import iconAdaptabilidad from "@/assets/images/maia_business/ICONOS/ADAPTADBILIDAD.png";
+import iconEficiencia from "@/assets/images/maia_business/ICONOS/EFICIENCIA.png";
+import iconSoporte from "@/assets/images/maia_business/ICONOS/SOPORTE.png";
+
+const benefits = [
+  {
+    title: "Adaptabilidad Total",
+    description: "Desarrollamos soluciones que se ajustan al 100% a tu realidad operativa, ya sea en agroindustria, manufactura o servicios.",
+    image: imgAdaptabilidad,
+    icon: iconAdaptabilidad,
+    bgColorClass: "bg-[#1D1B4E]",
+  },
+  {
+    title: "Eficiencia Operativa",
+    description: "Optimiza tus procesos, reduce tiempos de respuesta y libera a tu equipo de tareas repetitivas.",
+    image: imgEficiencia,
+    icon: iconEficiencia,
+    bgColorClass: "bg-[#4D55D8]",
+  },
+  {
+    title: "Soporte Local Experto",
+    description: "Más de 7 años acompañando empresas en Perú con soporte cercano y respuestas ágiles cuando más lo necesitan.",
+    image: imgSoporte,
+    icon: iconSoporte,
+    bgColorClass: "bg-[#10B39A]",
+  },
+];
+---
+
+<section id="beneficios" class="py-20 bg-slate-100">
+  <div class="container mx-auto max-w-[1344px] px-[20px] sm:px-[45px]">
+    
+    <!-- Title Section -->
+    <div class="mb-16">
+      <h2 
+        class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#153f70] tracking-wider uppercase"
+        style="font-family: 'Poppins', sans-serif;"
+      >
+        Beneficios de nuestro servicio
+      </h2>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+      {
+        benefits.map((item) => (
+          <div 
+            class="flex flex-col rounded-[28px] overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white"
+          >
+            <!-- Image Container -->
+            <div class="relative w-full aspect-[1.45] overflow-hidden shrink-0">
+              <Image 
+                src={item.image} 
+                alt={item.title}
+                class="w-full h-full object-cover"
+                quality="high"
+              />
+            </div>
+
+            <!-- Content Area with overlapping icon -->
+            <div class={`relative ${item.bgColorClass} flex-grow flex flex-col pt-12 pb-10 px-8 text-white`}>
+              
+              <!-- Floating Icon Badge -->
+              <div 
+                class="absolute top-0 left-8 -translate-y-1/2 w-16 h-16 rounded-[18px] bg-white flex items-center justify-center p-3.5 shadow-lg"
+              >
+                <Image 
+                  src={item.icon} 
+                  alt={`Icono ${item.title}`}
+                  class="w-full h-full object-contain"
+                />
+              </div>
+
+              <!-- Title -->
+              <h3 
+                class="text-2xl sm:text-[22px] font-bold mb-4"
+                style="font-family: 'Poppins', sans-serif;"
+              >
+                {item.title}
+              </h3>
+
+              <!-- Description -->
+              <p 
+                class="text-sm sm:text-base md:text-2xl text-white/90 leading-relaxed font-medium"
+                style="font-family: 'Poppins', sans-serif;"
+              >
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+  </div>
+</section>

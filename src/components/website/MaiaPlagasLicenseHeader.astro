@@ -1,0 +1,133 @@
+---
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
+import logo from "@/assets/images/maia_plagas_license/LOGO.png";
+
+const navItems = [
+  { label: "Inicio", href: "#inicio" },
+  { label: "Funciones", href: "#funciones" },
+  { label: "Por qué elegirnos", href: "#por-que-elegirnos" },
+  { label: "Contacto", href: "#contacto" },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md shadow-sm">
+  <div
+    class="mx-auto flex min-h-[100px] w-full max-w-[1344px] items-center justify-between px-[20px] sm:px-[45px] lg:h-[100px]"
+  >
+    <!-- Logo -->
+    <a href="/maiaplagaslicencia" aria-label="Maia Plagas Licencia" class="shrink-0 flex items-center">
+      <img
+        src={logo.src}
+        alt="Maia Plagas Licencia Logo"
+        class="h-[60px] w-auto sm:h-[68px] md:h-[75px] transition-transform duration-300 hover:scale-105"
+      />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav
+      aria-label="Maia Plagas Licencia"
+      class="hidden items-center gap-x-8 lg:flex"
+    >
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-[16px] font-medium leading-none tracking-tight text-[#334155] transition-all duration-300 hover:text-[#153f70]"
+            style="font-family: Poppins, sans-serif;"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Desktop CTA Button -->
+    <div class="hidden lg:flex items-center">
+      <a
+        href="#contacto"
+        class="inline-flex items-center justify-center bg-[#153f70] px-6 py-3 text-[15px] font-semibold text-white transition-all duration-300 hover:bg-[#60e8c1] hover:text-[#153f70] rounded-[16px] shadow-sm shadow-[#153f70]/10 hover:shadow-md hover:-translate-y-[1px]"
+        style="font-family: Poppins, sans-serif;"
+      >
+        Solicitar Demo
+      </a>
+    </div>
+
+    <!-- Mobile Burger Menu -->
+    <div class="flex items-center gap-4 lg:hidden">
+      <a
+        href="#contacto"
+        class="inline-flex items-center justify-center bg-[#153f70] px-4 py-2 text-[13px] font-semibold text-white transition-all duration-300 hover:bg-[#60e8c1] hover:text-[#153f70] rounded-[16px]"
+        style="font-family: Poppins, sans-serif;"
+      >
+        Demo
+      </a>
+      <button
+        id="plagas-mobile-menu-button"
+        class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5 focus:outline-none"
+        aria-label="Menu"
+      >
+        <span class="h-0.5 w-6 rounded-full bg-[#1e293b] transition-all duration-300 group-[.open]:translate-y-2 group-[.open]:rotate-45"></span>
+        <span class="h-0.5 w-6 rounded-full bg-[#1e293b] transition-all duration-300 group-[.open]:opacity-0"></span>
+        <span class="h-0.5 w-6 rounded-full bg-[#1e293b] transition-all duration-300 group-[.open]:-translate-y-2 group-[.open]:-rotate-45"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div
+    id="plagas-mobile-menu"
+    class="invisible absolute left-0 right-0 top-full flex h-0 flex-col overflow-hidden bg-white/95 backdrop-blur-md transition-all duration-500 ease-in-out lg:hidden border-t border-slate-100"
+  >
+    <nav class="flex flex-col px-6 py-6 divide-y divide-slate-50">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="py-4 text-center text-lg font-medium text-[#334155] transition-colors hover:text-[#153f70]"
+            style="font-family: Poppins, sans-serif;"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<script>
+  const button = document.getElementById('plagas-mobile-menu-button');
+  const menu = document.getElementById('plagas-mobile-menu');
+
+  button?.addEventListener('click', () => {
+    button.classList.toggle('open');
+    if (button.classList.contains('open')) {
+      menu?.classList.remove('invisible', 'h-0');
+      menu?.classList.add('h-screen', 'opacity-100');
+      document.body.style.overflow = 'hidden';
+    } else {
+      menu?.classList.add('h-0');
+      menu?.classList.remove('h-screen', 'opacity-100');
+      setTimeout(() => {
+        if (!button.classList.contains('open')) {
+          menu?.classList.add('invisible');
+        }
+      }, 500);
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Close menu when clicking on links
+  const links = menu?.querySelectorAll('a');
+  links?.forEach(link => {
+    link.addEventListener('click', () => {
+      button?.classList.remove('open');
+      menu?.classList.add('h-0');
+      menu?.classList.remove('h-screen', 'opacity-100');
+      setTimeout(() => {
+        menu?.classList.add('invisible');
+      }, 500);
+      document.body.style.overflow = '';
+    });
+  });
+</script>

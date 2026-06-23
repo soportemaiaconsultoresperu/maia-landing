@@ -1,0 +1,186 @@
+---
+import { Image } from "astro:assets";
+import capacitacionImage from "@/assets/images/inocuidad_calidad/IMAGENES/CAPACITACIONES.png";
+import iconHouse from "@/assets/images/inocuidad_calidad/ICONOS/6.png";
+import iconCase from "@/assets/images/inocuidad_calidad/ICONOS/7.png";
+import iconCert from "@/assets/images/inocuidad_calidad/ICONOS/8.png";
+---
+
+<section
+  class="relative min-h-[600px] lg:h-[580px] overflow-visible bg-brand-blue flex items-center"
+>
+  <!-- Background Image covering the entire section -->
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={capacitacionImage}
+      alt="Capacitaciones Especializadas"
+      class="w-full h-full object-cover object-[75%_center]"
+      quality="max"
+      loading="lazy"
+    />
+    <!-- Mobile/tablet overlay: Full screen semi-transparent dark green -->
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-[#032e28]/95 via-[#053d35]/90 to-[#007a6c]/85 lg:hidden z-10"
+    >
+    </div>
+  </div>
+
+  <!-- Desktop Slanted Overlay (Gradient overlay with clip-path) -->
+  <!-- <div 
+    class="hidden lg:block absolute inset-0 z-10 bg-gradient-to-r from-[#032e28]/95 via-[#053d35]/95 to-[#007a6c]/90"
+    style="clip-path: polygon(0 0, 60% 0, 52% 100%, 0 100%);"
+  ></div> -->
+
+  <!-- Content Container -->
+  <div class="container mx-auto px-6 lg:px-16 relative z-20">
+    <div class="max-w-2xl text-white py-16 lg:py-0">
+      <!-- Section Tagline/Title with line -->
+      <div class="flex items-center gap-4 mb-6">
+        <h2
+          class="text-sm md:text-base font-extrabold text-brand-green tracking-widest uppercase"
+        >
+          Capacitaciones
+        </h2>
+        <div class="h-[1.5px] bg-brand-green/40 w-32 md:w-48 relative">
+          <div
+            class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-brand-green rounded-full"
+          >
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Heading -->
+      <h3
+        class="text-3xl md:text-4xl lg:text-[44px] font-bold leading-[1.15] mb-6"
+      >
+        Capacitaciones Especializadas para<br class="hidden sm:inline" /> Empresas
+        y Profesionales
+      </h3>
+
+      <!-- Description -->
+      <p
+        class="text-md md:text-2xl text-white/95 max-w-xl leading-relaxed mb-8"
+      >
+        Capacitamos a tu equipo con cursos y talleres en inocuidad y calidad
+        alimentaria, saneamiento ambiental y normativas internacionales, con un
+        enfoque dinámico y práctico.
+      </p>
+
+      <!-- Topics List -->
+      <div class="max-w-xl">
+        <h4
+          class="font-bold text-base md:text-2xl text-brand-green mb-4 tracking-wide uppercase"
+        >
+          Temas:
+        </h4>
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3.5 text-base text-white/90"
+        >
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2.5">
+              <span
+                class="w-1.5 h-1.5 rounded-full bg-brand-green mt-2 shrink-0"
+              ></span>
+              <span>BPM, POE, POES</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span
+                class="w-1.5 h-1.5 rounded-full bg-brand-green mt-2 shrink-0"
+              ></span>
+              <span>Global GAP versión 5.4.1.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span
+                class="w-1.5 h-1.5 rounded-full bg-brand-green mt-2 shrink-0"
+              ></span>
+              <span>Food Defense y Fraude Alimentario</span>
+            </li>
+          </ul>
+
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2.5">
+              <span
+                class="w-1.5 h-1.5 rounded-full bg-brand-green mt-2 shrink-0"
+              ></span>
+              <span
+                >HACCP, HARPC y Buenas Prácticas de Almacenamiento (BPAL)</span
+              >
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span
+                class="w-1.5 h-1.5 rounded-full bg-brand-green mt-2 shrink-0"
+              ></span>
+              <span>Trazabilidad y Medidas Correctivas</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Overlapping Bottom Info Bar -->
+<div class="relative z-30 -mt-10 lg:-mt-12 px-6 lg:px-16 max-w-7xl mx-auto">
+  <div
+    class="bg-white rounded-3xl shadow-xl border border-gray-100/80 p-6 lg:py-8 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
+  >
+    <!-- Feature 1 -->
+    <div class="flex items-center gap-4">
+      <div
+        class="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-[#00af9b] flex items-center justify-center text-white shrink-0 shadow-lg shadow-[#00af9b]/20"
+      >
+        <Image
+          src={iconHouse}
+          alt="Capacitación in-house"
+          class="w-6 h-6 object-contain"
+        />
+      </div>
+      <div>
+        <p class="font-bold text-[#153f70] text-md lg:text-2xl leading-snug">
+          Capacitación in-house o en modalidad abierta.
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature 2 -->
+    <div
+      class="flex items-center gap-4 border-t border-gray-100 pt-6 md:pt-0 md:border-t-0 md:border-x md:px-6 lg:px-8 border-dashed"
+    >
+      <div
+        class="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-[#ffb703] flex items-center justify-center text-white shrink-0 shadow-lg shadow-[#ffb703]/20"
+      >
+        <Image
+          src={iconCase}
+          alt="Casos reales"
+          class="w-6 h-6 object-contain"
+        />
+      </div>
+      <div>
+        <p class="font-bold text-[#153f70] text-md lg:text-2xl leading-snug">
+          Aplicación de casos reales en la industria.
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature 3 -->
+    <div
+      class="flex items-center gap-4 border-t border-gray-100 pt-6 md:pt-0 md:border-t-0"
+    >
+      <div
+        class="w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-[#4caf50] flex items-center justify-center text-white shrink-0 shadow-lg shadow-[#4caf50]/20"
+      >
+        <Image
+          src={iconCert}
+          alt="Certificación experta"
+          class="w-6 h-6 object-contain"
+        />
+      </div>
+      <div>
+        <p class="font-bold text-[#153f70] text-md lg:text-2xl leading-snug">
+          Certificación avalada por expertos en el sector.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

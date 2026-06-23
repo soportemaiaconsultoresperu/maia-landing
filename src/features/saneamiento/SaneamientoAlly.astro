@@ -1,0 +1,118 @@
+---
+// Video ID for Maia Plagas / Maiagas introduction
+const videoId = "3hJOSnkJgMs";
+const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+---
+
+<section class="py-16 md:py-24 bg-[#f3f4f6]">
+  <div class="container mx-auto px-6 lg:px-16 max-w-8xl">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <!-- Left Content Column -->
+      <div class="lg:col-span-6 flex flex-col justify-center">
+        <h2
+          class="text-3xl md:text-[38px] font-bold text-[#153f70] leading-tight mb-6"
+        >
+          El mejor aliado para tu empresa
+        </h2>
+
+        <div
+          class="space-y-6 text-[#2d3748] text-base md:text-2xl leading-relaxed mb-8"
+        >
+          <p>
+            Con más de 7 años de experiencia, en Maia Consultores ayudamos a las
+            empresas de saneamiento ambiental a fortalecer sus procesos mediante
+            servicios de consultoría y capacitación.
+          </p>
+          <p>
+            Nuestro compromiso es impulsar operaciones más eficientes,
+            garantizar el cumplimiento de la normativa sanitaria y mejorar sus
+            estándares de calidad, contribuyendo al crecimiento y la
+            sostenibilidad de sus negocios.
+          </p>
+        </div>
+
+        <div class="flex justify-start w-full">
+          <a
+            href="#contacto"
+            class="w-full inline-flex items-center justify-center px-10 py-4 bg-[#4c84f4] hover:bg-[#3572e8] text-white font-bold text-base rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.03] uppercase tracking-wider"
+          >
+            AGENDAR ASESORÍA
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Video Column -->
+      <div class="lg:col-span-6">
+        <div
+          class="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl group"
+        >
+          <!-- Video Cover (Plays on click) -->
+          <div
+            id="ally-video-cover"
+            class="absolute inset-0 z-10 cursor-pointer flex items-center justify-center transition-all duration-300"
+          >
+            <!-- Youtube Maxresdefault Thumbnail -->
+            <img
+              src={thumbnailUrl}
+              alt="Te presentamos Maiagas - Software de Saneamiento Ambiental"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <!-- Dark Overlay -->
+            <div
+              class="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors duration-300"
+            >
+            </div>
+
+            <!-- Modern Youtube Play Button -->
+            <div
+              class="relative z-20 w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-red-600 group-hover:bg-red-700 transition-all duration-300 transform group-hover:scale-110 shadow-lg shadow-black/30"
+            >
+              <svg
+                class="w-10 h-10 text-white fill-current translate-x-0.5"
+                viewBox="0 0 24 24"
+              >
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Lazy loaded Iframe Container -->
+          <div id="ally-video-player-container" class="w-full h-full bg-black">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ videoUrl }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const videoCover = document.getElementById("ally-video-cover");
+    const videoContainer = document.getElementById(
+      "ally-video-player-container",
+    );
+
+    if (videoCover && videoContainer) {
+      videoCover.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        // Hide the cover
+        videoCover.classList.add("hidden");
+
+        // Inject YouTube iframe with autoplay enabled
+        videoContainer.innerHTML = `
+          <iframe 
+            class="w-full h-full absolute inset-0" 
+            src="${videoUrl}" 
+            title="Video de presentación de Maia Plagas" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen
+          ></iframe>
+        `;
+      });
+    }
+  });
+</script>

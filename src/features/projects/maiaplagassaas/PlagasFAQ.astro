@@ -1,0 +1,222 @@
+---
+const faqs = [
+  {
+    question: "¿Cómo funciona Maia Plagas?",
+    answer:
+      "Maia Plagas funciona mediante un pago inicial de implementación y una suscripción mensual según el plan elegido. Desde el primer día tendrás acceso al software, sus funciones y soporte postventa para tu equipo.",
+  },
+  {
+    question: "¿Puedo usar Maia Plagas desde el celular?",
+    answer:
+      "Sí. Puedes acceder desde nuestra aplicación móvil y registrar servicios incluso sin conexión a internet.",
+  },
+  {
+    question: "¿Qué capacidad de almacenamiento tengo?",
+    answer:
+      "Todos los planes incluyen 1 GB de almacenamiento inicial, con opción de ampliarlo según las necesidades de tu empresa.",
+  },
+  {
+    question: "¿Puedo retirar mi suscripción y luego volver?",
+    answer:
+      "Sí. Puedes pausar tu suscripción y retomarla más adelante sin volver a pagar el costo inicial de implementación.",
+  },
+  {
+    question: "¿Puedo personalizar el software con mi propia marca?",
+    answer:
+      "Sí. Contamos con una versión Licencia para empresas que desean una experiencia totalmente personalizada con su propia identidad visual.",
+  },
+];
+---
+
+<section id="faq" class="faq-section">
+  <div class="faq-container">
+    <!-- Title -->
+    <h2 class="faq-title text-sm sm:text-base md:text-2xl">Preguntas Frecuentes</h2>
+
+    <!-- Accordion -->
+    <div id="faq-accordion">
+      {
+        faqs.map((faq, i) => (
+          <div class="faq-item" data-index={i}>
+            <button class="faq-trigger" aria-expanded="false">
+              <span class="faq-question text-sm sm:text-base md:text-2xl">{faq.question}</span>
+              <!-- Solid filled triangle arrow -->
+              <span class="faq-arrow-wrap" aria-hidden="true">
+                <svg
+                  class="faq-arrow-svg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  width="16"
+                  height="16"
+                >
+                  <path d="M2 5l6 6 6-6H2z" />
+                </svg>
+              </span>
+            </button>
+
+            <div class="faq-panel" style="max-height: 0; overflow: hidden;">
+              <div class="faq-answer-wrap">
+                <p class="faq-answer text-sm sm:text-base md:text-2xl">{faq.answer}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupFAQ() {
+    const items = document.querySelectorAll<HTMLElement>(".faq-item");
+
+    items.forEach((item) => {
+      const trigger = item.querySelector<HTMLButtonElement>(".faq-trigger");
+      const panel = item.querySelector<HTMLElement>(".faq-panel");
+      const arrowSvg = item.querySelector<SVGElement>(".faq-arrow-svg");
+
+      if (!trigger || !panel) return;
+
+      trigger.addEventListener("click", () => {
+        const isOpen = trigger.getAttribute("aria-expanded") === "true";
+
+        // Close all
+        items.forEach((other) => {
+          const otherTrigger = other.querySelector<HTMLButtonElement>(".faq-trigger");
+          const otherPanel = other.querySelector<HTMLElement>(".faq-panel");
+          const otherArrow = other.querySelector<SVGElement>(".faq-arrow-svg");
+
+          if (otherTrigger) otherTrigger.setAttribute("aria-expanded", "false");
+          if (otherPanel) otherPanel.style.maxHeight = "0";
+          if (otherArrow) (otherArrow as HTMLElement).style.transform = "rotate(0deg)";
+          other.classList.remove("faq-open");
+        });
+
+        if (!isOpen) {
+          trigger.setAttribute("aria-expanded", "true");
+          panel.style.maxHeight = panel.scrollHeight + "px";
+          if (arrowSvg) (arrowSvg as HTMLElement).style.transform = "rotate(180deg)";
+          item.classList.add("faq-open");
+        }
+      });
+    });
+  }
+
+  setupFAQ();
+  document.addEventListener("astro:after-swap", setupFAQ);
+</script>
+
+<style>
+  .faq-section {
+    padding: 64px 20px;
+    background: #ffffff;
+  }
+
+  .faq-container {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .faq-title {
+    text-align: center;
+    font-family: Poppins, sans-serif;
+    /* font-size: 18px; */
+    font-weight: 800;
+    /* letter-spacing: 0.18em; */
+    text-transform: uppercase;
+    color: #3b3bcc;
+    margin-bottom: 36px;
+  }
+
+  /* Each card */
+  .faq-item {
+    background: #eef0ff;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    border: 1.5px solid #d8dbf5;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    overflow: hidden;
+  }
+
+  .faq-item.faq-open {
+    border-color: #b8bcee;
+    box-shadow: 0 4px 18px rgba(80, 89, 229, 0.13);
+  }
+
+  /* Trigger button — question row */
+  .faq-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .faq-question {
+    font-family: Poppins, sans-serif;
+    /* font-size: 16px; */
+    font-weight: 700;
+    color: #111827;
+    /* line-height: 1.4; */
+    flex: 1;
+  }
+
+  /* Arrow wrapper — dark rounded square look */
+  .faq-arrow-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: #1a1a2e;
+    border-radius: 6px;
+    color: #ffffff;
+  }
+
+  .faq-arrow-svg {
+    display: block;
+    transition: transform 0.28s ease;
+    color: #ffffff;
+  }
+
+  /* Answer panel */
+  .faq-panel {
+    transition: max-height 0.3s ease;
+    background-color: #fff;
+  }
+
+  .faq-answer-wrap {
+    padding: 0 24px 20px;
+    border-top: 1px solid #d0d3f0;
+    margin: 0 24px;
+    padding-top: 16px;
+  }
+
+  .faq-answer {
+    font-family: Poppins, sans-serif;
+    /* font-size: 16px; */
+    color: #374151;
+    /* line-height: 1.7; */
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .faq-section {
+      padding: 80px 40px;
+    }
+    .faq-title {
+      /* font-size: 20px; */
+      margin-bottom: 44px;
+    }
+    .faq-question {
+      /* font-size: 17px; */
+    }
+  }
+</style>

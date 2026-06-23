@@ -1,0 +1,124 @@
+---
+import { Image } from "astro:assets";
+
+// Import images
+import imgAdministrativo from "@/assets/images/maia_business/SOFTWARE ADMINISTRATIVO.png";
+import imgOperativo from "@/assets/images/maia_business/SOFTWARE OPERATIVO.png";
+import imgLogistico from "@/assets/images/maia_business/SOFTWARE LOGISTICO.png";
+import imgDocumentario from "@/assets/images/maia_business/SOFTWARE DOCUMENTARIO.png";
+import imgPersonalizado from "@/assets/images/maia_business/SISTEMAS PERSONALIZABLES.png";
+
+// Import icons
+import iconAdministrativo from "@/assets/images/maia_business/ICONOS/ADMINISTRATIVO.png";
+import iconOperativo from "@/assets/images/maia_business/ICONOS/OPERATIVO.png";
+import iconLogistico from "@/assets/images/maia_business/ICONOS/LOGISTICO.png";
+import iconDocumentario from "@/assets/images/maia_business/ICONOS/DOCUMENTARIO.png";
+import iconPersonalizado from "@/assets/images/maia_business/ICONOS/PERSONALIZADO.png";
+
+const solutions = [
+  {
+    title: "Software Administrativo",
+    description: "Sistemas para gestión de clientes, ventas, facturación, recursos humanos y control interno.",
+    image: imgAdministrativo,
+    icon: iconAdministrativo,
+    colorClass: "bg-[#00c0a9]", // Teal/Turquesa
+    borderColorClass: "border-[#00c0a9]",
+  },
+  {
+    title: "Software Operativo",
+    description: "Plataformas para controlar procesos productivos, operaciones y actividades del día a día.",
+    image: imgOperativo,
+    icon: iconOperativo,
+    colorClass: "bg-[#3dd87c]", // Green
+    borderColorClass: "border-[#3dd87c]",
+  },
+  {
+    title: "Software Logístico",
+    description: "Control de inventarios, almacenes, distribución, seguimiento de pedidos y trazabilidad.",
+    image: imgLogistico,
+    icon: iconLogistico,
+    colorClass: "bg-[#ff9e2a]", // Orange/Yellow
+    borderColorClass: "border-[#ff9e2a]",
+  },
+  {
+    title: "Gestión Documentaria",
+    description: "Plataformas para administrar, organizar, controlar y dar seguimiento a documentos empresariales.",
+    image: imgDocumentario,
+    icon: iconDocumentario,
+    colorClass: "bg-[#6f70e9]", // Blue/Purple
+    borderColorClass: "border-[#6f70e9]",
+  },
+  {
+    title: "Sistemas Web Personalizados",
+    description: "Desarrollo de plataformas accesibles desde cualquier dispositivo y ubicación.",
+    image: imgPersonalizado,
+    icon: iconPersonalizado,
+    colorClass: "bg-[#331b6e]", // Dark Blue/Indigo
+    borderColorClass: "border-[#331b6e]",
+  },
+];
+---
+
+<section id="funciones" class="py-20 bg-slate-50/50">
+  <div class="container mx-auto max-w-[1344px] px-[20px] sm:px-[45px]">
+    
+    <!-- Title Section -->
+    <div class="text-center mb-16">
+      <h2 
+        class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#153f70] tracking-wider uppercase"
+        style="font-family: 'Poppins', sans-serif;"
+      >
+        Soluciones de Software que Desarrollamos
+      </h2>
+    </div>
+
+    <!-- Cards Layout: Using flex-wrap to center the bottom row items -->
+    <div class="flex flex-wrap justify-center gap-10">
+      {
+        solutions.map((item) => (
+          <div 
+            class={`w-full sm:w-[calc(50%-20px)] lg:w-[calc(33.333%-27px)] xl:w-[380px] bg-white rounded-[16px] overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-b-[8px] ${item.borderColorClass} flex flex-col`}
+          >
+            <!-- Image Header Container -->
+            <div class="relative w-full aspect-[16/10] overflow-hidden bg-slate-100 shrink-0">
+              <Image 
+                src={item.image} 
+                alt={item.title}
+                class="w-full h-full object-cover"
+                quality="mid"
+              />
+              
+              <!-- Floating Overlapping Icon Badge -->
+              <div 
+                class={`absolute bottom-0 left-6 translate-y-1/2 w-14 h-14 rounded-[12px] flex items-center justify-center p-3 shadow-lg ${item.colorClass}`}
+              >
+                <Image 
+                  src={item.icon} 
+                  alt={`Icono ${item.title}`}
+                  class="w-full h-full object-contain brightness-0 invert"
+                />
+              </div>
+            </div>
+
+            <!-- Content Container -->
+            <div class="pt-10 pb-8 px-6 text-center flex-grow flex flex-col justify-start">
+              <h3 
+                class="text-sm sm:text-base md:text-2xl font-bold text-[#1e293b] mb-3"
+                style="font-family: 'Poppins', sans-serif;"
+              >
+                {item.title}
+              </h3>
+              <p 
+                class="text-sm sm:text-base md:text-2xl text-slate-600 leading-relaxed"
+                style="font-family: 'Poppins', sans-serif;"
+              >
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+  </div>
+</section>

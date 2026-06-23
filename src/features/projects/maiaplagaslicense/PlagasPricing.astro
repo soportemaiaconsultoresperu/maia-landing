@@ -1,0 +1,244 @@
+---
+import { Image } from "astro:assets";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/800.css";
+
+import imagen11 from "@/assets/images/maia_plagas_saas/IMAGENES/IMAGEN 11.png";
+
+const plans = [
+  {
+    name: "Plan Smart",
+    priceFrom: "$60",
+    priceTo: "$130",
+    highlight: false,
+    tag: null,
+    users: [
+      "1 Administrador",
+      "1 Supervisor",
+      "5 Técnicos",
+      "Clientes",
+      "Curso Gratuito *",
+    ],
+    features: [
+      "Programación Actividades",
+      "Cotizaciones",
+      "Certificados",
+      "Ficha Técnica",
+      "Informes",
+      "Estadísticas (Monitoreo)",
+      "Proveedores",
+      "Pedidos",
+      "Soporte",
+      "Portal de Clientes",
+      "Inventarios",
+      "Proyección de Servicios",
+      "Plantillas de Servicios***",
+      "Gráfico de Tendencias",
+      "APP Web Android/iPhone",
+    ],
+  },
+  {
+    name: "Plan Plus",
+    priceFrom: "$110",
+    priceTo: "$190",
+    highlight: true,
+    tag: "Más popular",
+    users: [
+      "1 Administrador",
+      "2 Supervisores",
+      "10 Técnicos",
+      "Clientes",
+      "Curso Gratuito **",
+      "Dscto. Asesorías",
+    ],
+    features: [
+      "Programación Actividades",
+      "Cotizaciones",
+      "Certificados",
+      "Ficha Técnica",
+      "Informes",
+      "Estadísticas (Monitoreo)",
+      "Proveedores",
+      "Pedidos",
+      "Soporte",
+      "Portal de Clientes",
+      "Inventarios",
+      "Proyección de Servicios",
+      "Plantillas de Servicios***",
+      "Gráfico de Tendencias",
+      "APP Web Android/iPhone",
+    ],
+  },
+  {
+    name: "Plan Max",
+    priceFrom: "$160",
+    priceTo: "$190",
+    highlight: false,
+    tag: null,
+    users: [
+      "2 Administradores",
+      "3 Supervisores",
+      "15 Técnicos",
+      "Clientes",
+      "Curso Gratuito **",
+      "Dscto. Asesorías",
+    ],
+    features: [
+      "Programación Actividades",
+      "Cotizaciones",
+      "Certificados",
+      "Ficha Técnica",
+      "Informes",
+      "Estadísticas (Monitoreo)",
+      "Proveedores",
+      "Pedidos",
+      "Soporte",
+      "Portal de Clientes",
+      "Inventarios",
+      "Proyección de Servicios",
+      "Plantillas de Servicios***",
+      "Gráfico de Tendencias",
+      "APP Web Android/iPhone",
+    ],
+  },
+];
+---
+
+<section id="precios" class="pt-12 pb-16 sm:pt-16 sm:pb-24 lg:pt-20 lg:pb-32 relative bg-[#f8f9fc]">
+  <!-- Background Image restricted to top portion -->
+  <div class="absolute inset-x-0 top-0 h-[350px] sm:h-[420px] z-0">
+    <Image
+      src={imagen11}
+      alt="Fondo planes de suscripción"
+      class="w-full h-full object-cover"
+      style="object-position: center 50%;"
+    />
+    <!-- Dark overlay -->
+    <div
+      class="absolute inset-0"
+      style="background: rgba(25, 15, 70, 0.80);"
+    ></div>
+  </div>
+
+  <div class="relative z-10 container mx-auto max-w-[1350px] px-5 sm:px-10">
+    <!-- Header -->
+    <div class="text-center mb-3">
+      <h2
+        class="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-white uppercase tracking-wide"
+        style="font-family: Poppins, sans-serif;"
+      >
+        Planes de Suscripción
+      </h2>
+    </div>
+    <p
+      class="text-center text-white/80 text-[15px] mb-12"
+      style="font-family: Poppins, sans-serif;"
+    >
+      Elige el mejor plan que se ajuste a tus necesidades:
+    </p>
+
+    <!-- Plans Grid -->
+    <div class="grid gap-8 sm:grid-cols-3 items-stretch">
+      {
+        plans.map((plan) => (
+          <div
+            class={`relative flex flex-col h-full rounded-[16px] overflow-hidden border-[6px] ${
+              plan.highlight
+                ? "border-[#3EC8A0] shadow-[0_8px_40px_rgba(62,200,160,0.35)] z-10"
+                : "border-[#e0e4f5] shadow-lg"
+            }`}
+            style="background: #ffffff;"
+          >
+            <!-- Popular tag (or invisible spacer) -->
+            <div
+              class={`text-center py-[7px] font-semibold tracking-wide ${
+                plan.tag ? "text-white" : "text-transparent select-none"
+              }`}
+              style={
+                plan.tag
+                  ? "background-color: #3EC8A0; font-family: Poppins, sans-serif;"
+                  : "font-family: Poppins, sans-serif;"
+              }
+            >
+              {plan.tag || "Spacer"}
+            </div>
+
+            <div class="flex flex-col flex-1 px-6 pb-6 pt-5">
+              <!-- Plan name -->
+              <h3
+                class="text-[20px] font-extrabold text-center uppercase mb-3"
+                style="font-family: Poppins, sans-serif; color: #1E1060;"
+              >
+                {plan.name}
+              </h3>
+
+              <!-- Stacked prices -->
+              <div class="text-left mb-1">
+                <div
+                  class="text-[22px] font-bold leading-tight"
+                  style="color: #1E1060; font-family: Poppins, sans-serif;"
+                >
+                  {plan.priceFrom}
+                </div>
+                <div
+                  class="text-[22px] font-bold leading-tight"
+                  style="color: #1E1060; font-family: Poppins, sans-serif;"
+                >
+                  {plan.priceTo}
+                </div>
+              </div>
+
+              <!-- Divider -->
+              <div class="border-t-2 border-[#1E1060] my-4" />
+
+              <!-- Users included — plain list, no bullets -->
+              <ul class="mb-4 space-y-[3px]">
+                {plan.users.map((u) => (
+                  <li
+                    class=" text-[#374151] leading-snug"
+                    style="font-family: Poppins, sans-serif;"
+                  >
+                    {u}
+                  </li>
+                ))}
+              </ul>
+
+              <!-- CTA button -->
+              <a
+                href="#demo"
+                class="block text-center py-[11px] px-6 rounded-[10px] font-bold text-white text-[15px] mb-5 transition-all hover:brightness-110 active:scale-95"
+                style={`font-family: Poppins, sans-serif; background-color: ${plan.highlight ? "#3EC8A0" : "#5059E5"};`}
+              >
+                ¡Lo quiero!
+              </a>
+
+              <!-- Second divider -->
+              <div class="border-t-2 border-[#1E1060] mb-4" />
+
+              <!-- Includes label -->
+              <p
+                class="text-[13px] font-bold text-[#1E1060] mb-2"
+                style="font-family: Poppins, sans-serif;"
+              >
+                Incluye:
+              </p>
+
+              <!-- Features list — plain, no bullets -->
+              <ul class="space-y-[3px] flex-1">
+                {plan.features.map((f) => (
+                  <li
+                    class=" text-[#374151] leading-snug"
+                    style="font-family: Poppins, sans-serif;"
+                  >
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

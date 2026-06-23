@@ -1,0 +1,99 @@
+---
+import { Image } from "astro:assets";
+import heroBackground from "@/assets/images/calculadora/IMAGENES/PORTADA.png";
+---
+
+<section
+  class="relative min-h-[600px] lg:h-[calc(100vh-100px)] flex items-center overflow-hidden bg-[#0c1833]"
+>
+  <!-- Background Image spanning the full area -->
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={heroBackground}
+      alt="Conversor de Diluciones"
+      class="w-full h-full object-cover object-center"
+      quality="max"
+      loading="eager"
+    />
+  </div>
+
+  <!-- Mobile Overlay (with blur, hidden on desktop) -->
+  <div
+    class="absolute inset-0 z-10 lg:hidden bg-[#0c1833]/85 backdrop-blur-[4px]"
+  >
+  </div>
+
+  <!-- Desktop Overlay (solid diagonal, NO blur, hidden on mobile) -->
+  <!-- <div class="absolute inset-y-0 left-0 z-10 hidden lg:block w-[60%] [clip-path:polygon(0_0,100%_0,73%_100%,0_100%)] bg-[#0c1833]"></div> -->
+
+  <!-- Content Container -->
+  <div
+    class="container mx-auto px-6 sm:px-12 lg:px-20 relative z-20 h-full flex items-center"
+  >
+    <div class="grid grid-cols-1 lg:grid-cols-12 w-full">
+      <!-- Text content -->
+      <div
+        class="col-span-1 lg:col-span-6 flex flex-col justify-center text-left py-12 lg:py-0"
+      >
+        <p
+          class="text-white text-base sm:text-lg md:text-3xl mb-2 tracking-wide animate-fade-in-up"
+        >
+          Conversor de Diluciones para preparar
+        </p>
+
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 animate-fade-in-up"
+        >
+          <span class="text-brand-green block">Soluciones</span>
+          <span class="text-brand-green block">Desinfectantes</span>
+        </h1>
+
+        <p
+          class="text-white/90 text-sm sm:text-base md:text-2xl leading-relaxed mb-8 max-w-xl sm:max-w-md animate-fade-in-up delay-200"
+        >
+          Convierte fácilmente las concentraciones de desinfectantes y prepara
+          soluciones seguras con nuestra herramienta de cálculo de diluciones.
+          Asegura un uso eficaz de hipoclorito de sodio.
+        </p>
+
+        <div class="animate-fade-in-up delay-300">
+          <a
+            href="#calculadora-tool"
+            class="inline-flex items-center justify-center px-8 py-3.5 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold text-sm sm:text-base tracking-wider rounded-full transition-all duration-300 shadow-lg shadow-blue-500/25 hover:scale-105 active:scale-98 uppercase"
+          >
+            USAR CALCULADORA
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+</style>

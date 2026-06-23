@@ -1,0 +1,20 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import type { SEO } from "@/types/seo";
+
+interface Props {
+  seo?: Partial<SEO>;
+  title: string;
+  description?: string;
+}
+---
+
+<BaseLayout
+  seo={{ ...Astro.props.seo, type: "project" }}
+  title={Astro.props.title}
+  description={Astro.props.description}
+>
+  <main>
+    <slot />
+  </main>
+</BaseLayout>

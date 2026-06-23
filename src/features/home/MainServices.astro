@@ -1,0 +1,329 @@
+---
+import { Image } from "astro:assets";
+
+// Icon images (teal square icons)
+import iconInocuidad from "../../assets/images/services/icon_inocuidad_y_calidad.png";
+import iconSaneamiento from "../../assets/images/services/icon_saneamiento_ambiental.png";
+import iconProyectos from "../../assets/images/services/icon_proyecto_innovate.png";
+import iconMaiaPlagas from "../../assets/images/services/icon_maia_plagas.png";
+import iconMaiaPlagasLicencia from "../../assets/images/services/icon_maia_plagas_licencia.png";
+import iconMaiaResiduos from "../../assets/images/services/icon_maia_residuos.png";
+import iconMaiaBusiness from "../../assets/images/services/icon_maia_business.png";
+import iconDesarrollo from "../../assets/images/services/icon_desarrollo_de_software.png";
+import iconCursos from "../../assets/images/services/icon_cursos.png";
+import iconAula from "../../assets/images/services/icon_aula_virtual.png";
+
+// Photo images (right side)
+import photoInocuidad from "../../assets/images/services/inocuidad_y_calidad.png";
+import photoSaneamiento from "../../assets/images/services/saneamiento_ambiental.png";
+import photoProyectos from "../../assets/images/services/proyecto_innovate.png";
+import photoMaiaPlagas from "../../assets/images/services/maia_plagas.png";
+import photoMaiaPlagasLicencia from "../../assets/images/services/maia_plagas_licencia.png";
+import photoMaiaResiduos from "../../assets/images/services/maia_residuos.png";
+import photoMaiaBusiness from "../../assets/images/services/maia_business.png";
+import photoDesarrollo from "../../assets/images/services/desarrollo_de_software.png";
+import photoCursos from "../../assets/images/services/CURSOS.png";
+import photoAula from "../../assets/images/services/aula_virtual.png";
+
+// Extra tools
+import calculadoraImg from "../../assets/images/services/CALCULADORA DE DILUCIONES.png";
+import blogImg from "../../assets/images/services/BLOG.png";
+
+const services = [
+  {
+    category: "Consultorías",
+    items: [
+      {
+        title: "Inocuidad y Calidad",
+        description: "Quiero cumplir normativas y obtener certificaciones para mi empresa.",
+        icon: iconInocuidad,
+        photo: photoInocuidad,
+        url: "/inocuidad-calidad",
+      },
+      {
+        title: "Saneamiento Ambiental",
+        description: "Quiero capacitar a mi equipo en control de plagas y saneamiento.",
+        icon: iconSaneamiento,
+        photo: photoSaneamiento,
+        url: "/saneamiento",
+      },
+      {
+        title: "Proyectos Innóvate",
+        description: "Quiero recibir asesoría para postular con éxito a fondos de financiamiento.",
+        icon: iconProyectos,
+        photo: photoProyectos,
+        url: "/proyectos-innovate",
+      },
+    ],
+  },
+  {
+    category: "Software",
+    items: [
+      {
+        title: "Maia Plagas",
+        description: "Quiero gestionar mi empresa de saneamiento ambiental con un software.",
+        icon: iconMaiaPlagas,
+        photo: photoMaiaPlagas,
+        url: "/maiaplagas",
+      },
+      {
+        title: "Maia Plagas Licencia",
+        description: "Quiero tener un software propio para mi empresa de saneamiento ambiental.",
+        icon: iconMaiaPlagasLicencia,
+        photo: photoMaiaPlagasLicencia,
+        url: "/maiaplagaslicencia",
+      },
+      {
+        title: "Maia Residuos",
+        description: "Quiero tener un software propio para mi empresa de gestión de residuos sólidos.",
+        icon: iconMaiaResiduos,
+        photo: photoMaiaResiduos,
+        url: "/maiaresiduos",
+      },
+      {
+        title: "Maia Business",
+        description: "Quiero digitalizar y automatizar los procesos de mi empresa.",
+        icon: iconDesarrollo,
+        photo: photoDesarrollo,
+        url: "/maiabusiness",
+      },
+    ],
+  },
+  {
+    category: "Formación",
+    items: [
+      {
+        title: "Cursos",
+        description: "Quiero cumplir normativas y obtener certificaciones para mi empresa.",
+        icon: iconCursos,
+        photo: photoCursos,
+        url: "/cursos",
+      },
+      {
+        title: "Aula virtual",
+        description: "Quiero capacitar a mi equipo en control de plagas y saneamiento.",
+        icon: iconAula,
+        photo: photoAula,
+        url: "/cursos/aula-virtual",
+      },
+    ],
+  },
+];
+---
+
+<section class="py-20 bg-white" id="servicios">
+  <div class="w-full px-6 md:px-12 lg:px-16 mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-[#204691] mb-4 tracking-tight uppercase">
+        ¿EN QUÉ PODEMOS AYUDARTE?
+      </h2>
+      <p class="text-2xl text-gray-700 font-medium">Selecciona una opción:</p>
+    </div>
+
+    <div class="space-y-16">
+      {services.map((group) => {
+        const isSoftware = group.category.toLowerCase() === 'software';
+        const cardBg = isSoftware ? 'bg-[#E8F0FE]' : 'bg-white';
+        const hasRoundedPhoto = ['consultorías', 'formación'].includes(group.category.toLowerCase());
+        return (
+        <div class="animate-on-scroll">
+          <!-- Category header -->
+          <div class="flex items-center gap-6 mb-8">
+            <h3 class="text-2xl sm:text-3xl font-black text-gray-800 shrink-0 uppercase tracking-wide">
+              {group.category}
+            </h3>
+            <div class="h-[2px] bg-gray-800 w-full"></div>
+          </div>
+
+          <!-- Cards grid / centered flex container -->
+          <div class="flex flex-wrap justify-center gap-6">
+            {group.items.map((item) => {
+              // Software composite images (mockup + circle) need contain, not cover.
+              // Only "Desarrollo de software" is a real photo that works with cover.
+              const isSoftwareComposite = isSoftware && item.title.toLowerCase() !== 'desarrollo de software';
+              const imgClass = isSoftwareComposite
+                ? 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]'
+                : 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.06]';
+              const wrapperClass = isSoftwareComposite ? 'photo-wrapper photo-wrapper--software' : 'photo-wrapper';
+              const innerClass = `photo-inner${hasRoundedPhoto ? ' photo-inner--rounded' : ''}${isSoftwareComposite ? ' photo-inner--software' : ''}`;
+              return (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={`service-card group relative w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[420px] rounded-[20px] overflow-hidden border border-gray-100/80 shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.13)] transition-all duration-300 ${cardBg}`}
+              >
+                
+                <!-- Content: icon + title + description -->
+                <div class="card-content">
+                  {/* Dynamic background color for the icon container based on category */}
+                  <div class={`w-16 h-16 rounded-[16px] overflow-hidden shrink-0 mb-3.5 shadow-sm p-3.5 flex items-center justify-center ${
+                    group.category.toLowerCase() === 'consultorías' ? 'bg-[#47D8A6]' :
+                    group.category.toLowerCase() === 'software' ? 'bg-[#3B82F6]' : 'bg-[#5D5FEF]'
+                  }`}>
+                    <Image
+                      src={item.icon}
+                      alt={item.title + " ícono"}
+                      class="w-full h-full object-contain"
+                    />
+                  </div>
+                  <h4 class="font-extrabold text-base sm:text-lg md:text-xl text-gray-900 leading-tight mb-2">
+                    {item.title}
+                  </h4>
+                  <p class="text-base sm:text-lg md:text-xl text-gray-700 leading-snug font-medium">
+                    {item.description}
+                  </p>
+                </div>
+
+                <!-- Photo: top-right with curved bottom-left -->
+                <div class={wrapperClass}>
+                  <div class={innerClass}>
+                    <Image
+                      src={item.photo}
+                      alt={item.title}
+                      class={imgClass}
+                    />
+                  </div>
+                </div>
+              </a>
+              );
+            })}
+          </div>
+        </div>
+        );
+      })}
+    </div>
+
+    <!-- Extra Tools Section Divider -->
+    <div class="mt-24 h-[2px] bg-gray-800 w-full"></div>
+
+    <!-- Extra Tools Section -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-10 animate-on-scroll">
+      <!-- Calculadora Box -->
+      <div class="relative rounded-[24px] overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300 min-h-[260px] md:min-h-[280px] w-full flex flex-col justify-center p-8 sm:p-10 lg:p-12 bg-gray-100">
+        <div class="absolute inset-0 w-full h-full">
+          <Image src={calculadoraImg} alt="Calculadora de Diluciones" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+        </div>
+        <div class="relative z-10 w-full sm:w-[75%] flex flex-col items-start">
+          <h3 class="text-white text-2xl sm:text-3xl lg:text-[32px] font-black mb-3 leading-tight">Calculadora de Diluciones</h3>
+          <p class="text-white/95 text-[15px] sm:text-base font-medium leading-snug mb-6">
+            Calcula fácilmente la cantidad exacta de desinfectante para cada dilución.
+          </p>
+          <a
+            href="/calculadora" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 bg-white text-[#204691] font-black text-sm sm:text-[15px] py-3.5 px-6 rounded-[12px] hover:bg-gray-50 transition-colors uppercase shadow-md"
+          >
+            USAR CALCULADORA <span class="text-2xl leading-none font-bold">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Blog Box -->
+      <div class="relative rounded-[24px] overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300 min-h-[260px] md:min-h-[280px] w-full flex flex-col justify-center p-8 sm:p-10 lg:p-12 bg-gray-100">
+        <div class="absolute inset-0 w-full h-full">
+          <Image src={blogImg} alt="Blog" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+        </div>
+        <div class="relative z-10 w-full sm:w-[75%] flex flex-col items-start">
+          <h3 class="text-white text-2xl sm:text-3xl lg:text-[32px] font-black mb-3 leading-tight">Blog</h3>
+          <p class="text-white/95 text-[15px] sm:text-base font-medium leading-snug mb-6">
+            Mantente actualizado con noticias, artículos y eventos sobre tu sector.
+          </p>
+          <a
+            href="/blog" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 bg-white text-[#204691] font-black text-sm sm:text-[15px] py-3.5 px-6 rounded-[12px] hover:bg-gray-50 transition-colors uppercase shadow-md"
+          >
+            VER BLOG <span class="text-2xl leading-none font-bold">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .service-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    min-height: 240px;
+    width: 100%;
+  }
+
+  /* Photo wrapper: absolutely positioned flush to the right, top, and bottom */
+  .photo-wrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Software composite wrapper: slightly wider to show full laptop and circle badge */
+  .photo-wrapper--software {
+    width: 48%;
+  }
+
+  /* Inner photo container */
+  .photo-inner {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Curved top-left for Consultorías and Formación to match mockup screenshot */
+  .photo-inner--rounded {
+    border-top-left-radius: 50% 60%;
+  }
+
+  /* Software composite: no border-radius clip */
+  .photo-inner--software {
+    border-radius: 0;
+    background: transparent;
+  }
+
+  /* Content area: left-aligned with padding and width constraint */
+  .card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 24px;
+    width: 55%;
+  }
+</style>
+
+<script>
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
+</script>

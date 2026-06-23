@@ -1,0 +1,32 @@
+---
+import "@/styles/globals.css";
+import SEO from "@/components/seo/SEO.astro";
+import { resolveSEO } from "@/lib/seo/metadata";
+import type { SEO as SEOModel } from "@/types/seo";
+
+interface Props {
+  seo?: Partial<SEOModel>;
+  title?: string;
+  description?: string;
+}
+
+const { seo, title, description } = Astro.props;
+const resolvedSEO = resolveSEO({
+  title,
+  description,
+  pathname: Astro.url.pathname,
+  seo
+});
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <SEO seo={resolvedSEO} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

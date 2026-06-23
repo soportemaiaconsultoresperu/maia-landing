@@ -1,0 +1,99 @@
+---
+import { Image } from "astro:assets";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+
+import icon1 from "@/assets/images/maia_residuos/ICONOS/ICONO 1.png";
+import icon2 from "@/assets/images/maia_residuos/ICONOS/ICONO 2.png";
+import icon3 from "@/assets/images/maia_residuos/ICONOS/ICONO 3.png";
+import icon4 from "@/assets/images/maia_residuos/ICONOS/ICONO 4.png";
+import icon5 from "@/assets/images/maia_residuos/ICONOS/ICONO 5.png";
+import icon6 from "@/assets/images/maia_residuos/ICONOS/ICONO 6.png";
+import icon7 from "@/assets/images/maia_residuos/ICONOS/ICONO 7.png";
+import icon8 from "@/assets/images/maia_residuos/ICONOS/ICONO 8.png";
+
+const features = [
+  {
+    icon: icon1,
+    title: "Visualiza la ubicación de tus vehículos en tiempo real",
+    description: "Supervisa cada recorrido con mayor precisión y aumenta la seguridad de tus unidades.",
+    bgColor: "bg-[#3dd87c]",
+  },
+  {
+    icon: icon2,
+    title: "Genera rutas de recolección más eficientes",
+    description: "Llega a cada punto de acopio de forma rápida y segura.",
+    bgColor: "bg-[#3dd87c]",
+  },
+  {
+    icon: icon3,
+    title: "Emite automáticamente fichas de pesaje y manifiestos",
+    description: "Obtén los documentos de cada servicio en minutos, sin procesos manuales."
+  },
+  {
+    icon: icon4,
+    title: "Convierte kilogramos a toneladas automáticamente",
+    description: "Evita cálculos manuales y reduce errores en el registro de tus datos."
+  },
+  {
+    icon: icon5,
+    title: "Reduce costos operativos",
+    description: "Ahorra combustible y horas de trabajo con rutas más eficientes."
+  },
+  {
+    icon: icon6,
+    title: "Cuenta con un software propio para tu empresa",
+    description: "Realiza un único pago y obtén un sistema con acceso exclusivo."
+  },
+  {
+    icon: icon7,
+    title: "Software adaptado a los procesos de tu empresa",
+    description: "Personaliza el sistema con tu logo, documentos y nuevas funciones."
+  },
+  {
+    icon: icon8,
+    title: "Personaliza el sistema con tu logo, documentos y nuevas funciones.",
+    description: "Gestiona tu operaciones desde tu celular o computadora."
+  }
+];
+---
+
+<section id="beneficios" class="py-16 sm:py-24 bg-white relative">
+  <div class="container mx-auto max-w-[1200px] px-[20px] sm:px-[45px]">
+    
+    <!-- Section Header -->
+    <div class="mb-12 sm:mb-16">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#15459c] tracking-tight uppercase" style="font-family: Poppins, sans-serif;">
+        BENEFICIOS DE USAR MAIA RESIDUOS
+      </h2>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="grid gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        features.map((feature) => (
+          <div class="flex flex-col items-center text-center">
+            <!-- Icon Container -->
+            <div class={`h-[96px] w-[96px] ${feature.bgColor ? feature.bgColor : "bg-[#EEF2FF]"} rounded-full flex items-center justify-center p-5 mb-6`}>
+              <Image 
+                src={feature.icon} 
+                alt={feature.title} 
+                class="h-full w-auto object-contain"
+              />
+            </div>
+            
+            <!-- Content -->
+            <h3 class="text-lg sm:text-[20px] font-bold text-[#1A1A2E] leading-tight mb-3 max-w-[320px]" style="font-family: Poppins, sans-serif;">
+              {feature.title}
+            </h3>
+            
+            <p class="text-black text-[15px] sm:text-base leading-relaxed max-w-[300px]">
+              {feature.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+  </div>
+</section>

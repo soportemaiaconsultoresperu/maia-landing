@@ -1,0 +1,412 @@
+---
+import { Image } from "astro:assets";
+import icon1 from "@/assets/images/calculadora/ICONOS/1.png";
+import icon2 from "@/assets/images/calculadora/ICONOS/2.png";
+import icon3 from "@/assets/images/calculadora/ICONOS/3.png";
+import icon4 from "@/assets/images/calculadora/ICONOS/4.png";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/900.css";
+---
+
+<section
+  id="calculadora-tool"
+  class="py-16 sm:py-24 bg-white relative overflow-hidden"
+>
+  <div class="container mx-auto px-6 lg:px-16 relative z-10">
+    <!-- Title Section -->
+    <div class="text-center mb-16">
+      <h2
+        class="text-3xl sm:text-4xl font-bold text-[#1d1b84] tracking-tight mb-4"
+        style="font-family: Poppins, sans-serif;"
+      >
+        ¿Cómo usar la calculadora?
+      </h2>
+      <p class="text-slate-600 max-w-2xl mx-auto  text-sm sm:text-base md:text-2xl">
+        Sigue estos sencillos pasos para determinar la cantidad exacta de
+        desinfectante que requieres para tu solución.
+      </p>
+    </div>
+
+    <!-- Steps Progress Bar / Graphic -->
+    <div class="relative max-w-7xl mx-auto mb-20">
+      <!-- Dotted Connector Line (Hidden on mobile) -->
+      <div
+        class="absolute top-[60px] left-[10%] right-[10%] h-[2px] border-t-2 border-dashed border-[#000] z-0 hidden md:block"
+      >
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center text-center group">
+          <div
+            class="relative w-[120px] h-[120px] rounded-full bg-[#e6f4f8] border border-[#b2e0ec] flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105 mb-6"
+          >
+            <!-- Step Number Badge -->
+            <span
+              class="absolute -top-1 -left-1 w-8 h-8 rounded-full bg-[#008080] text-white flex items-center justify-center font-bold text-sm shadow-md"
+              >1</span
+            >
+            <Image src={icon1} alt="Concentración Inicial" class="w-14 h-14 object-contain" />
+          </div>
+          <h4 class="font-bold text-[#1d1b84] mb-2 text-sm sm:text-base md:text-2xl">
+            1. Concentración Inicial
+          </h4>
+          <p class="text-sm sm:text-base md:text-xl text-slate-500 max-w-[200px]">
+            Introduce la concentración del desinfectante (según la etiqueta del
+            producto).
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center text-center group">
+          <div
+            class="relative w-[120px] h-[120px] rounded-full bg-[#fffbeb] border border-[#fde68a] flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105 mb-6"
+          >
+            <!-- Step Number Badge -->
+            <span
+              class="absolute -top-1 -left-1 w-8 h-8 rounded-full bg-[#ea580c] text-white flex items-center justify-center font-bold text-sm shadow-md"
+              >2</span
+            >
+            <Image src={icon2} alt="Volumen Requerido" class="w-14 h-14 object-contain" />
+          </div>
+          <h4 class="font-bold text-[#1d1b84] mb-2 text-sm sm:text-base md:text-2xl">
+            2. Volumen Requerido
+          </h4>
+          <p class="text-sm sm:text-base md:text-xl text-slate-500 max-w-[200px]">
+            Especifica el volumen de solución que necesitas preparar.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center text-center group">
+          <div
+            class="relative w-[120px] h-[120px] rounded-full bg-[#e0e7ff] border border-[#b4c6ff] flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105 mb-6"
+          >
+            <!-- Step Number Badge -->
+            <span
+              class="absolute -top-1 -left-1 w-8 h-8 rounded-full bg-[#6366f1] text-white flex items-center justify-center font-bold text-sm shadow-md"
+              >3</span
+            >
+            <Image src={icon3} alt="Concentración Final" class="w-14 h-14 object-contain" />
+          </div>
+          <h4 class="font-bold text-[#1d1b84] mb-2 text-sm sm:text-base md:text-2xl">
+            3. Concentración Final
+          </h4>
+          <p class="text-sm sm:text-base md:text-xl text-slate-500 max-w-[200px]">
+            Define la concentración final en ppm según las recomendaciones
+            sanitarias.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flex flex-col items-center text-center group">
+          <div
+            class="relative w-[120px] h-[120px] rounded-full bg-[#f0fdf4] border border-[#bbf7d0] flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105 mb-6"
+          >
+            <!-- Step Number Badge -->
+            <span
+              class="absolute -top-1 -left-1 w-8 h-8 rounded-full bg-[#16a34a] text-white flex items-center justify-center font-bold text-sm shadow-md"
+              >4</span
+            >
+            <Image src={icon4} alt="Obtener Resultado" class="w-14 h-14 object-contain" />
+          </div>
+          <h4 class="font-bold text-[#1d1b84] mb-2 text-sm sm:text-base md:text-2xl">
+            4. Obtener Resultado
+          </h4>
+          <p class="text-sm sm:text-base md:text-xl text-slate-500 max-w-[200px]">
+            Obtén el resultado de cuánto desinfectante usar.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calculator Card -->
+    <div
+      class="max-w-7xl mx-auto bg-[#f3f4f6] rounded-[2.5rem] p-8 md:p-12 shadow-inner border border-slate-200"
+    >
+      <div class="mb-8">
+        <h3
+          class="text-2xl sm:text-3xl font-extrabold text-[#1c1a5b] mb-2"
+          style="font-family: Poppins, sans-serif;"
+        >
+          ¡Prepara tu desinfectante correctamente!
+        </h3>
+        <p class="text-sm sm:text-base md:text-xl text-slate-700 font-medium">
+          Aplicar la fórmula: <span class="font-bold text-slate-900 ml-1"
+            >V1 x C1 = V2 x C2</span
+          >
+        </p>
+      </div>
+
+      <!-- Form Grid -->
+      <div class="space-y-6">
+        <!-- Row 1: V1 (Incógnita) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+          <div class="lg:col-span-6 flex items-center gap-3">
+            <span
+              class="flex-shrink-0 w-8 h-8 rounded-full border border-slate-400 flex items-center justify-center text-sm sm:text-base md:text-xl font-bold text-slate-600 bg-white"
+              >V1</span
+            >
+            <p class="text-sm sm:text-base md:text-xl text-slate-700 font-medium"
+              >Mililitros de desinfectante a utilizar (Incógnita)</span
+            >
+          </div>
+          <div class="lg:col-span-3">
+            <div
+              id="v1-result-pill"
+              class="w-full h-12 rounded-full bg-[#5c53e2] text-white flex items-center justify-center font-bold text-lg shadow transition-colors duration-300"
+            >
+              <span id="v1-display">0.00</span>
+            </div>
+          </div>
+          <div class="lg:col-span-3">
+            <div
+              class="w-full h-12 rounded-xl bg-[#c5d8f9] border border-slate-300 flex items-center justify-between px-4 text-[#1c1a5b] font-semibold text-sm sm:text-base md:text-lg"
+            >
+              <span>Mililitros (ml)</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: C1 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+          <div class="lg:col-span-6 flex items-center gap-3">
+            <span
+              class="flex-shrink-0 w-8 h-8 rounded-full border border-slate-400 flex items-center justify-center text-sm sm:text-base md:text-xl font-bold text-slate-600 bg-white"
+              >C1</span
+            >
+            <p
+              class="text-sm sm:text-base md:text-xl text-slate-700 font-medium leading-tight"
+            >
+              Concentración de hipoclorito de sodio (este valor se halla en la
+              etiqueta del desinfectante y se presenta en %) (C1)
+            </span>
+          </div>
+          <div class="lg:col-span-3 relative">
+            <input
+              type="number"
+              id="c1-input"
+              placeholder="%"
+              step="any"
+              min="0"
+              class="w-full h-12 rounded-xl border border-slate-300 bg-white px-4 text-center text-[#1c1a5b] font-bold text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all placeholder:text-slate-400 placeholder:font-normal"
+            />
+          </div>
+          <div class="lg:col-span-3">
+            <!-- Empty space to align with V1 row -->
+          </div>
+        </div>
+
+        <!-- Row 3: V2 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+          <div class="lg:col-span-6 flex items-center gap-3">
+            <span
+              class="flex-shrink-0 w-8 h-8 rounded-full border border-slate-400 flex items-center justify-center text-sm sm:text-base md:text-xl font-bold text-slate-600 bg-white"
+              >V2</span
+            >
+            <p class="text-sm sm:text-base md:text-xl text-slate-700 font-medium"
+              >Cantidad de solución que deseo preparar (V2)</span
+            >
+          </div>
+          <div class="lg:col-span-3">
+            <input
+              type="number"
+              id="v2-input"
+              placeholder="En litros (L)"
+              step="any"
+              min="0"
+              class="w-full h-12 rounded-xl border border-slate-300 bg-white px-4 text-center text-[#1c1a5b] font-bold text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all placeholder:text-slate-400 placeholder:font-normal"
+            />
+          </div>
+          <div class="lg:col-span-3">
+            <select
+              id="v2-unit"
+              class="w-full h-12 rounded-xl bg-[#c5d8f9] border border-slate-300 text-[#1c1a5b] font-semibold text-sm sm:text-base md:text-lg px-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              <option value="L">Litros (L)</option>
+              <option value="ml">Mililitros (ml)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 4: C2 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+          <div class="lg:col-span-6 flex items-center gap-3">
+            <span
+              class="flex-shrink-0 w-8 h-8 rounded-full border border-slate-400 flex items-center justify-center text-sm sm:text-base md:text-xl font-bold text-slate-600 bg-white"
+              >C2</span
+            >
+            <p
+              class="text-sm sm:text-base md:text-xl text-slate-700 font-medium"
+              >Concentración de la solución desinfectante en ppm (C2)</span
+            >
+          </div>
+          <div class="lg:col-span-3">
+            <input
+              type="number"
+              id="c2-input"
+              placeholder="ppm"
+              step="any"
+              min="0"
+              class="w-full h-12 rounded-xl border border-slate-300 bg-white px-4 text-center text-[#1c1a5b] font-bold text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all placeholder:text-slate-400 placeholder:font-normal"
+            />
+          </div>
+          <div class="lg:col-span-3">
+            <select
+              id="c2-unit"
+              class="w-full h-12 rounded-xl bg-[#c5d8f9] border border-slate-300 text-[#1c1a5b] font-semibold text-sm sm:text-base md:text-lg px-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              <option value="ppm">Partes por millón (ppm)</option>
+              <option value="percent">Porcentaje (%)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Action / Reset Button -->
+        <div class="flex justify-end pt-4">
+          <button
+            type="button"
+            id="reset-btn"
+            class="px-8 py-3 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold tracking-wider rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-md shadow-blue-500/20"
+          >
+            Restablecer
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Dynamic Result Message -->
+      <div
+        id="result-message-container"
+        class="mt-8 pt-6 border-t border-slate-300 text-center opacity-0 transform translate-y-2 transition-all duration-500"
+      >
+        <p class="text-lg sm:text-2xl font-bold text-[#1d1b84]">
+          Requiere <span
+            id="v1-text-value"
+            class="text-2xl font-black text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg"
+            >0.00</span
+          > Mililitros de desinfectante para preparar la solución.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const c1Input = document.getElementById("c1-input") as HTMLInputElement;
+    const v2Input = document.getElementById("v2-input") as HTMLInputElement;
+    const v2Unit = document.getElementById("v2-unit") as HTMLSelectElement;
+    const c2Input = document.getElementById("c2-input") as HTMLInputElement;
+    const c2Unit = document.getElementById("c2-unit") as HTMLSelectElement;
+
+    const v1Display = document.getElementById("v1-display");
+    const v1TextValue = document.getElementById("v1-text-value");
+    const resultMessageContainer = document.getElementById(
+      "result-message-container",
+    );
+    const resetBtn = document.getElementById("reset-btn");
+
+    function calculate() {
+      const c1 = parseFloat(c1Input.value);
+      const v2 = parseFloat(v2Input.value);
+      const c2 = parseFloat(c2Input.value);
+
+      // Check if all fields have valid numbers greater than 0
+      if (
+        !isNaN(c1) &&
+        c1 > 0 &&
+        !isNaN(v2) &&
+        v2 > 0 &&
+        !isNaN(c2) &&
+        c2 > 0
+      ) {
+        // 1. Convert C1 (%) to ppm
+        const c1_ppm = c1 * 10000;
+
+        // 2. Convert V2 based on selected unit
+        let v2_ml = v2;
+        if (v2Unit.value === "L") {
+          v2_ml = v2 * 1000;
+        }
+
+        // 3. Convert C2 based on selected unit
+        let c2_ppm = c2;
+        if (c2Unit.value === "percent") {
+          c2_ppm = c2 * 10000;
+        }
+
+        // 4. Formula: V1 * C1_ppm = V2_ml * C2_ppm => V1 = (V2_ml * C2_ppm) / C1_ppm
+        const v1_ml = (v2_ml * c2_ppm) / c1_ppm;
+
+        // Round to 2 decimals or show standard precision
+        const formattedResult =
+          v1_ml < 0.01 ? v1_ml.toFixed(4) : v1_ml.toFixed(2);
+
+        if (v1Display) v1Display.textContent = formattedResult;
+        if (v1TextValue) v1TextValue.textContent = formattedResult;
+
+        if (resultMessageContainer) {
+          resultMessageContainer.classList.remove("opacity-0", "translate-y-2");
+          resultMessageContainer.classList.add("opacity-100", "translate-y-0");
+        }
+      } else {
+        // Clear or hide result
+        if (v1Display) v1Display.textContent = "0.00";
+        if (v1TextValue) v1TextValue.textContent = "0.00";
+
+        if (resultMessageContainer) {
+          resultMessageContainer.classList.add("opacity-0", "translate-y-2");
+          resultMessageContainer.classList.remove(
+            "opacity-100",
+            "translate-y-0",
+          );
+        }
+      }
+    }
+
+    // Add event listeners for inputs and select controls
+    [c1Input, v2Input, c2Input].forEach((input) => {
+      input.addEventListener("input", calculate);
+    });
+
+    [v2Unit, c2Unit].forEach((select) => {
+      select.addEventListener("change", calculate);
+    });
+
+    // Reset button handler
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        c1Input.value = "";
+        v2Input.value = "";
+        c2Input.value = "";
+        v2Unit.value = "L";
+        c2Unit.value = "ppm";
+
+        if (v1Display) v1Display.textContent = "0.00";
+        if (v1TextValue) v1TextValue.textContent = "0.00";
+
+        if (resultMessageContainer) {
+          resultMessageContainer.classList.add("opacity-0", "translate-y-2");
+          resultMessageContainer.classList.remove(
+            "opacity-100",
+            "translate-y-0",
+          );
+        }
+      });
+    }
+  });
+</script>

@@ -1,0 +1,20 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import MainHeader from "@/components/website/MainHeader.astro";
+import MainFooter from "@/components/website/MainFooter.astro";
+import type { SEO } from "@/types/seo";
+
+interface Props {
+  seo?: Partial<SEO>;
+  title?: string;
+  description?: string;
+}
+---
+
+<BaseLayout seo={Astro.props.seo} title={Astro.props.title} description={Astro.props.description}>
+  <MainHeader />
+  <main>
+    <slot />
+  </main>
+  <MainFooter />
+</BaseLayout>

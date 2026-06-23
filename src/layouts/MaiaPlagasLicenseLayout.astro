@@ -1,0 +1,20 @@
+---
+import MaiaPlagasLicenseFooter from "@/components/website/MaiaPlagasLicenseFooter.astro";
+import BaseLayout from "./BaseLayout.astro";
+import MaiaPlagasLicenseHeader from "@/components/website/MaiaPlagasLicenseHeader.astro";
+import type { SEO } from "@/types/seo";
+
+interface Props {
+  seo?: Partial<SEO>;
+  title?: string;
+  description?: string;
+}
+---
+
+<BaseLayout seo={Astro.props.seo} title={Astro.props.title} description={Astro.props.description}>
+  <MaiaPlagasLicenseHeader />
+  <main class="min-h-screen bg-slate-50/50">
+    <slot />
+  </main>
+  <MaiaPlagasLicenseFooter />
+</BaseLayout>

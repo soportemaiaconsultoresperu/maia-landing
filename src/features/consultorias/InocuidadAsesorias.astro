@@ -1,0 +1,230 @@
+---
+import { Image } from 'astro:assets';
+import inspeccionesImg from '@/assets/images/inocuidad_calidad/IMAGENES/INSPECCIONES SANITARIAS.png';
+import auditoriasImg from '@/assets/images/inocuidad_calidad/IMAGENES/AUDITORIAS EXTERNAS.png';
+import disenoImg from '@/assets/images/inocuidad_calidad/IMAGENES/DISEÑO DEL AREA.png';
+import desarrolloImg from '@/assets/images/inocuidad_calidad/IMAGENES/DESARROLLO DE NUEVOS PRODUCTOS.png';
+import registroImg from '@/assets/images/inocuidad_calidad/IMAGENES/REGISTRO SANITARIO.png';
+
+const services = [
+  {
+    title: "Inspecciones Sanitarias y Diagnóstico de Brechas",
+    image: inspeccionesImg,
+    description: "Evaluamos las condiciones sanitarias de tu empresa para detectar riesgos, incumplimientos y oportunidades de mejora frente a las normativas.",
+    type: "Implementamos:",
+    items: [
+      "Diagnóstico preciso de fallas y riesgos sanitarios.",
+      "Plan de acción para mejorar tus procesos.",
+      "Lineamientos para cumplir normativas y avanzar hacia certificaciones."
+    ],
+    badgeColor: "bg-[#00b1a0]",
+    borderColor: "border-b-[6px] border-[#00b1a0]",
+    icon: "search-eye"
+  },
+  {
+    title: "Auditorías Externas en Inocuidad y Calidad",
+    image: auditoriasImg,
+    description: "Evaluamos tus procesos para verificar el cumplimiento de normativas y el correcto funcionamiento de tu sistema.",
+    type: "Implementamos:",
+    items: [
+      "Revisión del cumplimiento de normativas.",
+      "Detección y corrección de fallas antes de inspecciones oficiales.",
+      "Acciones para fortalecer la confianza de clientes y reguladores."
+    ],
+    badgeColor: "bg-[#4caf50]",
+    borderColor: "border-b-[6px] border-[#4caf50]",
+    icon: "checklist"
+  },
+  {
+    title: "Diseño del Área de Producción y Optimización de Procesos",
+    image: disenoImg,
+    description: "Rediseñamos áreas de producción, cocinas, laboratorios y almacenes para optimizar procesos, reducir costos y mejorar la eficiencia de tu empresa.",
+    type: "Resultados:",
+    items: [
+      "Diseño alineado a normativas de seguridad e higiene.",
+      "Mejor aprovechamiento del espacio y los equipos.",
+      "Reducción de tiempos y desperdicios en producción."
+    ],
+    badgeColor: "bg-[#ffb703]",
+    borderColor: "border-b-[6px] border-[#ffb703]",
+    icon: "blueprint"
+  },
+  {
+    title: "Desarrollo de Nuevos Productos y Optimización de Formulaciones",
+    image: desarrolloImg,
+    description: "Te ayudamos a desarrollar y mejorar tus productos, optimizar formulaciones, envases y cumplir con las normativas.",
+    type: "Resultados:",
+    items: [
+      "Productos más seguros y competitivos en el mercado.",
+      "Reducción de costos en insumos y empaques.",
+      "Desarrollo de productos enfocados en innovación y tendencias del sector."
+    ],
+    badgeColor: "bg-[#6366f1]",
+    borderColor: "border-b-[6px] border-[#6366f1]",
+    icon: "lightbulb"
+  },
+  {
+    title: "Asesoría para Registro Sanitario de Alimentos y Bebidas",
+    image: registroImg,
+    description: "Te guiamos en la obtención del Registro Sanitario de tus productos de consumo humano, facilitando los trámites ante las entidades reguladoras.",
+    type: "¡Beneficios:",
+    items: [
+      "Agiliza el proceso para obtener el Registro Sanitario.",
+      "Cumple con los requisitos técnicos y documentales.",
+      "Accede a nuevos mercados con tu producto autorizado."
+    ],
+    badgeColor: "bg-[#3a0ca3]",
+    borderColor: "border-b-[6px] border-[#3a0ca3]",
+    icon: "shield"
+  }
+];
+---
+
+<section class="py-20 bg-gray-50/50">
+  <div class="container mx-auto px-6 lg:px-16">
+    
+    <!-- Section Title with horizontal line and dot -->
+    <div class="flex items-center gap-4 mb-16">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-[#153f70] tracking-wider uppercase">
+        Asesorías
+      </h2>
+      <div class="h-[2px] bg-[#153f70] flex-grow relative">
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-[#153f70] rounded-full"></div>
+      </div>
+    </div>
+
+    <!-- Row 1: 3 cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
+      {services.slice(0, 3).map((service) => (
+        <div class={`flex flex-col bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden ${service.borderColor}`}>
+          <div class="relative h-52 overflow-hidden">
+            <Image 
+              src={service.image} 
+              alt={service.title} 
+              class="w-full h-full object-cover"
+            />
+            <!-- Icon Badge overlapping bottom-left -->
+            <div class={`absolute -bottom-6 left-6 z-10 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg text-white ${service.badgeColor}`}>
+              {service.icon === 'search-eye' && (
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l5.5 5.5" />
+                  <circle cx="10" cy="10" r="6" stroke-width="2" />
+                  <circle cx="10" cy="10" r="1.5" fill="currentColor" />
+                  <path d="M7 10c0-1.5 1-3 3-3" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              )}
+              {service.icon === 'checklist' && (
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+              )}
+              {service.icon === 'blueprint' && (
+                <div class="relative flex items-center justify-center font-bold text-xs">
+                  <svg class="w-6 h-6 absolute inset-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5z" />
+                  </svg>
+                  <span>m²</span>
+                </div>
+              )}
+            </div>
+          </div>
+          
+          <div class="p-8 pt-10 flex-grow flex flex-col">
+            <h3 class="text-2xl font-bold text-gray-800 mb-3 min-h-[56px] leading-snug">
+              {service.title}
+            </h3>
+            
+            <p class="text-2xl text-gray-600 mb-6 leading-relaxed flex-grow">
+              {service.description}
+            </p>
+            
+            <div class="mb-8">
+              <h4 class="font-bold text-2xl text-gray-700 mb-3">
+                {service.type}
+              </h4>
+              <ul class="space-y-2 text-2xl text-gray-600">
+                {service.items.map((item) => (
+                  <li class="flex items-start gap-2">
+                    <span class="text-gray-400 mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div class="text-center mt-auto w-full">
+              <a 
+                href="#contacto" 
+                class="w-full inline-flex items-center justify-center px-8 py-2.5 bg-[#00af9b] hover:bg-[#008f7d] text-white font-bold text-md rounded-full tracking-wider transition-all duration-300 hover:scale-105"
+              >
+                COTIZAR SERVICIO
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Row 2: 2 cards centered -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+      {services.slice(3).map((service) => (
+        <div class={`flex flex-col bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden ${service.borderColor}`}>
+          <div class="relative h-52 overflow-hidden">
+            <Image 
+              src={service.image} 
+              alt={service.title} 
+              class="w-full h-full object-cover"
+            />
+            <!-- Icon Badge overlapping bottom-left -->
+            <div class={`absolute -bottom-6 left-6 z-30 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg text-white ${service.badgeColor}`}>
+              {service.icon === 'lightbulb' && (
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              )}
+              {service.icon === 'shield' && (
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              )}
+            </div>
+          </div>
+          
+          <div class="p-8 pt-10 flex-grow flex flex-col">
+            <h3 class="text-2xl font-bold text-gray-800 mb-3 min-h-[56px] leading-snug">
+              {service.title}
+            </h3>
+            
+            <p class="text-2xl text-gray-600 mb-6 leading-relaxed flex-grow">
+              {service.description}
+            </p>
+            
+            <div class="mb-8">
+              <h4 class="font-bold text-2xl text-gray-700 mb-3">
+                {service.type}
+              </h4>
+              <ul class="space-y-2 text-2xl text-gray-600">
+                {service.items.map((item) => (
+                  <li class="flex items-start gap-2">
+                    <span class="text-gray-400 mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div class="text-center mt-auto w-full">
+              <a 
+                href="#contacto" 
+                class="w-full inline-flex items-center justify-center px-8 py-2.5 bg-[#00af9b] hover:bg-[#008f7d] text-white font-bold text-md rounded-full tracking-wider transition-all duration-300 hover:scale-105"
+              >
+                COTIZAR SERVICIO
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

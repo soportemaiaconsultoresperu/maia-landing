@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import backgroundImage from '@/assets/images/razones_elegir_fondo.png';
+import barrasIcon from '@/assets/images/barras_icon.png';
+import estrellasIcon from '@/assets/images/estrellas_icon.png';
+import manosIcon from '@/assets/images/manos_apretadas_icon.png';
+
+const reasons = [
+  {
+    title: "Expande tu presencia en el mercado",
+    description: "Atrae más clientes y accede a nuevas certificaciones que impulsen el crecimiento de tu empresa.",
+    icon: barrasIcon,
+    alt: "Icono de barras de crecimiento"
+  },
+  {
+    title: "Aumenta tus oportunidades de ganar licitaciones",
+    description: "Potencia tu gestión con un software que te ayuda a cumplir con los requisitos de tus clientes.",
+    icon: manosIcon,
+    alt: "Icono de apretón de manos"
+  },
+  {
+    title: "Fortalece la imagen de tu empresa",
+    description: "Mejora la imagen de tu empresa con una gestión más ordenada, digital y eficiente.",
+    icon: estrellasIcon,
+    alt: "Icono de estrellas de calidad"
+  }
+];
+---
+
+<section class="relative py-24 md:py-32 overflow-hidden min-h-[800px] flex items-center">
+  <!-- Background Layer -->
+  <div class="absolute inset-0 z-0">
+    <Image 
+      src={backgroundImage} 
+      alt="Fondo razones para elegir Maia" 
+      class="w-full h-full object-cover"
+    />
+    <!-- Dark blue tint overlay for the left side / overall -->
+    <!-- <div class="absolute inset-0 bg-[#153f70]/50"></div> -->
+  </div>
+
+  <div class="pl-6 lg:pl-20 pr-6 relative z-10 w-full">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-28 md:mb-36 lg:mb-40 tracking-tighter text-left drop-shadow-2xl uppercase leading-none w-full">
+      ¿Por qué elegir Maia Consultores?
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-24 md:gap-y-32 lg:gap-12 max-w-[1400px]">
+      {reasons.map((reason, index) => (
+        <div class={`bg-white rounded-[16px] p-8 md:p-10 lg:p-12 pt-20 shadow-2xl flex flex-col items-start relative transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_30px_60px_rgba(0,0,0,0.3)] group ${index === 2 ? 'md:col-span-2 lg:col-span-1 md:max-w-xl md:mx-auto lg:max-w-none lg:mx-0' : ''}`}>
+          <!-- Enlarged Icon - No background circle -->
+          <div class="absolute -top-16 md:-top-20 lg:-top-20 left-8 md:left-10 lg:left-12 w-24 h-24 md:w-32 md:h-32 lg:w-32 lg:h-32 flex items-center justify-center p-2 group-hover:scale-110 transition-transform duration-500">
+            <Image src={reason.icon} alt={reason.alt} class="w-full h-full object-contain relative z-10" />
+          </div>
+          
+          <h3 class="text-2xl md:text-2xl lg:text-3xl font-bold text-[#153f70] mb-4 md:mb-6 lg:mb-6 leading-tight group-hover:text-[#4a82ef] transition-colors">
+            {reason.title}
+          </h3>
+          <p class="text-[#000] text-lg md:text-2xl lg:text-2xl leading-relaxed ">
+            {reason.description}
+          </p>
+
+          <!-- Subtle decorative element -->
+          <div class="absolute bottom-6 right-8 w-12 h-1 bg-gradient-to-r from-[#60e8c1] to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 1023px) {
+    section {
+       background: linear-gradient(to bottom, transparent, rgba(21, 63, 112, 0.5));
+    }
+  }
+</style>

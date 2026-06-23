@@ -1,0 +1,99 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "@/assets/images/inocuidad_calidad/IMAGENES/PORTADA.png";
+---
+
+<section
+  class="relative min-h-[550px] lg:h-[calc(100vh-80px)] flex items-center overflow-hidden bg-brand-blue"
+>
+  <!-- Background Image (Visible full on mobile background, partially on desktop) -->
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={heroImage}
+      alt="Calidad e Inocuidad Alimentaria"
+      class="w-full h-full object-cover object-[70%_center]"
+      quality="max"
+      loading="eager"
+    />
+    <!-- Mobile overlay (solid or gradient) -->
+    <div class="absolute inset-0 bg-brand-blue/85 lg:hidden z-10"></div>
+  </div>
+
+  <!-- Yellow/Golden Glow on Bottom Right -->
+  <div
+    class="absolute -bottom-10 -right-10 w-96 h-96 bg-yellow-500/30 blur-[100px] rounded-full pointer-events-none z-10"
+  >
+  </div>
+
+  <!-- Content Container -->
+  <div class="container mx-auto px-6 lg:px-16 relative z-20">
+    <div class="max-w-2xl text-white py-12 lg:py-0">
+      <p
+        class="text-white text-base sm:text-lg md:text-3xl mb-2 tracking-wide animate-fade-in-up"
+      >
+        Consultoría especializada en
+      </p>
+
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 animate-fade-in-up"
+      >
+        <span class="text-brand-green block">Calidad e Inocuidad</span>
+        <span class="text-brand-green block">Alimentaria</span>
+      </h1>
+
+      <p
+        class="text-white/90 text-sm sm:text-base md:text-2xl leading-relaxed mb-8 max-w-xl sm:max-w-md animate-fade-in-up delay-200"
+      >
+        Expertos en normativas y certificaciones para mejorar la calidad,
+        inocuidad y sostenibilidad de tu empresa.
+      </p>
+
+      <div class="animate-fade-in-up delay-200">
+        <a
+          href="#contacto"
+          class="inline-flex items-center justify-center px-10 py-3.5 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-semibold text-base md:text-lg rounded-full transition-all duration-300 shadow-lg hover:shadow-blue-500/20 hover:scale-105"
+        >
+          AGENDAR ASESORÍA
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+</style>
