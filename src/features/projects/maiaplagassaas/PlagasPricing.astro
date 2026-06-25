@@ -139,10 +139,9 @@ const plans = [
       <p>Suscríbete de manera mensual, semestral o anual.</p>
     </div>
 
-    <!-- Switches -->
+    <!-- Switches
     <div class="flex flex-col items-center justify-center mb-12">
       <div class="flex flex-col gap-4 sm:gap-3">
-        <!-- Annual -->
         <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 justify-center sm:justify-start">
           <div class="bg-white rounded-full w-[22px] h-[22px] flex items-center justify-center flex-shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-[14px] w-[14px] text-[#1E1060] ml-[2px]" viewBox="0 0 20 20" fill="currentColor">
@@ -157,7 +156,6 @@ const plans = [
           </button>
         </div>
 
-        <!-- Semiannual -->
         <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 justify-center sm:justify-start">
           <div class="bg-white rounded-full w-[22px] h-[22px] flex items-center justify-center flex-shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-[14px] w-[14px] text-[#1E1060] ml-[2px]" viewBox="0 0 20 20" fill="currentColor">
@@ -173,6 +171,7 @@ const plans = [
         </div>
       </div>
     </div>
+    -->
 
     <!-- Plans Grid -->
     <div class="grid gap-8 sm:grid-cols-3 items-stretch">
@@ -209,9 +208,8 @@ const plans = [
                 {plan.name}
               </h3>
 
-              <!-- Stacked prices adjusted to capture style -->
+              <!-- Stacked prices adjusted to capture style
               <div class="space-y-2 mb-2">
-                <!-- Monthly Price -->
                 <div class="flex items-baseline justify-between gap-1">
                   <span
                     class="text-[32px] sm:text-[36px] font-bold leading-none plan-monthly-price"
@@ -227,7 +225,6 @@ const plans = [
                     USD/Mes + IGV
                   </span>
                 </div>
-                <!-- Activation Price -->
                 <div class="flex items-baseline justify-between gap-1">
                   <span
                     class="text-[32px] sm:text-[36px] font-bold leading-none"
@@ -243,6 +240,7 @@ const plans = [
                   </span>
                 </div>
               </div>
+              -->
 
               <!-- Divider -->
               <div class="border-t-2 border-[#1E1060] my-4" />
@@ -309,6 +307,7 @@ const plans = [
 
 
 
+<!--
 <script>
   function setupToggles() {
     const toggleAnnual = document.getElementById('toggle-annual');
@@ -384,3 +383,4 @@ const plans = [
   setupToggles();
   document.addEventListener('astro:after-swap', setupToggles);
 </script>
+-->
