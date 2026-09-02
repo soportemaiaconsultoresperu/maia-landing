@@ -1,0 +1,21 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<div class={`space-y-2 ${className}`} data-turnstile-container>
+  <div class="cf-turnstile" data-sitekey={siteKey}></div>
+  <p
+    class="hidden text-sm font-medium text-red-600"
+    data-turnstile-error
+    role="alert"
+  >
+    Completá la verificación de seguridad antes de enviar el formulario.
+  </p>
+</div>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>

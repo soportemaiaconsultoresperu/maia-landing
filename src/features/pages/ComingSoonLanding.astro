@@ -1,4 +1,5 @@
 ---
+import TurnstileWidget from "@/components/TurnstileWidget.astro";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
@@ -61,8 +62,9 @@ const { badge, title, subtitle, description, features, projectId } = Astro.props
           <h3 class="text-lg font-bold text-slate-900 mb-2">¿Quieres enterarte del lanzamiento?</h3>
           <p class="text-sm text-slate-500 mb-4">Déjanos tu correo y sé uno de los primeros en acceder cuando estemos listos.</p>
 
-          <form id={`notify-form-${projectId}`} class="flex flex-col sm:flex-row gap-3">
-            <div class="relative flex-grow">
+          <form id={`notify-form-${projectId}`} class="flex flex-col gap-3">
+            <div class="flex flex-col sm:flex-row gap-3">
+              <div class="relative flex-grow">
               <input
                 type="email"
                 required
@@ -71,12 +73,23 @@ const { badge, title, subtitle, description, features, projectId } = Astro.props
                 class="w-full rounded-xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10"
               />
             </div>
-            <button
-              type="submit"
-              class="relative flex items-center justify-center rounded-xl bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-brand-blue/95 hover:shadow-lg hover:shadow-brand-blue/10 active:scale-95 disabled:pointer-events-none disabled:opacity-50"
-            >
-              <span>Notificarme</span>
-            </button>
+            <div class="relative flex-grow">
+              <input
+                type="tel"
+                required
+                id={`phone-input-${projectId}`}
+                placeholder="Tu teléfono"
+                class="w-full rounded-xl border border-slate-200 bg-white/90 px-4 py-3 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/10"
+              />
+            </div>
+              <button
+                type="submit"
+                class="relative flex items-center justify-center rounded-xl bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-brand-blue/95 hover:shadow-lg hover:shadow-brand-blue/10 active:scale-95 disabled:pointer-events-none disabled:opacity-50"
+              >
+                <span>Notificarme</span>
+              </button>
+            </div>
+            <TurnstileWidget />
           </form>
 
           <!-- Success State -->
@@ -145,17 +158,34 @@ const { badge, title, subtitle, description, features, projectId } = Astro.props
     const form = document.getElementById(`notify-form-${projectId}`);
     const successMsg = document.getElementById(`success-msg-${projectId}`);
     const emailInput = document.getElementById(`email-input-${projectId}`);
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxChjOsML3etbRHgT4Dvm7UwrigFoQdU6u8ea8p1ezPNBlJW6mtriIK4UW033ZlNPL2DQ/exec';
+    const phoneInput = document.getElementById(`phone-input-${projectId}`);
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbxChjOsML3etbRHgT4Dvm7UwrigFoQdU6u8ea8p1ezPNBlJW6mtriIK4UW033ZlNPL2DQ/exec';
 
-    if (!form) return;
+      if (!form) return;
+
+      const getTurnstileToken = () => {
+        const tokenInput = form.querySelector('input[name="cf-turnstile-response"]');
+        const errorMessage = form.querySelector('[data-turnstile-error]');
+        const token = tokenInput?.value || '';
+
+        if (!token) {
+          errorMessage?.classList.remove('hidden');
+          return '';
+        }
+
+        errorMessage?.classList.add('hidden');
+        return token;
+      };
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const submitBtn = form.querySelector('button[type="submit"]');
       if (!submitBtn) return;
-      
-      const originalText = submitBtn.innerHTML;
+
+      const turnstileToken = getTurnstileToken();
+      if (!turnstileToken) return;
+        
       submitBtn.innerHTML = `
         <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -168,7 +198,9 @@ const { badge, title, subtitle, description, features, projectId } = Astro.props
       try {
         const data = {
           email: emailInput?.value || '',
-          project: `Coming Soon - ${projectId}`
+          phone: phoneInput?.value || '',
+          project: `Coming Soon - ${projectId}`,
+          turnstileToken
         };
 
         await fetch(scriptUrl, {

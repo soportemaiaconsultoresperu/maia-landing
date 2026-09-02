@@ -2,6 +2,21 @@
 // Reemplaza esto con la URL real cuando la tengas
 // export const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwqA411-QUD5xnL4nJiC0BHWMTp5Qsp_ebDTSMbe24q_hV39FQQF_b2BzAJJ8SX_f_9zg/exec';
 export const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxChjOsML3etbRHgT4Dvm7UwrigFoQdU6u8ea8p1ezPNBlJW6mtriIK4UW033ZlNPL2DQ/exec';
+
+function getTurnstileToken(form: HTMLFormElement) {
+  const tokenInput = form.querySelector<HTMLInputElement>('input[name="cf-turnstile-response"]');
+  const errorMessage = form.querySelector<HTMLElement>('[data-turnstile-error]');
+  const token = tokenInput?.value || '';
+
+  if (!token) {
+    errorMessage?.classList.remove('hidden');
+    return '';
+  }
+
+  errorMessage?.classList.add('hidden');
+  return token;
+}
+
 export function setupDemoForm(formId: string, projectName: string) {
   const form = document.getElementById(formId) as HTMLFormElement;
   const successMessage = document.getElementById('formSuccess');
@@ -10,6 +25,9 @@ export function setupDemoForm(formId: string, projectName: string) {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const turnstileToken = getTurnstileToken(form);
+    if (!turnstileToken) return;
     
     const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
     if (!submitBtn) return;
@@ -22,10 +40,12 @@ export function setupDemoForm(formId: string, projectName: string) {
       const data = {
         name: (document.getElementById('name') as HTMLInputElement)?.value || '',
         email: (document.getElementById('email') as HTMLInputElement)?.value || '',
+        phone: (document.getElementById('phone') as HTMLInputElement)?.value || '',
         company: (document.getElementById('company') as HTMLInputElement)?.value || '',
         technicians: (document.getElementById('technicians') as HTMLSelectElement)?.value || '',
         message: (document.getElementById('message') as HTMLTextAreaElement)?.value || '',
-        project: projectName
+        project: projectName,
+        turnstileToken
       };
 
       await fetch(SCRIPT_URL, {

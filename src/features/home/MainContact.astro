@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import TurnstileWidget from "@/components/TurnstileWidget.astro";
 import formularioImg from "@/assets/images/FORMULARIO.png";
 ---
 
@@ -83,6 +84,8 @@ import formularioImg from "@/assets/images/FORMULARIO.png";
             ></textarea>
           </div>
 
+          <TurnstileWidget />
+
           <div class="flex justify-end w-full pt-2">
             <button
               type="submit"
@@ -110,6 +113,24 @@ import formularioImg from "@/assets/images/FORMULARIO.png";
   const form = document.getElementById("mainContactForm") as HTMLFormElement;
   const successMessage = document.getElementById("contactFormSuccess");
 
+  const getTurnstileToken = () => {
+    const tokenInput = form?.querySelector<HTMLInputElement>(
+      'input[name="cf-turnstile-response"]',
+    );
+    const errorMessage = form?.querySelector<HTMLElement>(
+      "[data-turnstile-error]",
+    );
+    const token = tokenInput?.value || "";
+
+    if (!token) {
+      errorMessage?.classList.remove("hidden");
+      return "";
+    }
+
+    errorMessage?.classList.add("hidden");
+    return token;
+  };
+
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -118,6 +139,9 @@ import formularioImg from "@/assets/images/FORMULARIO.png";
         'button[type="submit"]',
       ) as HTMLButtonElement;
       if (!submitBtn) return;
+
+      const turnstileToken = getTurnstileToken();
+      if (!turnstileToken) return;
 
       const originalText = submitBtn.innerText;
       submitBtn.innerText = "Enviando...";
@@ -141,6 +165,7 @@ import formularioImg from "@/assets/images/FORMULARIO.png";
             (document.getElementById("contactMessage") as HTMLTextAreaElement)
               ?.value || "",
           project: "CONTACTO DE CONSULTORIA",
+          turnstileToken,
         };
 
         await fetch(SCRIPT_URL, {
@@ -152,7 +177,9 @@ import formularioImg from "@/assets/images/FORMULARIO.png";
         });
 
         form.reset();
-        form.querySelectorAll("input, textarea, button").forEach((el) => {
+        form
+          .querySelectorAll("input, textarea, button, [data-turnstile-container]")
+          .forEach((el) => {
           if (el.id !== "contactFormSuccess") {
             (el as HTMLElement).classList.add("hidden");
           }
