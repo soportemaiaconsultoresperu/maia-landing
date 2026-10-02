@@ -1,0 +1,161 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { Post } from "@/types/content";
+import { paths } from "@/lib/routes/paths";
+import hero from "@/assets/images/blog/IMAGENES/PORTADA.png";
+import contact from "@/assets/images/blog/IMAGENES/CONTACTANOS.png";
+import MainContact from "@/features/home/MainContact.astro";
+import PostCard from "./PostCard.astro";
+import { topics, categoryKey, searchEntry, newestFirst, featuredPost } from "./model";
+interface Props { posts: Post[]; state: "ready" | "unconfigured" }
+const { posts, state } = Astro.props;
+const sorted = newestFirst(posts);
+const featured = featuredPost(sorted);
+const icons = import.meta.glob<{ default: ImageMetadata }>("/src/assets/images/blog/ICONOS/*.png", { eager: true });
+const extraCategories = new Map<string, string>();
+for (const post of sorted) for (const category of post.categories ?? []) {
+  const key = categoryKey(category);
+  if (key.startsWith("category:")) extraCategories.set(key, category.name);
+}
+---
+<div class="blog" data-blog>
+  <section class="hero" aria-labelledby="blog-title">
+    <Image src={hero} alt="" loading="eager" class="hero-image" />
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <h1 id="blog-title">Blog Maia</h1>
+      <p>Encuentra información práctica sobre saneamiento ambiental, calidad e inocuidad, gestión de residuos, tecnología y gestión empresarial para mejorar los procesos de tu empresa y mantenerte actualizado.</p>
+    </div>
+  </section>
+  <section class="topics content-width" aria-labelledby="topics-title">
+    <h2 id="topics-title">Explora nuestros temas</h2>
+    <div class="topic-grid" role="group" aria-label="Filtrar por tema">
+      {topics.map((topic) => <button type="button" data-category={topic.key} aria-pressed={topic.key === "all" ? "true" : "false"} disabled>
+        <Image src={icons[`/src/assets/images/blog/ICONOS/${topic.image}.png`].default} alt="" width={48} height={48} />
+        <span>{topic.label}</span>
+      </button>)}
+    </div>
+    {extraCategories.size > 0 && <div class="extra-categories" role="group" aria-label="Otros temas">
+      {[...extraCategories].map(([key, name]) => <button type="button" data-category={key} aria-pressed="false" disabled>{name}</button>)}
+    </div>}
+    <noscript><p class="notice">Todos los artículos están disponibles a continuación. Activa JavaScript para buscar y filtrar por tema.</p></noscript>
+  </section>
+  <div class="content-width articles-layout">
+    <div class="articles-main">
+      {featured && <section aria-labelledby="featured-title" class="featured-section"><h2 id="featured-title">Artículo destacado</h2><PostCard post={featured} featured /></section>}
+      <section aria-labelledby="latest-title">
+        <h2 id="latest-title">Últimos artículos</h2>
+        {sorted.length === 0 && <p class="notice">{state === "unconfigured" ? "El blog aún no está conectado a WordPress. Los artículos estarán disponibles cuando se configure la conexión." : "Todavía no hay artículos publicados. Vuelve pronto para conocer nuestras novedades."}</p>}
+        <p data-results role="status" aria-live="polite" hidden></p>
+        <div class="article-grid" id="blog-articles">
+          {sorted.map((post) => <div data-post data-entry={JSON.stringify(searchEntry(post))}><PostCard post={post} /></div>)}
+        </div>
+        <p data-no-results class="notice" hidden>No encontramos artículos con esos criterios. Prueba otra búsqueda o selecciona Todo.</p>
+        <button class="more" type="button" data-more aria-controls="blog-articles" hidden>Ver más</button>
+      </section>
+    </div>
+    <aside aria-label="Buscar y descubrir artículos">
+      <div class="sidebar-panel">
+        <label for="blog-search">Buscar en el blog</label>
+        <input id="blog-search" type="search" placeholder="Buscar artículos, tema…" disabled aria-controls="blog-articles" />
+      </div>
+      {sorted.length > 0 && <section class="sidebar-panel" aria-labelledby="recent-title">
+        <h2 id="recent-title">Artículos recientes</h2>
+        <ol>{sorted.slice(0, 5).map((post) => <li><a href={paths.post(post.slug)}>{post.title}</a></li>)}</ol>
+      </section>}
+    </aside>
+  </div>
+  <MainContact image={contact} imageAlt="Profesional trabajando en su oficina" heading="¡Contáctanos!" description="Cuéntanos qué necesitas y nuestro equipo se pondrá en contacto contigo." variant="blog" />
+</div>
+<script>
+  import { matches, PAGE_SIZE, type SearchEntry } from "./model";
+  const root = document.querySelector<HTMLElement>("[data-blog]");
+  if (root) {
+    const input = root.querySelector<HTMLInputElement>("#blog-search")!;
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>("[data-category]")];
+    const entries = [...root.querySelectorAll<HTMLElement>("[data-post]")].map((element) => ({ element, entry: JSON.parse(element.dataset.entry!) as SearchEntry }));
+    const more = root.querySelector<HTMLButtonElement>("[data-more]")!;
+    const results = root.querySelector<HTMLElement>("[data-results]")!;
+    const empty = root.querySelector<HTMLElement>("[data-no-results]")!;
+    let category = "all";
+    let limit = PAGE_SIZE;
+    function update() {
+      const matching = entries.filter(({ entry }) => matches(entry, input.value, category));
+      const visible = new Set(matching.slice(0, limit));
+      entries.forEach((entry) => { entry.element.hidden = !visible.has(entry); });
+      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.category === category)));
+      more.hidden = matching.length <= limit;
+      empty.hidden = matching.length !== 0 || entries.length === 0;
+      results.hidden = entries.length === 0;
+      results.textContent = `${Math.min(limit, matching.length)} de ${matching.length} artículos`;
+    }
+    buttons.forEach((button) => {
+      button.disabled = false;
+      button.addEventListener("click", () => { category = button.dataset.category!; limit = PAGE_SIZE; update(); });
+    });
+    input.disabled = false;
+    input.addEventListener("input", () => { limit = PAGE_SIZE; update(); });
+    more.addEventListener("click", () => {
+      const previous = entries.filter(({ element }) => !element.hidden).length;
+      limit += PAGE_SIZE;
+      update();
+      entries.filter(({ element }) => !element.hidden)[previous]?.element.querySelector<HTMLAnchorElement>("a")?.focus();
+    });
+    update();
+  }
+</script>
+<style>
+  .blog { font-family: Poppins, sans-serif; color: #1b395b; }
+  .content-width { max-width: 1240px; margin-inline: auto; padding-inline: 28px; }
+  .hero { position: relative; min-height: 500px; display: flex; align-items: center; overflow: hidden; }
+  .hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  /* The supplied artwork already includes the desktop navy diagonal. */
+  .hero-shade { display: none; position: absolute; inset: 0; }
+  .hero-copy { position: relative; width: 100%; max-width: 1240px; margin-inline: auto; padding: 70px 28px; }
+  h1 { color: #5ee7c7; font-size: clamp(2.8rem, 5.5vw, 4.5rem); font-weight: 700; line-height: 1.2; }
+  .hero-copy p { max-width: 490px; width: 45%; margin-top: 32px; color: white; font-size: 1.1rem; line-height: 1.5; }
+  h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 24px; }
+  .topics { padding-block: 58px; }
+  .topics h2 { text-align: center; font-size: 1.8rem; margin-bottom: 44px; }
+  .topic-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
+  .topic-grid button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 150px; padding: 20px 10px; border: 1px solid #ccc; border-radius: 24px; box-shadow: 0 1px 10px #0002; color: #141414; background: white; line-height: 1.2; }
+  .topic-grid img { width: 48px; height: 48px; object-fit: contain; }
+  button:not(:disabled) { cursor: pointer; }
+  button[aria-pressed="true"] { border-color: #0066d7; box-shadow: 0 0 0 2px #0066d7; }
+  button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid #0066d7; outline-offset: 4px; }
+  .extra-categories { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  .extra-categories button { border: 1px solid #aac5df; border-radius: 24px; min-height: 44px; padding: 8px 18px; }
+  .articles-layout { display: grid; grid-template-columns: minmax(0, 2.5fr) minmax(230px, 1fr); gap: 36px; padding-bottom: 65px; }
+  .articles-main { min-width: 0; }
+  .featured-section { margin-bottom: 30px; }
+  .article-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 24px; }
+  [data-results] { font-size: .85rem; margin-bottom: 16px; }
+  .sidebar-panel { background: #ddecfd; border-radius: 14px; padding: 22px; margin-bottom: 24px; }
+  .sidebar-panel h2, label { font-size: 1rem; font-weight: 700; }
+  label { display: block; margin-bottom: 14px; }
+  input { border-radius: 24px; width: 100%; min-height: 44px; background: white; padding: 10px 16px; font-size: .85rem; color: #172d44; }
+  ol { list-style: none; counter-reset: recent; }
+  li { counter-increment: recent; display: flex; gap: 12px; font-size: .85rem; line-height: 1.5; margin-block: 18px; }
+  li::before { content: counter(recent); display: grid; place-items: center; flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: #b3ccff; }
+  li a:hover { text-decoration: underline; }
+  .more { display: block; margin: 30px auto 0; min-height: 44px; padding: 10px 48px; border-radius: 32px; background: #211d61; color: white; font-weight: 600; }
+  .notice { padding: 24px; background: #edf4fb; border-radius: 12px; line-height: 1.7; }
+  [hidden] { display: none !important; }
+  @media (max-width: 1000px) { .topic-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 767px) {
+    .hero { min-height: 460px; }
+    .hero-shade { display: block; background: #0c244cce; }
+    .hero-copy p { width: 100%; max-width: 470px; }
+    .hero-image { object-position: 65% center; }
+    .articles-layout { grid-template-columns: 1fr; }
+    aside { grid-row: 1; }
+    .topic-grid { gap: 16px; }
+    .topics h2 { font-size: 1.5rem; }
+  }
+  @media (max-width: 479px) {
+    .content-width { padding-inline: 20px; }
+    .topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .article-grid { grid-template-columns: 1fr; }
+  }
+</style>

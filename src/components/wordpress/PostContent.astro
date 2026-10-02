@@ -1,0 +1,136 @@
+---
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+
+interface Props {
+  /** Only sanitized HTML from the WordPress mapper is accepted. */
+  html: string;
+}
+---
+<div class="post-content" set:html={Astro.props.html} />
+<style>
+  .post-content {
+    width: 100%;
+    max-width: 70ch;
+    min-width: 0;
+    margin-inline: auto;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.0625rem, 1rem + .2vw, 1.125rem);
+    line-height: 1.8;
+    color: #263b4d;
+    overflow-wrap: anywhere;
+  }
+  .post-content:empty { display: none; }
+  /* Override the global paragraph scale, including paragraphs inside lists. */
+  .post-content :global(p) { font-size: 1em; line-height: 1.8; margin-block: 1.25em; }
+  .post-content :global(h2),
+  .post-content :global(h3),
+  .post-content :global(h4),
+  .post-content :global(h5),
+  .post-content :global(h6) {
+    margin-block: 2em .75em;
+    font-family: Poppins, ui-sans-serif, system-ui, sans-serif;
+    color: #153f70;
+    font-weight: 600;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+  .post-content :global(h2) { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.875rem); font-weight: 700; }
+  .post-content :global(h3) { font-size: clamp(1.3125rem, 1.1rem + .7vw, 1.5rem); }
+  .post-content :global(h4) { font-size: 1.1875rem; }
+  .post-content :global(h5) { font-size: 1.0625rem; font-weight: 700; }
+  .post-content :global(h6) { font-size: 1rem; font-weight: 700; letter-spacing: .02em; }
+  .post-content :global(ul), .post-content :global(ol) { margin-block: 1.25em; padding-inline-start: 1.6em; }
+  .post-content :global(ul) { list-style: disc; }
+  .post-content :global(ol) { list-style: decimal; }
+  .post-content :global(ul ul) { list-style: circle; }
+  .post-content :global(ul ul ul) { list-style: square; }
+  .post-content :global(ol ol) { list-style: lower-alpha; }
+  .post-content :global(ol ol ol) { list-style: lower-roman; }
+  .post-content :global(li) { padding-inline-start: .25em; margin-block: .4em; line-height: 1.8; }
+  .post-content :global(li::marker) { color: #153f70; font-weight: 600; }
+  .post-content :global(li > ul), .post-content :global(li > ol), .post-content :global(li > p) { margin-block: .5em; }
+  .post-content :global(a) {
+    color: #153f70;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .2em;
+    overflow-wrap: anywhere;
+  }
+  .post-content :global(a:hover) { text-decoration-thickness: 2px; }
+  .post-content :global(a:focus-visible) { outline: 3px solid #153f70; outline-offset: 3px; border-radius: 2px; }
+  .post-content :global(strong), .post-content :global(b) { font-weight: 700; }
+  .post-content :global(img) { display: block; max-width: 100%; height: auto; margin-inline: auto; border-radius: .5rem; }
+  .post-content :global(figure) { max-width: 100%; margin: 2em 0; }
+  .post-content :global(figcaption) {
+    margin-top: .75rem;
+    color: #526777;
+    font-size: .875rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .post-content :global(figcaption p) { font-size: 1em; line-height: 1.6; margin-block: .5em; }
+  .post-content :global(blockquote) {
+    margin: 1.75em 0;
+    border-inline-start: 4px solid #60e8c1;
+    padding: 1.25rem clamp(1rem, 3vw, 1.75rem);
+    border-radius: 0 .5rem .5rem 0;
+    background: #eff9f6;
+    color: #153f70;
+  }
+  .post-content :global(hr) { margin-block: 2.5em; border: 0; border-top: 1px solid #c5d5e1; }
+  .post-content :global(code) {
+    border-radius: .25rem;
+    padding: .125em .3em;
+    background: #edf3f7;
+    color: #153f70;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: .9em;
+    white-space: break-spaces;
+    overflow-wrap: anywhere;
+  }
+  .post-content :global(pre) {
+    max-width: 100%;
+    overflow-x: auto;
+    margin-block: 1.75em;
+    padding: 1.25rem;
+    border-radius: .625rem;
+    background: #153f70;
+    color: #f2f7fc;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: .875rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    tab-size: 2;
+  }
+  .post-content :global(pre code) { padding: 0; background: transparent; color: inherit; font-size: inherit; white-space: inherit; }
+  /* Keep wide CMS tables locally scrollable without changing their HTML. */
+  .post-content :global(table) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    margin-block: 1.75em;
+    border-collapse: collapse;
+    font-size: .9375rem;
+    line-height: 1.6;
+  }
+  .post-content :global(th), .post-content :global(td) {
+    min-width: 8rem;
+    border: 1px solid #c5d5e1;
+    padding: .75rem 1rem;
+    text-align: start;
+    vertical-align: top;
+  }
+  .post-content :global(th) { background: #eaf2f8; color: #153f70; font-weight: 700; }
+  .post-content :global(tbody tr:nth-child(even)) { background: #f7fafc; }
+  .post-content :global(td p), .post-content :global(th p) { margin-block: .5em; font-size: 1em; line-height: 1.6; }
+  .post-content :global(sup), .post-content :global(sub) { font-size: .75em; line-height: 0; }
+  .post-content > :global(:first-child),
+  .post-content :global(blockquote > :first-child),
+  .post-content :global(li > :first-child) { margin-top: 0; }
+  .post-content > :global(:last-child),
+  .post-content :global(blockquote > :last-child),
+  .post-content :global(li > :last-child) { margin-bottom: 0; }
+</style>

@@ -1,6 +1,8 @@
 ---
 import "@fontsource/poppins/400.css";
 import logoMaiaConsultores from "@/assets/images/logo_maia_consultores.png";
+import { paths } from "@/lib/routes/paths";
+const isBlog = Astro.url.pathname === paths.blog || Astro.url.pathname.startsWith(`${paths.blog}/`);
 
 const simpleNavItems = [
   { label: "Inicio", href: "/" },
@@ -26,6 +28,7 @@ const softwareDropdown = {
 
 const trailingNavItems = [
   { label: "Convertidor", href: "/calculadora" },
+  { label: "Blog", href: paths.blog },
   { label: "Contacto", href: "/#contacto" },
 ];
 ---
@@ -126,6 +129,7 @@ const trailingNavItems = [
       {
         trailingNavItems.map((item) => (
           <a
+            aria-current={item.href === paths.blog && isBlog ? "page" : undefined}
             href={item.href}
             class="text-[17px] font-medium leading-none tracking-tight text-[#111111] transition-all duration-300 hover:text-[#153f70]"
             style="font-family: Poppins, sans-serif;"
@@ -238,6 +242,7 @@ const trailingNavItems = [
       {
         trailingNavItems.map((item) => (
           <a
+            aria-current={item.href === paths.blog && isBlog ? "page" : undefined}
             href={item.href}
             class="py-4 text-center text-2xl font-medium text-[#111111] transition-colors hover:text-[#153f70]"
             style="font-family: Poppins, sans-serif;"
@@ -249,6 +254,10 @@ const trailingNavItems = [
     </nav>
   </div>
 </header>
+
+<style>
+  a[aria-current="page"] { color: #006bea; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+</style>
 
 <script>
   // Mobile menu toggle

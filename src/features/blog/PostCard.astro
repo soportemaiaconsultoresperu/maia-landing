@@ -1,0 +1,42 @@
+---
+import type { Post } from "@/types/content";
+import { paths } from "@/lib/routes/paths";
+import { formatDate } from "./model";
+interface Props { post: Post; featured?: boolean }
+const { post, featured = false } = Astro.props;
+---
+<article class:list={["post-card", { featured }]}>
+  <a href={paths.post(post.slug)} class="card-link">
+    {post.cover ? <img src={post.cover.url} alt={post.cover.alt ?? ""} width={post.cover.width} height={post.cover.height} loading="lazy" /> :
+      <div class="cover-fallback" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h18l6 5 6-5h18v40H38l-6 5-6-5H8zM32 17v40M15 23h10m-10 8h10m14-8h10m-10 8h10" /></svg></div>}
+    <div class="card-copy">
+      {featured && post.publishedAt && <time datetime={post.publishedAt}>{formatDate(post.publishedAt)} (Lima)</time>}
+      <h3>{post.title}</h3>
+      {featured && post.excerpt && <p>{post.excerpt}</p>}
+      {!featured && post.publishedAt && <time datetime={post.publishedAt}>{formatDate(post.publishedAt)} (Lima)</time>}
+      {featured && <span class="read-more">Leer más →</span>}
+    </div>
+  </a>
+</article>
+<style>
+  .post-card { height: 100%; background: #f1f1f1; border-radius: 0 0 22px 22px; overflow: hidden; }
+  .card-link { display: flex; flex-direction: column; height: 100%; color: #171717; text-decoration: none; }
+  img, .cover-fallback { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .cover-fallback { display: grid; place-items: center; background: #ddebfa; color: #224e74; }
+  .cover-fallback svg { width: 76px; }
+  .card-copy { padding: 20px; }
+  h3 { font-size: 1.1rem; font-weight: 700; line-height: 1.4; overflow-wrap: anywhere; }
+  time { display: block; font-size: .8rem; margin-top: 14px; }
+  .card-link:hover h3 { text-decoration: underline; }
+  .card-link:focus-visible { outline: 3px solid #006bea; outline-offset: -4px; }
+  .featured { border-radius: 0 18px 18px 0; background: linear-gradient(125deg, #23346c, #008e88); }
+  .featured .card-link { color: white; }
+  .featured time { margin: 0 0 12px; }
+  .featured p { margin: 14px 0; font-size: .9rem; line-height: 1.65; }
+  .read-more { display: inline-block; margin-top: 8px; font-size: .85rem; font-weight: 600; }
+  @media (min-width: 640px) {
+    .featured .card-link { flex-direction: row; }
+    .featured img, .featured .cover-fallback { width: 48%; aspect-ratio: auto; min-height: 280px; }
+    .featured .card-copy { flex: 1; min-width: 0; }
+  }
+</style>

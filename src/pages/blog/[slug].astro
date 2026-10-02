@@ -1,15 +1,16 @@
 ---
-import ArticleLayout from "@/layouts/ArticleLayout.astro";
+import type { Post } from "@/types/content";
+import WebsiteLayout from "@/layouts/WebsiteLayout.astro";
+import BlogArticle from "@/features/blog/BlogArticle.astro";
+import { loadPosts } from "@/lib/wordpress/posts";
 
-export function getStaticPaths() {
-  return [];
+export async function getStaticPaths() {
+  const { posts } = await loadPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
 }
-
-const { slug } = Astro.params;
+interface Props { post: Post }
+const { post } = Astro.props;
 ---
-
-<ArticleLayout title={slug ?? "Articulo"} description="Articulo del blog.">
-  <section class="mx-auto max-w-3xl px-6 py-20">
-    <h1 class="text-4xl font-semibold">{slug}</h1>
-  </section>
-</ArticleLayout>
+<WebsiteLayout title={post.title} description={post.excerpt} seo={{ ...post.seo, type: "article", publishedTime: post.publishedAt, modifiedTime: post.updatedAt, image: post.seo?.image ?? post.cover?.url }}>
+  <BlogArticle post={post} />
+</WebsiteLayout>

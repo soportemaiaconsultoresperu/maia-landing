@@ -1,0 +1,136 @@
+---
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import type { Post } from "@/types/content";
+import { paths } from "@/lib/routes/paths";
+import PostContent from "@/components/wordpress/PostContent.astro";
+import { formatDate } from "./model";
+
+interface Props { post: Post }
+const { post } = Astro.props;
+const publishedDate = formatDate(post.publishedAt);
+---
+<article class="blog-article">
+  <div class="reading-width">
+    <a class="back" href={paths.blog}><span aria-hidden="true">←</span> Volver al blog</a>
+  </div>
+  <header class="article-header reading-width">
+    {(post.categories?.length ?? 0) > 0 && (
+      <ul class="categories" aria-label="Temas">
+        {post.categories?.map((category) => <li>{category.name}</li>)}
+      </ul>
+    )}
+    {post.title && <h1>{post.title}</h1>}
+    {(post.author || publishedDate) && (
+      <div class="byline">
+        {post.author && <span class="author">Por {post.author.name}</span>}
+        {publishedDate && <time datetime={post.publishedAt}>{publishedDate} (hora de Lima)</time>}
+      </div>
+    )}
+    {post.excerpt && <p class="excerpt">{post.excerpt}</p>}
+  </header>
+  {post.cover && (
+    <div class="cover-frame">
+      <img class="cover" src={post.cover.url} alt={post.cover.alt ?? ""} width={post.cover.width} height={post.cover.height} />
+    </div>
+  )}
+  <PostContent html={post.content} />
+  <footer class="article-footer reading-width">
+    <a class="back" href={paths.blog}><span aria-hidden="true">←</span> Explorar más artículos</a>
+  </footer>
+</article>
+<style>
+  .blog-article {
+    max-width: 1160px;
+    margin-inline: auto;
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem) clamp(3rem, 7vw, 6rem);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.0625rem, 1rem + .2vw, 1.125rem);
+    color: #263b4d;
+    overflow-wrap: anywhere;
+  }
+  .reading-width {
+    width: 100%;
+    max-width: 70ch;
+    margin-inline: auto;
+  }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: .625rem;
+    min-height: 44px;
+    padding-block: .625rem;
+    color: #153f70;
+    font-size: .9375rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .25em;
+  }
+  .back:hover { text-decoration-thickness: 2px; }
+  .back:focus-visible { outline: 3px solid #153f70; outline-offset: 4px; border-radius: 2px; }
+  .article-header { margin-block: clamp(1.5rem, 4vw, 2.5rem) clamp(2rem, 5vw, 3rem); }
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    list-style: none;
+  }
+  .categories li {
+    max-width: 100%;
+    border: 1px solid #60e8c1;
+    border-radius: 999px;
+    background: #eafbf5;
+    color: #153f70;
+    padding: .375rem .875rem;
+    font-size: .8125rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  h1 {
+    margin: 0;
+    font-family: Poppins, ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(2rem, 1.25rem + 3vw, 3.25rem);
+    font-weight: 700;
+    color: #153f70;
+    line-height: 1.18;
+    letter-spacing: -.025em;
+    text-wrap: balance;
+  }
+  .byline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.5rem;
+    margin-top: 1.5rem;
+    color: #526777;
+    font-size: .875rem;
+    line-height: 1.6;
+  }
+  .author { font-weight: 600; color: #263b4d; }
+  .excerpt {
+    margin: 1.75rem 0 0;
+    border-inline-start: 3px solid #60e8c1;
+    padding-inline-start: 1.25rem;
+    font-size: clamp(1.125rem, 1rem + .5vw, 1.375rem);
+    line-height: 1.65;
+    color: #40576c;
+  }
+  .article-header > :first-child { margin-top: 0; }
+  .article-header:empty { display: none; }
+  .cover-frame { margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+  .cover {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: clamp(.5rem, 1.5vw, 1rem);
+    background: #eff5f8;
+  }
+  .article-footer {
+    border-top: 1px solid #d5e1e9;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: 1.25rem;
+  }
+</style>

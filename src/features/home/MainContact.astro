@@ -2,9 +2,25 @@
 import { Image } from "astro:assets";
 import TurnstileWidget from "@/components/TurnstileWidget.astro";
 import formularioImg from "@/assets/images/FORMULARIO.png";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  image?: ImageMetadata;
+  imageAlt?: string;
+  heading?: string;
+  description?: string;
+  variant?: "default" | "blog";
+}
+const {
+  image = formularioImg,
+  imageAlt = "Equipo en reunión",
+  heading = "¡CONTÁCTANOS!",
+  description = "Cuéntanos qué necesita tu empresa y recibe una propuesta personalizada.",
+  variant = "default",
+} = Astro.props;
 ---
 
-<section class="py-20 bg-slate-50" id="contacto">
+<section class:list={["py-20 bg-slate-50", { "blog-contact": variant === "blog" }]} id="contacto">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
     <div
       class="flex flex-col lg:flex-row bg-[#eef2f9] rounded-3xl overflow-hidden shadow-lg border border-slate-100"
@@ -14,8 +30,8 @@ import formularioImg from "@/assets/images/FORMULARIO.png";
         class="w-full lg:w-1/2 relative h-64 lg:h-auto min-h-[320px] lg:min-h-full"
       >
         <Image
-          src={formularioImg}
-          alt="Equipo en reunión"
+          src={image}
+          alt={imageAlt}
           class="absolute inset-0 w-full h-full object-cover"
         />
         <div class="absolute inset-0 bg-emerald-950/20 mix-blend-multiply">
@@ -25,11 +41,10 @@ import formularioImg from "@/assets/images/FORMULARIO.png";
       <!-- Form Section -->
       <div class="w-full lg:w-1/2 p-8 md:p-12">
         <h2 class="text-3xl font-extrabold text-slate-800 mb-2">
-          ¡CONTÁCTANOS!
+          {heading}
         </h2>
         <p class="text-slate-800 text-base md:text-2xl leading-relaxed mb-8">
-          Cuéntanos qué necesita tu empresa y recibe una propuesta
-          personalizada.
+          {description}
         </p>
 
         <form id="mainContactForm" class="space-y-4">
@@ -106,6 +121,19 @@ import formularioImg from "@/assets/images/FORMULARIO.png";
     </div>
   </div>
 </section>
+
+<style>
+  .blog-contact { background: #ddecfb; }
+  .blog-contact > div > div { background: transparent; border: 0; box-shadow: none; border-radius: 0; gap: 24px; }
+  .blog-contact > div > div > div:first-child { border-radius: 16px; overflow: hidden; }
+  .blog-contact > div > div > div:last-child { background: white; border: 1px solid #7189a3; border-radius: 16px; padding: 28px; }
+  .blog-contact h2 { text-transform: none; font-size: 1.65rem; }
+  .blog-contact p { font-size: .95rem; }
+  @media (min-width: 1024px) {
+    .blog-contact > div > div > div:first-child { width: 38%; }
+    .blog-contact > div > div > div:last-child { width: 62%; }
+  }
+</style>
 
 <script>
   import { SCRIPT_URL } from "@/utils/demoFormSubmit";
