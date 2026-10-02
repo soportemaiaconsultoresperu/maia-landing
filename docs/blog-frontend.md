@@ -20,9 +20,19 @@ npm run typecheck
 npm run build
 ```
 
-The test script runs both data/sanitization and listing-model regression tests. When preserving a dirty working tree, run these checks against an isolated export of the selected candidate, not the original checkout: Astro generates metadata and caches. Build output can be redirected with `npm run build -- --outDir <owned-temporary-output>`.
+The test script runs data/sanitization, listing-model and DOM-contract controller regressions. The controller tests use a small DOM double and source-wiring assertions; they are not compiled Astro or live asset-delivery proof. When preserving a dirty working tree, run these checks against an isolated export of the selected candidate, not the original checkout: Astro generates metadata and caches. Build output can be redirected with `npm run build -- --outDir <owned-temporary-output>`.
 
 Previous verification reported four baseline TS2352 errors in the license FAQ (lines 87/94) and SaaS FAQ (lines 92/99). Those unrelated errors are not fixed by this frontend delivery. Historical passes are not proof that the current selected candidate passed; rerun checks and record their actual results.
+
+## Filtros del listado
+
+Los temas y la búsqueda se combinan en la misma página, sin rutas de categorías. El destacado se elige del conjunto coincidente: primero el artículo marcado más reciente, o el más reciente si ninguno está marcado. Se oculta si no hay coincidencias. «Todo» elimina el filtro de tema, pero conserva la búsqueda; cambiar tema o búsqueda reinicia la paginación. El contador corresponde al listado (el destacado puede repetir uno de esos artículos). «Recientes de todos los temas» permanece global.
+
+Las categorías adicionales conservan su nombre y clave exactos y usan una tarjeta de la misma grilla responsive, con un icono de etiqueta SVG decorativo local. Los temas fijos conservan sus PNG originales; no se requieren campos de WordPress, imágenes remotas ni alias nuevos.
+
+Sin JavaScript se muestran el destacado inicial y todos los artículos; los controles deshabilitados y el aviso explican que la búsqueda necesita JavaScript. El controlador conserva botones nativos, `aria-pressed`, foco visible y contador anunciado. Las tarjetas destacadas alternativas se renderizan dentro de `template`: sus imágenes permanecen inertes hasta seleccionar la tarjeta y además conservan `loading="lazy"`. Esto aumenta el HTML del listado, pero evita descargar todas las imágenes candidatas de forma anticipada y reutiliza el componente normalizado `PostCard`. Una sola inicialización por raíz evita listeners duplicados.
+
+La aceptación humana sigue pendiente: probar tema fijo/adicional/vacío, búsqueda combinada y «Todo», «Ver más», navegación por teclado y la grilla en móvil. Los tests de contrato no reemplazan esa revisión ni demuestran una falla de entrega de JavaScript del sitio publicado.
 
 ## Publication boundary
 

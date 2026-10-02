@@ -35,21 +35,28 @@ for (const post of sorted) for (const category of post.categories ?? []) {
         <Image src={icons[`/src/assets/images/blog/ICONOS/${topic.image}.png`].default} alt="" width={48} height={48} />
         <span>{topic.label}</span>
       </button>)}
+      {[...extraCategories].map(([key, name]) => <button type="button" data-category={key} aria-pressed="false" disabled>
+        <svg class="topic-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 8h16l20 20-14 14L6 20z" /><circle cx="15" cy="16" r="3" /></svg>
+        <span>{name}</span>
+      </button>)}
     </div>
-    {extraCategories.size > 0 && <div class="extra-categories" role="group" aria-label="Otros temas">
-      {[...extraCategories].map(([key, name]) => <button type="button" data-category={key} aria-pressed="false" disabled>{name}</button>)}
-    </div>}
     <noscript><p class="notice">Todos los artículos están disponibles a continuación. Activa JavaScript para buscar y filtrar por tema.</p></noscript>
   </section>
   <div class="content-width articles-layout">
     <div class="articles-main">
-      {featured && <section aria-labelledby="featured-title" class="featured-section"><h2 id="featured-title">Artículo destacado</h2><PostCard post={featured} featured /></section>}
+      <section aria-labelledby="featured-title" class="featured-section" data-featured hidden={!featured}>
+        <h2 id="featured-title">Artículo destacado</h2>
+        <div data-featured-slot data-selected={featured ? String(sorted.indexOf(featured)) : undefined}>
+          {featured && <PostCard post={featured} featured />}
+        </div>
+      </section>
+      {sorted.map((post, index) => <template data-featured-template={String(index)}><PostCard post={post} featured /></template>)}
       <section aria-labelledby="latest-title">
         <h2 id="latest-title">Últimos artículos</h2>
         {sorted.length === 0 && <p class="notice">{state === "unconfigured" ? "El blog aún no está conectado a WordPress. Los artículos estarán disponibles cuando se configure la conexión." : "Todavía no hay artículos publicados. Vuelve pronto para conocer nuestras novedades."}</p>}
         <p data-results role="status" aria-live="polite" hidden></p>
         <div class="article-grid" id="blog-articles">
-          {sorted.map((post) => <div data-post data-entry={JSON.stringify(searchEntry(post))}><PostCard post={post} /></div>)}
+          {sorted.map((post, index) => <div data-post={String(index)} data-featured={String(post.featured)} data-entry={JSON.stringify(searchEntry(post))}><PostCard post={post} /></div>)}
         </div>
         <p data-no-results class="notice" hidden>No encontramos artículos con esos criterios. Prueba otra búsqueda o selecciona Todo.</p>
         <button class="more" type="button" data-more aria-controls="blog-articles" hidden>Ver más</button>
@@ -61,7 +68,7 @@ for (const post of sorted) for (const category of post.categories ?? []) {
         <input id="blog-search" type="search" placeholder="Buscar artículos, tema…" disabled aria-controls="blog-articles" />
       </div>
       {sorted.length > 0 && <section class="sidebar-panel" aria-labelledby="recent-title">
-        <h2 id="recent-title">Artículos recientes</h2>
+        <h2 id="recent-title">Recientes de todos los temas</h2>
         <ol>{sorted.slice(0, 5).map((post) => <li><a href={paths.post(post.slug)}>{post.title}</a></li>)}</ol>
       </section>}
     </aside>
@@ -69,41 +76,8 @@ for (const post of sorted) for (const category of post.categories ?? []) {
   <MainContact image={contact} imageAlt="Profesional trabajando en su oficina" heading="¡Contáctanos!" description="Cuéntanos qué necesitas y nuestro equipo se pondrá en contacto contigo." variant="blog" />
 </div>
 <script>
-  import { matches, PAGE_SIZE, type SearchEntry } from "./model";
-  const root = document.querySelector<HTMLElement>("[data-blog]");
-  if (root) {
-    const input = root.querySelector<HTMLInputElement>("#blog-search")!;
-    const buttons = [...root.querySelectorAll<HTMLButtonElement>("[data-category]")];
-    const entries = [...root.querySelectorAll<HTMLElement>("[data-post]")].map((element) => ({ element, entry: JSON.parse(element.dataset.entry!) as SearchEntry }));
-    const more = root.querySelector<HTMLButtonElement>("[data-more]")!;
-    const results = root.querySelector<HTMLElement>("[data-results]")!;
-    const empty = root.querySelector<HTMLElement>("[data-no-results]")!;
-    let category = "all";
-    let limit = PAGE_SIZE;
-    function update() {
-      const matching = entries.filter(({ entry }) => matches(entry, input.value, category));
-      const visible = new Set(matching.slice(0, limit));
-      entries.forEach((entry) => { entry.element.hidden = !visible.has(entry); });
-      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.category === category)));
-      more.hidden = matching.length <= limit;
-      empty.hidden = matching.length !== 0 || entries.length === 0;
-      results.hidden = entries.length === 0;
-      results.textContent = `${Math.min(limit, matching.length)} de ${matching.length} artículos`;
-    }
-    buttons.forEach((button) => {
-      button.disabled = false;
-      button.addEventListener("click", () => { category = button.dataset.category!; limit = PAGE_SIZE; update(); });
-    });
-    input.disabled = false;
-    input.addEventListener("input", () => { limit = PAGE_SIZE; update(); });
-    more.addEventListener("click", () => {
-      const previous = entries.filter(({ element }) => !element.hidden).length;
-      limit += PAGE_SIZE;
-      update();
-      entries.filter(({ element }) => !element.hidden)[previous]?.element.querySelector<HTMLAnchorElement>("a")?.focus();
-    });
-    update();
-  }
+  import { initializeBlog } from "./filters";
+  document.querySelectorAll<HTMLElement>("[data-blog]").forEach(initializeBlog);
 </script>
 <style>
   .blog { font-family: Poppins, sans-serif; color: #1b395b; }
@@ -120,12 +94,12 @@ for (const post of sorted) for (const category of post.categories ?? []) {
   .topics h2 { text-align: center; font-size: 1.8rem; margin-bottom: 44px; }
   .topic-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
   .topic-grid button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 150px; padding: 20px 10px; border: 1px solid #ccc; border-radius: 24px; box-shadow: 0 1px 10px #0002; color: #141414; background: white; line-height: 1.2; }
-  .topic-grid img { width: 48px; height: 48px; object-fit: contain; }
+  .topic-grid img, .topic-icon { width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; }
+  .topic-grid span { overflow-wrap: anywhere; }
+  .topic-icon { color: #224e74; }
   button:not(:disabled) { cursor: pointer; }
   button[aria-pressed="true"] { border-color: #0066d7; box-shadow: 0 0 0 2px #0066d7; }
   button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid #0066d7; outline-offset: 4px; }
-  .extra-categories { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-  .extra-categories button { border: 1px solid #aac5df; border-radius: 24px; min-height: 44px; padding: 8px 18px; }
   .articles-layout { display: grid; grid-template-columns: minmax(0, 2.5fr) minmax(230px, 1fr); gap: 36px; padding-bottom: 65px; }
   .articles-main { min-width: 0; }
   .featured-section { margin-bottom: 30px; }
