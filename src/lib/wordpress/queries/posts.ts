@@ -1,25 +1,24 @@
+// Core WPGraphQL fields only; no SEO or custom-field plugin is required.
 export const postsIndexQuery = /* GraphQL */ `
-  query PostsIndex {
-    posts {
+  query PublishedPosts($first: Int!, $after: String) {
+    posts(first: $first, after: $after, where: { status: PUBLISH, orderby: { field: DATE, order: DESC } }) {
+      pageInfo { hasNextPage endCursor }
       nodes {
-        title
         slug
+        status
+        title
         excerpt
-        date
+        content
+        dateGmt
+        modifiedGmt
+        isSticky
+        author { node { name slug } }
+        categories(first: 100) {
+          nodes { name slug }
+          pageInfo { hasNextPage }
+        }
+        featuredImage { node { sourceUrl altText mediaDetails { width height } } }
       }
-    }
-  }
-`;
-
-export const postBySlugQuery = /* GraphQL */ `
-  query PostBySlug($slug: ID!) {
-    post(id: $slug, idType: SLUG) {
-      title
-      slug
-      excerpt
-      content
-      date
-      modified
     }
   }
 `;

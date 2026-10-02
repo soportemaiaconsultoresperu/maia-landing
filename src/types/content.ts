@@ -36,6 +36,9 @@ export interface Project {
 export interface Post {
   title: string;
   slug: string;
+  /** Sanitized WordPress HTML, safe for the article renderer. */
+  content: string;
+  featured: boolean;
   excerpt?: string;
   publishedAt?: string;
   updatedAt?: string;
