@@ -62,6 +62,30 @@ interface Props {
   .post-content :global(strong), .post-content :global(b) { font-weight: 700; }
   .post-content :global(img) { display: block; max-width: 100%; height: auto; margin-inline: auto; border-radius: .5rem; }
   .post-content :global(figure) { max-width: 100%; margin: 2em 0; }
+  /* Alignment stays inside the reading column; no automatic image upscaling. */
+  .post-content :global(.aligncenter) { margin-inline: auto; }
+  .post-content :global(.alignleft),
+  .post-content :global(.alignleft img),
+  .post-content :global(.alignleft video) { margin-inline: 0 auto; }
+  .post-content :global(.alignright),
+  .post-content :global(.alignright img),
+  .post-content :global(.alignright video) { margin-inline: auto 0; }
+  .post-content :global(video) { display: block; max-width: 100%; height: auto; margin-inline: auto; }
+  .post-content :global(iframe) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 0;
+  }
+  /* Explicit WP embed ratios override the iframe's fallback/intrinsic dimensions. */
+  .post-content :global(.wp-embed-aspect-16-9 iframe) { aspect-ratio: 16 / 9 !important; }
+  .post-content :global(.wp-embed-aspect-4-3 iframe) { aspect-ratio: 4 / 3 !important; }
+  .post-content :global(.wp-embed-aspect-1-1 iframe) { aspect-ratio: 1 !important; }
+  .post-content :global(.wp-embed-aspect-9-16 iframe) { aspect-ratio: 9 / 16 !important; }
+  .post-content :global(.wp-embed-aspect-3-2 iframe) { aspect-ratio: 3 / 2 !important; }
+  .post-content :global(.wp-embed-aspect-21-9 iframe) { aspect-ratio: 21 / 9 !important; }
   .post-content :global(figcaption) {
     margin-top: .75rem;
     color: #526777;

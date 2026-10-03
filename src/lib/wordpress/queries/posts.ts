@@ -17,6 +17,10 @@ export const postsIndexQuery = /* GraphQL */ `
           nodes { name slug }
           pageInfo { hasNextPage }
         }
+        tags(first: 100) {
+          nodes { name slug }
+          pageInfo { hasNextPage }
+        }
         featuredImage { node { sourceUrl altText mediaDetails { width height } } }
       }
     }

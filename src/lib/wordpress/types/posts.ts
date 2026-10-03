@@ -9,6 +9,7 @@ export interface WordPressPost {
   isSticky: boolean;
   author: { node: { name: string; slug: string } | null } | null;
   categories: { nodes: Array<{ name: string; slug: string }>; pageInfo: { hasNextPage: boolean } };
+  tags: { nodes: Array<{ name: string; slug: string }>; pageInfo: { hasNextPage: boolean } };
   featuredImage: {
     node: {
       sourceUrl: string | null;

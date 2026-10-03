@@ -82,6 +82,37 @@ test("empty topics hide featured; Todo preserves active search and clear resets 
   assert.equal(f.buttons.filter((b) => b.attributes["aria-pressed"] === "true").length, 1);
 });
 
+test("only the chosen topic stays pressed through search, pagination and return to Todo", () => {
+  const f = fixture();
+  const assertPressed = (category) => assert.deepEqual(
+    f.buttons.map((button) => button.attributes["aria-pressed"]),
+    f.buttons.map((button) => String(button.dataset.category === category)),
+  );
+  assertPressed("all");
+  for (const category of ["category:actualidad", "calidad-e-inocuidad", "software-y-tecnologia", "all"]) {
+    f.choose(category);
+    assertPressed(category);
+    f.search("articulo");
+    assertPressed(category);
+    if (!f.controls["[data-more]"].hidden) f.controls["[data-more]"].click();
+    assertPressed(category);
+  }
+});
+
+test("topic selection styling outranks the base rule and keeps a check cue separate from focus", () => {
+  const source = readFileSync(new URL("../src/features/blog/BlogListing.astro", import.meta.url), "utf8");
+  const selected = source.match(/\.topic-grid button\[aria-pressed="true"\] \{([^}]+)\}/)?.[1];
+  assert.ok(selected, "selection must include the grid and button for scoped specificity");
+  assert.match(selected, /background: #d4f7ec/);
+  assert.match(selected, /border-color: #176b56/);
+  assert.match(selected, /color: #123c36/);
+  assert.match(source, /\.topic-check \{[^}]*display: none/);
+  assert.match(source, /\.topic-grid button\[aria-pressed="true"\] \.topic-check \{ display: block; \}/);
+  const grid = source.slice(source.indexOf('<div class="topic-grid"'), source.indexOf("<noscript>"));
+  assert.equal((grid.match(/<svg class="topic-check"[^>]*aria-hidden="true"[^>]*focusable="false"/g) ?? []).length, 2);
+  assert.match(source, /button:focus-visible, input:focus-visible, a:focus-visible \{ outline: 3px solid #0066d7; outline-offset: 4px; \}/);
+});
+
 test("initialization is idempotent and incomplete roots remain unenhanced", () => {
   const f = fixture();
   initializeBlog(f.root);

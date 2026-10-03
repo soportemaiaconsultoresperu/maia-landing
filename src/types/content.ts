@@ -18,6 +18,11 @@ export interface Category {
   slug: string;
 }
 
+export interface Tag {
+  name: string;
+  slug: string;
+}
+
 export interface Page {
   title: string;
   slug: string;
@@ -44,6 +49,7 @@ export interface Post {
   updatedAt?: string;
   author?: Author;
   categories?: Category[];
+  tags?: Tag[];
   cover?: Media;
   seo?: Partial<SEO>;
 }

@@ -22,6 +22,13 @@ export function assertPost(value: unknown): asserts value is WordPressPost {
       !record(categories.pageInfo) || categories.pageInfo.hasNextPage !== false) {
     throw new Error("WordPress post categories are invalid or exceed the 100-category limit.");
   }
+  const tags = value.tags;
+  if (!record(tags) || !Array.isArray(tags.nodes) || tags.nodes.length > 100 ||
+      !tags.nodes.every((item) => record(item) && typeof item.name === "string" &&
+        !!plainText(item.name) && typeof item.slug === "string" && !!item.slug.trim()) ||
+      !record(tags.pageInfo) || tags.pageInfo.hasNextPage !== false) {
+    throw new Error("WordPress post tags are invalid or exceed the 100-tag limit.");
+  }
   const author = value.author;
   if (author !== null && (!record(author) || (author.node !== null &&
       (!record(author.node) || typeof author.node.name !== "string" || typeof author.node.slug !== "string")))) {
@@ -66,6 +73,7 @@ export function mapPost(value: unknown): Post {
     categories: value.categories.nodes.map((category) => ({
       name: plainText(category.name), slug: category.slug
     })),
+    tags: value.tags.nodes.map((tag) => ({ name: plainText(tag.name), slug: tag.slug })),
     cover: url && image ? {
       url,
       alt: plainText(image.altText ?? ""),

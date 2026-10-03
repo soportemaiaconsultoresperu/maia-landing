@@ -36,6 +36,14 @@ const publishedDate = formatDate(post.publishedAt);
   )}
   <PostContent html={post.content} />
   <footer class="article-footer reading-width">
+    {(post.tags?.length ?? 0) > 0 && (
+      <section aria-labelledby="article-tags-title">
+        <h2 id="article-tags-title" class="tags-title">Etiquetas</h2>
+        <ul class="tags">
+          {post.tags?.map((tag) => <li>{tag.name}</li>)}
+        </ul>
+      </section>
+    )}
     <a class="back" href={paths.blog}><span aria-hidden="true">←</span> Explorar más artículos</a>
   </footer>
 </article>
@@ -71,7 +79,8 @@ const publishedDate = formatDate(post.publishedAt);
   .back:hover { text-decoration-thickness: 2px; }
   .back:focus-visible { outline: 3px solid #153f70; outline-offset: 4px; border-radius: 2px; }
   .article-header { margin-block: clamp(1.5rem, 4vw, 2.5rem) clamp(2rem, 5vw, 3rem); }
-  .categories {
+  .tags-title { font-size: 1rem; font-weight: 600; margin-bottom: .75rem; }
+  .categories, .tags {
     display: flex;
     flex-wrap: wrap;
     gap: .5rem;
@@ -79,7 +88,7 @@ const publishedDate = formatDate(post.publishedAt);
     padding: 0;
     list-style: none;
   }
-  .categories li {
+  .categories li, .tags li {
     max-width: 100%;
     border: 1px solid #60e8c1;
     border-radius: 999px;

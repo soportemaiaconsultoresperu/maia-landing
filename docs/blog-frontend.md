@@ -28,11 +28,25 @@ Previous verification reported four baseline TS2352 errors in the license FAQ (l
 
 Los temas y la búsqueda se combinan en la misma página, sin rutas de categorías. El destacado se elige del conjunto coincidente: primero el artículo marcado más reciente, o el más reciente si ninguno está marcado. Se oculta si no hay coincidencias. «Todo» elimina el filtro de tema, pero conserva la búsqueda; cambiar tema o búsqueda reinicia la paginación. El contador corresponde al listado (el destacado puede repetir uno de esos artículos). «Recientes de todos los temas» permanece global.
 
+El control de tema seleccionado (incluido «Todo») tiene relleno verde claro, borde marcado y una marca de verificación decorativa; no se resaltan las tarjetas de artículos. El selector local `.topic-grid button[aria-pressed="true"]` prevalece sobre el estilo base. El foco de teclado mantiene un contorno azul independiente de la selección. Los tests cubren la exclusividad al cambiar tema, buscar y paginar, y el contrato de estilos; la apariencia compilada y el contraste requieren revisión en navegador.
+
 Las categorías adicionales conservan su nombre y clave exactos y usan una tarjeta de la misma grilla responsive, con un icono de etiqueta SVG decorativo local. Los temas fijos conservan sus PNG originales; no se requieren campos de WordPress, imágenes remotas ni alias nuevos.
 
 Sin JavaScript se muestran el destacado inicial y todos los artículos; los controles deshabilitados y el aviso explican que la búsqueda necesita JavaScript. El controlador conserva botones nativos, `aria-pressed`, foco visible y contador anunciado. Las tarjetas destacadas alternativas se renderizan dentro de `template`: sus imágenes permanecen inertes hasta seleccionar la tarjeta y además conservan `loading="lazy"`. Esto aumenta el HTML del listado, pero evita descargar todas las imágenes candidatas de forma anticipada y reutiliza el componente normalizado `PostCard`. Una sola inicialización por raíz evita listeners duplicados.
 
 La aceptación humana sigue pendiente: probar tema fijo/adicional/vacío, búsqueda combinada y «Todo», «Ver más», navegación por teclado y la grilla en móvil. Los tests de contrato no reemplazan esa revisión ni demuestran una falla de entrega de JavaScript del sitio publicado.
+
+## Article tags and edited media
+
+The core WPGraphQL query requests `tags(first: 100)` with connection completeness. Missing, malformed or truncated tag connections fail loading instead of publishing incomplete chips. Normalized tags are plain names/slugs, independent of categories. The article renders an escaped, non-linked list under **Etiquetas** and omits it when empty; no tag routes, search or custom CMS fields are introduced.
+
+Body media remains inside the existing 70ch reading column; the cover is unchanged. Only recognized WordPress image/video/embed and alignment/aspect classes survive. Edited width accepts finite positive pixel values up to 10,000 or percentages up to 100; aspect ratios are bounded positive numbers or pairs. Fixed CSS heights are discarded in favor of proportional `height:auto`, and `max-width:100%` clamps media on small screens. Other CSS, events and arbitrary classes are removed. Left/right/center alignment uses block margins, not floating text or full-bleed expansion. Images without edited widths are not automatically enlarged. The verified 205×129 original can render at the editor's 645px width but cannot gain image detail.
+
+Iframe admission is deliberately narrow: literal HTTPS `www.youtube.com/embed/<11-character-video-id>` URLs, optionally with `?feature=oembed` (removed on output). Other hosts, paths, query parameters, fragments, explicit ports, credentials, encoded aliases and `srcdoc` are rejected. Title/loading/referrer policy and permissions are rebuilt; fullscreen and picture-in-picture remain available, but incoming autoplay or arbitrary permissions do not. Recognized WP aspect classes control embed proportions; otherwise valid iframe dimensions determine the ratio, with a 16:9 fallback only for iframes lacking geometry.
+
+Native video retains safe absolute HTTP(S) source/poster URLs, bounded dimensions and validated sizing, with controls, metadata preload and no autoplay. Source MIME types, when supplied, must be `video/mp4`, `video/webm` or `video/ogg`. Native video is not forced to 16:9. Script, SVG, forms, unsafe URLs and executable attributes remain prohibited.
+
+Regressions cover the supplied post48 markup, taxonomy completeness, provider URL attacks, hostile sizing and native video. These fixtures are not a live GraphQL fetch or playback test. Browser geometry/alignment, mobile clamping, captions, fullscreen/audio, third-party embed accessibility/privacy and human acceptance still require independent checks; unsupported providers are not silently admitted.
 
 ## Publication boundary
 
